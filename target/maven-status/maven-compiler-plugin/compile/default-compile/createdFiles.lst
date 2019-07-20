@@ -1,8 +1,0 @@
-com\mycompany\bioeshop\entities\Customer.class
-com\mycompany\bioeshop\entities\Account.class
-com\mycompany\bioeshop\configuration\AppInitializer.class
-com\mycompany\bioeshop\entities\Orderxxx.class
-com\mycompany\bioeshop\configuration\AppConfig.class
-com\mycompany\bioeshop\entities\Orderdetails.class
-com\mycompany\bioeshop\configuration\HibernateConfiguration.class
-com\mycompany\bioeshop\entities\Product.class
