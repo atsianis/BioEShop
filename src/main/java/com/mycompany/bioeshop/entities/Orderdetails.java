@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -26,7 +27,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author samsung np350
  */
 @Entity
-@Table(catalog = "zzz", schema = "")
+@Table(catalog = "zzz", schema = "", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"order_id", "product_id"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Orderdetails.findAll", query = "SELECT o FROM Orderdetails o")

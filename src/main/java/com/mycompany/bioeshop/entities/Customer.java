@@ -50,15 +50,11 @@ public class Customer implements Serializable {
     @Basic(optional = false)
     @Column(name = "customer_id", nullable = false)
     private Integer customerId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(nullable = false, length = 45)
+    @Size(max = 45)
+    @Column(length = 45)
     private String fname;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(nullable = false, length = 45)
+    @Size(max = 45)
+    @Column(length = 45)
     private String lname;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
@@ -66,16 +62,14 @@ public class Customer implements Serializable {
     @Size(min = 1, max = 45)
     @Column(nullable = false, length = 45)
     private String email;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 60)
-    @Column(nullable = false, length = 60)
+    @Size(max = 60)
+    @Column(length = 60)
     private String address;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "phone_number", nullable = false, length = 45)
+    @Size(max = 45)
+    @Column(name = "phone_number", length = 45)
     private String phoneNumber;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerId", fetch = FetchType.LAZY)
+    private List<Order$> orderList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerId", fetch = FetchType.LAZY)
     private List<User> userList;
 
@@ -86,13 +80,9 @@ public class Customer implements Serializable {
         this.customerId = customerId;
     }
 
-    public Customer(Integer customerId, String fname, String lname, String email, String address, String phoneNumber) {
+    public Customer(Integer customerId, String email) {
         this.customerId = customerId;
-        this.fname = fname;
-        this.lname = lname;
         this.email = email;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
     }
 
     public Integer getCustomerId() {
@@ -141,6 +131,15 @@ public class Customer implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @XmlTransient
+    public List<Order$> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order$> orderList) {
+        this.orderList = orderList;
     }
 
     @XmlTransient

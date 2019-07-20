@@ -16,6 +16,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -38,8 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Order$.findAll", query = "SELECT o FROM Order$ o")
     , @NamedQuery(name = "Order$.findByOrderId", query = "SELECT o FROM Order$ o WHERE o.orderId = :orderId")
     , @NamedQuery(name = "Order$.findByDate", query = "SELECT o FROM Order$ o WHERE o.date = :date")
-    , @NamedQuery(name = "Order$.findByCustomerId", query = "SELECT o FROM Order$ o WHERE o.customerId = :customerId")
-    , @NamedQuery(name = "Order$.findByStatus", query = "SELECT o FROM Order$ o WHERE o.status = :status")
+    , @NamedQuery(name = "Order$.findByPending", query = "SELECT o FROM Order$ o WHERE o.pending = :pending")
     , @NamedQuery(name = "Order$.findByComments", query = "SELECT o FROM Order$ o WHERE o.comments = :comments")})
 public class Order$ implements Serializable {
 
@@ -56,18 +57,16 @@ public class Order$ implements Serializable {
     private Date date;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "customer_id", nullable = false)
-    private int customerId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(nullable = false, length = 45)
-    private String status;
+    @Column(nullable = false)
+    private short pending;
     @Size(max = 200)
     @Column(length = 200)
     private String comments;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId", fetch = FetchType.LAZY)
     private List<Orderdetails> orderdetailsList;
+    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Customer customerId;
 
     public Order$() {
     }
@@ -76,11 +75,10 @@ public class Order$ implements Serializable {
         this.orderId = orderId;
     }
 
-    public Order$(Integer orderId, Date date, int customerId, String status) {
+    public Order$(Integer orderId, Date date, short pending) {
         this.orderId = orderId;
         this.date = date;
-        this.customerId = customerId;
-        this.status = status;
+        this.pending = pending;
     }
 
     public Integer getOrderId() {
@@ -99,20 +97,12 @@ public class Order$ implements Serializable {
         this.date = date;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public short getPending() {
+        return pending;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setPending(short pending) {
+        this.pending = pending;
     }
 
     public String getComments() {
@@ -130,6 +120,14 @@ public class Order$ implements Serializable {
 
     public void setOrderdetailsList(List<Orderdetails> orderdetailsList) {
         this.orderdetailsList = orderdetailsList;
+    }
+
+    public Customer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Customer customerId) {
+        this.customerId = customerId;
     }
 
     @Override

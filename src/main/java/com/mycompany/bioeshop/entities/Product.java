@@ -79,20 +79,14 @@ public class Product implements Serializable {
     @Size(min = 1, max = 45)
     @Column(nullable = false, length = 45)
     private String category;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(nullable = false, length = 45)
+    @Size(max = 45)
+    @Column(length = 45)
     private String color;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(nullable = false, length = 45)
+    @Size(max = 45)
+    @Column(length = 45)
     private String size;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(nullable = false, length = 45)
+    @Size(max = 45)
+    @Column(length = 45)
     private String material;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId", fetch = FetchType.LAZY)
     private List<Orderdetails> orderdetailsList;
@@ -104,7 +98,7 @@ public class Product implements Serializable {
         this.productId = productId;
     }
 
-    public Product(Integer productId, String path, String descr, int stock, String title, double price, String category, String color, String size, String material) {
+    public Product(Integer productId, String path, String descr, int stock, String title, double price, String category) {
         this.productId = productId;
         this.path = path;
         this.descr = descr;
@@ -112,9 +106,6 @@ public class Product implements Serializable {
         this.title = title;
         this.price = price;
         this.category = category;
-        this.color = color;
-        this.size = size;
-        this.material = material;
     }
 
     public Integer getProductId() {
