@@ -10,6 +10,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,27 +31,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Orderdetails.findAll", query = "SELECT o FROM Orderdetails o")
     , @NamedQuery(name = "Orderdetails.findByOdId", query = "SELECT o FROM Orderdetails o WHERE o.odId = :odId")
-    , @NamedQuery(name = "Orderdetails.findByPriceEach", query = "SELECT o FROM Orderdetails o WHERE o.priceEach = :priceEach")
     , @NamedQuery(name = "Orderdetails.findByQuantity", query = "SELECT o FROM Orderdetails o WHERE o.quantity = :quantity")})
 public class Orderdetails implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "od_id", nullable = false)
     private Integer odId;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "price_each", nullable = false)
-    private double priceEach;
     @Basic(optional = false)
     @NotNull
     @Column(nullable = false)
     private int quantity;
     @JoinColumn(name = "order_id", referencedColumnName = "order_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Orderxxx orderId;
+    private Order$ orderId;
     @JoinColumn(name = "product_id", referencedColumnName = "product_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Product productId;
@@ -61,9 +58,8 @@ public class Orderdetails implements Serializable {
         this.odId = odId;
     }
 
-    public Orderdetails(Integer odId, double priceEach, int quantity) {
+    public Orderdetails(Integer odId, int quantity) {
         this.odId = odId;
-        this.priceEach = priceEach;
         this.quantity = quantity;
     }
 
@@ -75,14 +71,6 @@ public class Orderdetails implements Serializable {
         this.odId = odId;
     }
 
-    public double getPriceEach() {
-        return priceEach;
-    }
-
-    public void setPriceEach(double priceEach) {
-        this.priceEach = priceEach;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -91,11 +79,11 @@ public class Orderdetails implements Serializable {
         this.quantity = quantity;
     }
 
-    public Orderxxx getOrderId() {
+    public Order$ getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Orderxxx orderId) {
+    public void setOrderId(Order$ orderId) {
         this.orderId = orderId;
     }
 

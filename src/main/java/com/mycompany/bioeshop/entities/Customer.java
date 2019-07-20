@@ -6,12 +6,14 @@
 package com.mycompany.bioeshop.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -44,8 +46,8 @@ public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "customer_id", nullable = false)
     private Integer customerId;
     @Basic(optional = false)
@@ -75,9 +77,7 @@ public class Customer implements Serializable {
     @Column(name = "phone_number", nullable = false, length = 45)
     private String phoneNumber;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerId", fetch = FetchType.LAZY)
-    private Collection<Orderxxx> orderxxxCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerId", fetch = FetchType.LAZY)
-    private Collection<Account> accountCollection;
+    private List<User> userList;
 
     public Customer() {
     }
@@ -144,21 +144,12 @@ public class Customer implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Orderxxx> getOrderxxxCollection() {
-        return orderxxxCollection;
+    public List<User> getUserList() {
+        return userList;
     }
 
-    public void setOrderxxxCollection(Collection<Orderxxx> orderxxxCollection) {
-        this.orderxxxCollection = orderxxxCollection;
-    }
-
-    @XmlTransient
-    public Collection<Account> getAccountCollection() {
-        return accountCollection;
-    }
-
-    public void setAccountCollection(Collection<Account> accountCollection) {
-        this.accountCollection = accountCollection;
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 
     @Override

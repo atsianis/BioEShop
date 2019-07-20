@@ -6,7 +6,7 @@
 package com.mycompany.bioeshop.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -95,7 +95,7 @@ public class Product implements Serializable {
     @Column(nullable = false, length = 45)
     private String material;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId", fetch = FetchType.LAZY)
-    private Collection<Orderdetails> orderdetailsCollection;
+    private List<Orderdetails> orderdetailsList;
 
     public Product() {
     }
@@ -198,12 +198,12 @@ public class Product implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Orderdetails> getOrderdetailsCollection() {
-        return orderdetailsCollection;
+    public List<Orderdetails> getOrderdetailsList() {
+        return orderdetailsList;
     }
 
-    public void setOrderdetailsCollection(Collection<Orderdetails> orderdetailsCollection) {
-        this.orderdetailsCollection = orderdetailsCollection;
+    public void setOrderdetailsList(List<Orderdetails> orderdetailsList) {
+        this.orderdetailsList = orderdetailsList;
     }
 
     @Override

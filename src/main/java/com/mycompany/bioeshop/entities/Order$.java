@@ -6,16 +6,16 @@
 package com.mycompany.bioeshop.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -35,17 +35,18 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "orders", catalog = "zzz", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Orderxxx.findAll", query = "SELECT o FROM Orderxxx o")
-    , @NamedQuery(name = "Orderxxx.findByOrderId", query = "SELECT o FROM Orderxxx o WHERE o.orderId = :orderId")
-    , @NamedQuery(name = "Orderxxx.findByDate", query = "SELECT o FROM Orderxxx o WHERE o.date = :date")
-    , @NamedQuery(name = "Orderxxx.findByStatus", query = "SELECT o FROM Orderxxx o WHERE o.status = :status")
-    , @NamedQuery(name = "Orderxxx.findByComments", query = "SELECT o FROM Orderxxx o WHERE o.comments = :comments")})
-public class Orderxxx implements Serializable {
+    @NamedQuery(name = "Order$.findAll", query = "SELECT o FROM Order$ o")
+    , @NamedQuery(name = "Order$.findByOrderId", query = "SELECT o FROM Order$ o WHERE o.orderId = :orderId")
+    , @NamedQuery(name = "Order$.findByDate", query = "SELECT o FROM Order$ o WHERE o.date = :date")
+    , @NamedQuery(name = "Order$.findByCustomerId", query = "SELECT o FROM Order$ o WHERE o.customerId = :customerId")
+    , @NamedQuery(name = "Order$.findByStatus", query = "SELECT o FROM Order$ o WHERE o.status = :status")
+    , @NamedQuery(name = "Order$.findByComments", query = "SELECT o FROM Order$ o WHERE o.comments = :comments")})
+public class Order$ implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "order_id", nullable = false)
     private Integer orderId;
     @Basic(optional = false)
@@ -55,6 +56,10 @@ public class Orderxxx implements Serializable {
     private Date date;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "customer_id", nullable = false)
+    private int customerId;
+    @Basic(optional = false)
+    @NotNull
     @Size(min = 1, max = 45)
     @Column(nullable = false, length = 45)
     private String status;
@@ -62,21 +67,19 @@ public class Orderxxx implements Serializable {
     @Column(length = 200)
     private String comments;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId", fetch = FetchType.LAZY)
-    private Collection<Orderdetails> orderdetailsCollection;
-    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Customer customerId;
+    private List<Orderdetails> orderdetailsList;
 
-    public Orderxxx() {
+    public Order$() {
     }
 
-    public Orderxxx(Integer orderId) {
+    public Order$(Integer orderId) {
         this.orderId = orderId;
     }
 
-    public Orderxxx(Integer orderId, Date date, String status) {
+    public Order$(Integer orderId, Date date, int customerId, String status) {
         this.orderId = orderId;
         this.date = date;
+        this.customerId = customerId;
         this.status = status;
     }
 
@@ -96,6 +99,14 @@ public class Orderxxx implements Serializable {
         this.date = date;
     }
 
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -113,20 +124,12 @@ public class Orderxxx implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Orderdetails> getOrderdetailsCollection() {
-        return orderdetailsCollection;
+    public List<Orderdetails> getOrderdetailsList() {
+        return orderdetailsList;
     }
 
-    public void setOrderdetailsCollection(Collection<Orderdetails> orderdetailsCollection) {
-        this.orderdetailsCollection = orderdetailsCollection;
-    }
-
-    public Customer getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Customer customerId) {
-        this.customerId = customerId;
+    public void setOrderdetailsList(List<Orderdetails> orderdetailsList) {
+        this.orderdetailsList = orderdetailsList;
     }
 
     @Override
@@ -139,10 +142,10 @@ public class Orderxxx implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Orderxxx)) {
+        if (!(object instanceof Order$)) {
             return false;
         }
-        Orderxxx other = (Orderxxx) object;
+        Order$ other = (Order$) object;
         if ((this.orderId == null && other.orderId != null) || (this.orderId != null && !this.orderId.equals(other.orderId))) {
             return false;
         }
@@ -151,7 +154,7 @@ public class Orderxxx implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.bioeshop.entities.Orderxxx[ orderId=" + orderId + " ]";
+        return "com.mycompany.bioeshop.entities.Order$[ orderId=" + orderId + " ]";
     }
     
 }
