@@ -28,14 +28,16 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author samsung np350
  */
 @Entity
+@Transactional
 @Table(name = "orders", catalog = "zzz", schema = "")
-@XmlRootElement
+//@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Order$.findAll", query = "SELECT o FROM Order$ o")
     , @NamedQuery(name = "Order$.findByOrderId", query = "SELECT o FROM Order$ o WHERE o.orderId = :orderId")
@@ -62,10 +64,10 @@ public class Order$ implements Serializable {
     @Size(max = 200)
     @Column(length = 200)
     private String comments;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId", fetch = FetchType.EAGER)
     private List<Orderdetails> orderdetailsList;
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Customer customer;
 
     public Order$() {
@@ -152,7 +154,9 @@ public class Order$ implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.bioeshop.entities.Order$[ orderId=" + orderId + " ]";
+        return "Order${" + "orderId=" + orderId + ", date=" + date + ", pending=" + pending + ", comments=" + comments + ", orderdetailsList=" + orderdetailsList + ", customer=" + customer + '}';
     }
+
+    
     
 }

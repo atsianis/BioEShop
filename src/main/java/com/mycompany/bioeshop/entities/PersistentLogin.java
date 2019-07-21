@@ -19,14 +19,16 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author samsung np350
  */
 @Entity
+@Transactional
 @Table(name = "persistent_logins", catalog = "zzz", schema = "")
-@XmlRootElement
+//@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "PersistentLogin.findAll", query = "SELECT p FROM PersistentLogin p")
     , @NamedQuery(name = "PersistentLogin.findByUsername", query = "SELECT p FROM PersistentLogin p WHERE p.username = :username")
@@ -126,7 +128,9 @@ public class PersistentLogin implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.bioeshop.entities.PersistentLogin[ series=" + series + " ]";
+        return "PersistentLogin{" + "username=" + username + ", series=" + series + ", token=" + token + ", lastUsed=" + lastUsed + '}';
     }
+
+    
     
 }

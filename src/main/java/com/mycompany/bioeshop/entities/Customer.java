@@ -24,16 +24,18 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author samsung np350
  */
 @Entity
+@Transactional
 @Table(name = "customers", catalog = "zzz", schema = "", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"email"})
     , @UniqueConstraint(columnNames = {"phone_number"})})
-@XmlRootElement
+//@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c")
     , @NamedQuery(name = "Customer.findByCustomerId", query = "SELECT c FROM Customer c WHERE c.customerId = :customerId")
@@ -68,9 +70,9 @@ public class Customer implements Serializable {
     @Size(max = 45)
     @Column(name = "phone_number", length = 45)
     private String phoneNumber;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.EAGER)
     private List<Order$> orderList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.EAGER)
     private List<User> userList;
 
     public Customer() {
@@ -173,7 +175,9 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.bioeshop.entities.Customer[ customerId=" + customerId + " ]";
+        return "Customer{" + "customerId=" + customerId + ", fname=" + fname + ", lname=" + lname + ", email=" + email + ", address=" + address + ", phoneNumber=" + phoneNumber + ", orderList=" + orderList + ", userList=" + userList + '}';
     }
+
+    
     
 }
