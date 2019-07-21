@@ -21,15 +21,17 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author samsung np350
  */
 @Entity
+@Transactional
 @Table(catalog = "zzz", schema = "", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"order_id", "product_id"})})
-@XmlRootElement
+//@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Orderdetails.findAll", query = "SELECT o FROM Orderdetails o")
     , @NamedQuery(name = "Orderdetails.findByOdId", query = "SELECT o FROM Orderdetails o WHERE o.odId = :odId")
@@ -47,10 +49,10 @@ public class Orderdetails implements Serializable {
     @Column(nullable = false)
     private int quantity;
     @JoinColumn(name = "order_id", referencedColumnName = "order_id", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Order$ orderId;
     @JoinColumn(name = "product_id", referencedColumnName = "product_id", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Product productId;
 
     public Orderdetails() {
@@ -119,7 +121,9 @@ public class Orderdetails implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.bioeshop.entities.Orderdetails[ odId=" + odId + " ]";
+        return "Orderdetails{" + "odId=" + odId + ", quantity=" + quantity + ", orderId=" + orderId + ", productId=" + productId + '}';
     }
+
+    
     
 }

@@ -23,15 +23,17 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author samsung np350
  */
 @Entity
+@Transactional
 @Table(name = "USER_PROFILE", catalog = "zzz", schema = "", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"type"})})
-@XmlRootElement
+//@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "UserProfile.findAll", query = "SELECT u FROM UserProfile u")
     , @NamedQuery(name = "UserProfile.findById", query = "SELECT u FROM UserProfile u WHERE u.id = :id")
@@ -49,7 +51,7 @@ public class UserProfile implements Serializable {
     @Size(min = 1, max = 30)
     @Column(nullable = false, length = 30)
     private String type;
-    @ManyToMany(mappedBy = "userProfileList", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "userProfileList", fetch = FetchType.EAGER)
     private List<User> userList;
 
     public UserProfile() {
@@ -80,7 +82,7 @@ public class UserProfile implements Serializable {
         this.type = type;
     }
 
-    @XmlTransient
+    //@XmlTransient
     public List<User> getUserList() {
         return userList;
     }
@@ -111,7 +113,9 @@ public class UserProfile implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.bioeshop.entities.UserProfile[ id=" + id + " ]";
+        return "UserProfile{" + "id=" + id + ", type=" + type + ", userList=" + userList + '}';
     }
+
+    
     
 }

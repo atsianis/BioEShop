@@ -26,12 +26,14 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author samsung np350
  */
 @Entity
+@Transactional
 @Table(name = "APP_USER", catalog = "zzz", schema = "", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"sso_id"})})
 @XmlRootElement
@@ -61,10 +63,10 @@ public class User implements Serializable {
     @JoinTable(name = "APP_USER_USER_PROFILE", joinColumns = {
         @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
         @JoinColumn(name = "user_profile_id", referencedColumnName = "id", nullable = false)})
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<UserProfile> userProfileList;
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Customer customer;
 
     public User() {
@@ -143,7 +145,9 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.bioeshop.entities.User[ id=" + id + " ]";
+        return "User{" + "id=" + id + ", ssoId=" + ssoId + ", password=" + password +", customer=" + customer + '}';
     }
+
+    
     
 }

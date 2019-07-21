@@ -23,12 +23,14 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author samsung np350
  */
 @Entity
+@Transactional
 @Table(name = "products", catalog = "zzz", schema = "")
 @XmlRootElement
 @NamedQueries({
@@ -88,7 +90,7 @@ public class Product implements Serializable {
     @Size(max = 45)
     @Column(length = 45)
     private String material;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId", fetch = FetchType.EAGER)
     private List<Orderdetails> orderdetailsList;
 
     public Product() {
@@ -219,7 +221,9 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.bioeshop.entities.Product[ productId=" + productId + " ]";
+        return "Product{" + "productId=" + productId + ", path=" + path + ", descr=" + descr + ", stock=" + stock + ", title=" + title + ", price=" + price + ", category=" + category + ", color=" + color + ", size=" + size + ", material=" + material + ", orderdetailsList=" + orderdetailsList + '}';
     }
+
+    
     
 }
