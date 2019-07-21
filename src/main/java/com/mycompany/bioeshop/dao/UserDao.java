@@ -20,18 +20,10 @@ public interface UserDao {
         
         ///// Extra //////////////
         
-        public Customer getCustomerByEmail(String email);
+        //public boolean createAccount(User u); // einai to save stin ousia
         
-        public boolean createAccount(User u);
-    
-        public boolean createCustomer(Customer c);
-
         public User getAccountByCustomomerId(int id);
-
-        public Customer getCustomerById(int id);
-
-        public boolean updateCustomer(Customer c);
-
+        
         public boolean updateAccount(User u);
 
 }
