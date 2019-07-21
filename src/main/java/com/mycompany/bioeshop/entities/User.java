@@ -104,7 +104,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    @XmlTransient
+//    @XmlTransient
     public List<UserProfile> getUserProfileList() {
         return userProfileList;
     }
