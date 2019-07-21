@@ -1,5 +1,6 @@
 package com.mycompany.bioeshop.dao;
 
+import com.mycompany.bioeshop.entities.Customer;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -63,5 +64,37 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		User user = (User)crit.uniqueResult();
 		delete(user);
 	}
+        
+        // Extra ////////
+        
+        @Override
+        public Customer getCustomerByEmail(String email){
+            return null;
+        }
+        
+        @Override
+        public boolean createCustomer(Customer c){
+            return true;
+        }
+
+        @Override
+        public User getAccountByCustomomerId(int id){
+            return null;
+        }
+
+        @Override
+        public Customer getCustomerById(int id){
+            return null;
+        }
+
+        @Override
+        public boolean updateCustomer(Customer c){
+            return true;
+        }
+
+        @Override
+        public boolean updateAccount(User u){
+            return true;
+        }
 
 }
