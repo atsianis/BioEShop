@@ -90,7 +90,7 @@ public class Product implements Serializable {
     @Size(max = 45)
     @Column(length = 45)
     private String material;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
     private List<Orderdetails> orderdetailsList;
 
     public Product() {

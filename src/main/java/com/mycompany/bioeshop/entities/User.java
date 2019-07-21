@@ -63,7 +63,7 @@ public class User implements Serializable {
     @JoinTable(name = "APP_USER_USER_PROFILE", joinColumns = {
         @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
         @JoinColumn(name = "user_profile_id", referencedColumnName = "id", nullable = false)})
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<UserProfile> userProfileList;
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
@@ -115,12 +115,12 @@ public class User implements Serializable {
         this.userProfileList = userProfileList;
     }
 
-    public Customer getCustomerId() {
+    public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomerId(Customer customerId) {
-        this.customer = customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     @Override
@@ -145,7 +145,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", ssoId=" + ssoId + ", password=" + password +", customer=" + customer + '}';
+        return "User{" + "id=" + id + ", ssoId=" + ssoId + ", password=" + password +'}';
     }
 
     

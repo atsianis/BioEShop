@@ -64,7 +64,7 @@ public class Order$ implements Serializable {
     @Size(max = 200)
     @Column(length = 200)
     private String comments;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.LAZY)
     private List<Orderdetails> orderdetailsList;
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
