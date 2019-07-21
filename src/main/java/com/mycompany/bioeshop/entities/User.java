@@ -65,7 +65,7 @@ public class User implements Serializable {
     private List<UserProfile> userProfileList;
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Customer customerId;
+    private Customer customer;
 
     public User() {
     }
@@ -114,11 +114,11 @@ public class User implements Serializable {
     }
 
     public Customer getCustomerId() {
-        return customerId;
+        return customer;
     }
 
     public void setCustomerId(Customer customerId) {
-        this.customerId = customerId;
+        this.customer = customerId;
     }
 
     @Override

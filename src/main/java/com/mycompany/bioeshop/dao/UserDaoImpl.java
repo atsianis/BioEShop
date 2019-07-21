@@ -1,5 +1,6 @@
 package com.mycompany.bioeshop.dao;
 
+import com.mycompany.bioeshop.entities.Customer;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -11,11 +12,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.mycompany.bioeshop.entities.User;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 
 
 @Repository("userDao")
+@Transactional
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
+    
+        private static SessionFactory sessionFactory;
+        private Session session;
 
 	static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 	
@@ -63,5 +71,25 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		User user = (User)crit.uniqueResult();
 		delete(user);
 	}
+        
+        // Extra ////////
+        @Override
+        public User getAccountByCustomomerId(int id){
+            Criteria crit = session.createCriteria(User.class);
+            Criteria suppCrit = crit.createCriteria("customer");
+            suppCrit.add(Restrictions.eq("customer.customerId",id));
+            User u = (User)crit.uniqueResult();
+            return u;
+        }
+        
+        @Override
+        public boolean updateAccount(User u) {
+            try {
+                update(u);
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        }
 
 }

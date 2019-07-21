@@ -5,10 +5,30 @@
  */
 package com.mycompany.bioeshop.controllers;
 
+import com.mycompany.bioeshop.dao.UserDao;
+import com.mycompany.bioeshop.entities.User;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 /**
  *
  * @author giorgos
  */
+@Controller
+@RequestMapping("/")
 public class test {
-    
+
+    @Autowired
+    UserDao udao;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String Testing(ModelMap model) {
+        List<User> list = udao.findAllUsers();
+        model.addAttribute("users", list);
+        return "testview";
+    }
 }

@@ -66,7 +66,7 @@ public class Order$ implements Serializable {
     private List<Orderdetails> orderdetailsList;
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Customer customerId;
+    private Customer customer;
 
     public Order$() {
     }
@@ -123,11 +123,11 @@ public class Order$ implements Serializable {
     }
 
     public Customer getCustomerId() {
-        return customerId;
+        return customer;
     }
 
     public void setCustomerId(Customer customerId) {
-        this.customerId = customerId;
+        this.customer = customerId;
     }
 
     @Override
