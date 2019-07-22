@@ -1,5 +1,6 @@
 package com.mycompany.bioeshop.controllers;
 
+import com.mycompany.bioeshop.entities.Customer;
 import java.util.List;
 import java.util.Locale;
 
@@ -69,9 +70,11 @@ public class AppController {
 	 */
 	@RequestMapping(value = { "/register" }, method = RequestMethod.GET)
 	public String newUser(ModelMap model) {
-//		User user = new User();
-//		model.addAttribute("user", user);
-//		model.addAttribute("edit", false);
+		User user = new User();
+                Customer customer = new Customer();
+                user.setCustomer(customer);
+		model.addAttribute("user", user);
+		model.addAttribute("edit", false);
 //		model.addAttribute("loggedinuser", getPrincipal());
 		return "registration";
 	}

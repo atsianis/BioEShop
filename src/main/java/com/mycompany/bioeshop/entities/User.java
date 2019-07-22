@@ -68,25 +68,25 @@ public class User implements Serializable {
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Customer customer;
-
+    
     public User() {
     }
 
-    public User(int id) {
+    public User(Integer id) {
         this.id = id;
     }
 
-    public User(int id, String ssoId, String password) {
+    public User(Integer id, String ssoId, String password) {
         this.id = id;
         this.ssoId = ssoId;
         this.password = password;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -105,6 +105,8 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    
 
 //    @XmlTransient
     public List<UserProfile> getUserProfileList() {
@@ -115,11 +117,11 @@ public class User implements Serializable {
         this.userProfileList = userProfileList;
     }
 
-    public Customer getCustomerId() {
+    public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomerId(Customer customerId) {
+    public void setCustomer(Customer customerId) {
         this.customer = customerId;
     }
 

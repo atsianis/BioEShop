@@ -24,9 +24,9 @@
 				<div class="form-group col-md-12">
 					<label class="col-md-3 control-lable" for="firstName">First Name</label>
 					<div class="col-md-7">
-						<form:input type="text" path="firstName" id="firstName" class="form-control input-sm"/>
+						<form:input type="text" path="customer.fname" id="firstName" class="form-control input-sm"/>
 						<div class="has-error">
-							<form:errors path="firstName" class="help-inline"/>
+							<form:errors path="customer.fname" class="help-inline"/>
 						</div>
 					</div>
 				</div>
@@ -36,9 +36,9 @@
 				<div class="form-group col-md-12">
 					<label class="col-md-3 control-lable" for="lastName">Last Name</label>
 					<div class="col-md-7">
-						<form:input type="text" path="lastName" id="lastName" class="form-control input-sm" />
+						<form:input type="text" path="customer.lname" id="lastName" class="form-control input-sm" />
 						<div class="has-error">
-							<form:errors path="lastName" class="help-inline"/>
+							<form:errors path="customer.lname" class="help-inline"/>
 						</div>
 					</div>
 				</div>
@@ -79,9 +79,9 @@
 				<div class="form-group col-md-12">
 					<label class="col-md-3 control-lable" for="email">Email</label>
 					<div class="col-md-7">
-						<form:input type="text" path="email" id="email" class="form-control input-sm" />
+						<form:input type="text" name="customer.email" path="customer.email" id="email" class="form-control input-sm" />
 						<div class="has-error">
-							<form:errors path="email" class="help-inline"/>
+							<form:errors name="customer.email" class="help-inline"/>
 						</div>
 					</div>
 				</div>
@@ -91,9 +91,10 @@
 				<div class="form-group col-md-12">
 					<label class="col-md-3 control-lable" for="userProfiles">Roles</label>
 					<div class="col-md-7">
-						<form:select path="userProfiles" items="${roles}" multiple="true" itemValue="id" itemLabel="type" class="form-control input-sm" />
-						<div class="has-error">
-							<form:errors path="userProfiles" class="help-inline"/>
+						<form:select path="userProfileList" items="${roles}" multiple="true" itemValue="id" itemLabel="type" class="form-control input-sm" />
+						
+                                                <div class="has-error">
+							<form:errors path="userProfileList" class="help-inline"/>
 						</div>
 					</div>
 				</div>

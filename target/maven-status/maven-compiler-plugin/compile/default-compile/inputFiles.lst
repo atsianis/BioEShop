@@ -1,8 +1,6 @@
-<<<<<<< HEAD
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/service/UserProfileService.java
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/dao/UserDao.java
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/entities/UserProfile.java
-/home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/dao/userDao/InterfaceUserDao.java
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/dao/HibernateTokenRepositoryImpl.java
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/entities/Orderdetails.java
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/controllers/AppController.java
@@ -11,6 +9,7 @@
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/dao/UserDaoImpl.java
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/service/UserProfileServiceImpl.java
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/security/SecurityConfiguration.java
+/home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/dao/CustomerDao.java
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/configuration/AppConfig.java
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/converter/RoleToUserProfileConverter.java
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/entities/User.java
@@ -25,34 +24,6 @@
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/entities/Product.java
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/dao/UserProfileDaoImpl.java
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/service/UserServiceImpl.java
+/home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/dao/CustomerDaoImpl.java
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/entities/PersistentLogin.java
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/dao/AbstractDao.java
-=======
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\security\SecurityWebApplicationInitializer.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\security\CustomUserDetailsService.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\dao\UserProfileDaoImpl.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\dao\UserDaoImpl.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\configuration\AppInitializer.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\service\UserServiceImpl.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\dao\UserDao.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\dao\UserProfileDao.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\configuration\AppConfig.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\entities\Order$.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\entities\User.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\configuration\HibernateConfiguration.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\service\UserService.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\dao\CustomerDao.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\entities\UserProfile.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\dao\AbstractDao.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\controllers\test.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\dao\HibernateTokenRepositoryImpl.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\service\UserProfileService.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\entities\Customer.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\security\SecurityConfiguration.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\service\UserProfileServiceImpl.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\entities\Product.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\entities\Orderdetails.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\converter\RoleToUserProfileConverter.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\dao\CustomerDaoImpl.java
-C:\Users\samsung np350\Desktop\AfDEmp Bootcamp\BioEShop\src\main\java\com\mycompany\bioeshop\entities\PersistentLogin.java
->>>>>>> master
