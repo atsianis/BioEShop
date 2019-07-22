@@ -164,13 +164,13 @@ public class AppController {
 //	}
 //	
 //
-//	/**
-//	 * This method will provide UserProfile list to views
-//	 */
-//	@ModelAttribute("roles")
-//	public List<UserProfile> initializeProfiles() {
-//		return userProfileService.findAll();
-//	}
+	/**
+	 * This method will provide UserProfile list to views
+	 */
+	@ModelAttribute("roles")
+	public List<UserProfile> initializeProfiles() {
+		return userProfileService.findAll();
+	}
 //	
 //	/**
 //	 * This method handles Access-Denied redirect.

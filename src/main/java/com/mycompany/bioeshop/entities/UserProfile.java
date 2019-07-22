@@ -113,7 +113,7 @@ public class UserProfile implements Serializable {
 
     @Override
     public String toString() {
-        return "UserProfile{" + "id=" + id + ", type=" + type + ", userList=" + userList + '}';
+        return "UserProfile{" + "id=" + id + ", type=" + type +'}';
     }
 
     
