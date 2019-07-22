@@ -33,7 +33,7 @@ import com.mycompany.bioeshop.service.UserService;
 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/sss")
 @SessionAttributes("roles")
 public class AppController {
 

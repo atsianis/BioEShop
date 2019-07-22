@@ -51,7 +51,7 @@ public class UserProfile implements Serializable {
     @Size(min = 1, max = 30)
     @Column(nullable = false, length = 30)
     private String type;
-    @ManyToMany(mappedBy = "userProfileList", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "userProfileList", fetch = FetchType.LAZY)
     private List<User> userList;
 
     public UserProfile() {

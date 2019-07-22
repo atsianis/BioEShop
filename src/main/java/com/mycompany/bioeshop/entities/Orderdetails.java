@@ -50,10 +50,10 @@ public class Orderdetails implements Serializable {
     private int quantity;
     @JoinColumn(name = "order_id", referencedColumnName = "order_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Order$ orderId;
+    private Order$ order;
     @JoinColumn(name = "product_id", referencedColumnName = "product_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Product productId;
+    private Product product;
 
     public Orderdetails() {
     }
@@ -84,19 +84,19 @@ public class Orderdetails implements Serializable {
     }
 
     public Order$ getOrderId() {
-        return orderId;
+        return order;
     }
 
-    public void setOrderId(Order$ orderId) {
-        this.orderId = orderId;
+    public void setOrderId(Order$ order) {
+        this.order = order;
     }
 
     public Product getProductId() {
-        return productId;
+        return product;
     }
 
-    public void setProductId(Product productId) {
-        this.productId = productId;
+    public void setProductId(Product product) {
+        this.product = product;
     }
 
     @Override
@@ -121,7 +121,7 @@ public class Orderdetails implements Serializable {
 
     @Override
     public String toString() {
-        return "Orderdetails{" + "odId=" + odId + ", quantity=" + quantity + ", orderId=" + orderId + ", productId=" + productId + '}';
+        return "Orderdetails{" + "odId=" + odId + ", quantity=" + quantity + ", orderId=" + order + ", productId=" + product + '}';
     }
 
     

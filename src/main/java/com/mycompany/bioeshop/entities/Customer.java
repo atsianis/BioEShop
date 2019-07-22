@@ -70,9 +70,9 @@ public class Customer implements Serializable {
     @Size(max = 45)
     @Column(name = "phone_number", length = 45)
     private String phoneNumber;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<Order$> orderList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<User> userList;
 
     public Customer() {
