@@ -26,7 +26,9 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
         private Session session;
 
 	static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
-	
+	//Tested --> Works fine !! Make sure to initialize nested lists in customer field if you have to
+        //Explanation: User contains UserProfileList (Lazily initialized) and a Customer object (contains lists that are Lazily initialized) and this Customer objects contains... etc etc
+        //If the User toString prints all those objects you have to manually initialize them with the Hibernate.initialize method
 	public User findById(int id) {
 		User user = getByKey(id);
 		if(user!=null){
@@ -34,7 +36,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		}
 		return user;
 	}
-
+        //Tested --> Works fine ! Again be aware of the nested Lazily initialized lists
 	public User findBySSO(String sso) {
 		logger.info("SSO : {}", sso);
 		Criteria crit = createEntityCriteria();
@@ -45,7 +47,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		}
 		return user;
 	}
-
+        // Tested --> works fine ! Again the same
 	@SuppressWarnings("unchecked")
 	public List<User> findAllUsers() {
 		Criteria criteria = createEntityCriteria();
@@ -72,10 +74,10 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		delete(user);
 	}
         
-        // Extra ////////
+        /////////////// Extra ////////
         @Override
         public User getAccountByCustomomerId(int id){
-            Criteria crit = session.createCriteria(User.class);
+            Criteria crit = getSession().createCriteria(User.class);
             Criteria suppCrit = crit.createCriteria("customer");
             suppCrit.add(Restrictions.eq("customer.customerId",id));
             User u = (User)crit.uniqueResult();

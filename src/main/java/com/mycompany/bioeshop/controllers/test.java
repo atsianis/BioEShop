@@ -27,8 +27,8 @@ public class test {
 
     @RequestMapping(value="/",method = RequestMethod.GET)
     public String Testing(ModelMap model) {
-        List<User> list = udao.findAllUsers();
-        model.addAttribute("users", list);
+        User user = udao.getAccountByCustomomerId(2);
+        model.addAttribute("variable", user);
         return "testview";
     }
 }

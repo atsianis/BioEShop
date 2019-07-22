@@ -9,6 +9,6 @@
     </head>
 
     <body>
-        ${users}
+        ${variable}
     </body>
 </html>
