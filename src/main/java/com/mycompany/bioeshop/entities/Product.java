@@ -190,7 +190,7 @@ public class Product implements Serializable {
         this.material = material;
     }
 
-    @XmlTransient
+    //@XmlTransient
     public List<Orderdetails> getOrderdetailsList() {
         return orderdetailsList;
     }
