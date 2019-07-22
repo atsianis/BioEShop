@@ -8,6 +8,7 @@ package com.mycompany.bioeshop.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -66,8 +67,15 @@ public class User implements Serializable {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<UserProfile> userProfileList;
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private Customer customer;
+    /*
+    πρόσθεσα το cascade=CascadeType.ALL γιατί όταν πήγαινα να καταχωρήσω τη regitration form έβγαζε error
+    org.hibernate.TransientPropertyValueException: Not-null property references a transient value
+    https://stackoverflow.com/questions/19074278/not-null-property-references-a-transient-value-transient-instance-must-be-save
+    https://stackoverflow.com/questions/32794600/not-null-property-references-a-transient-value-transient-instance-must-be-saved?rq=1
+    */
+    
     
     public User() {
     }
