@@ -86,19 +86,6 @@
 			</div>
 	
 			<div class="row">
-				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable sr-only" for="userProfiles">Roles</label>
-					<div class="col-md-7">
-                                            <form:input hidden="true" disabled="true" type = "text" path="userProfileList" value="${roles.get(1).type}" multiple="true" itemValue="id" itemLabel="type" class="form-control input-sm" />
-						
-                                                <div class="has-error">
-							<form:errors path="userProfileList" class="help-inline"/>
-						</div>
-					</div>
-				</div>
-			</div>
-	
-			<div class="row">
 				<div class="form-actions floatRight">
 					<c:choose>
 						<c:when test="${edit}">

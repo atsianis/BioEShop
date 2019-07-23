@@ -29,6 +29,8 @@ import com.mycompany.bioeshop.entities.User;
 import com.mycompany.bioeshop.entities.UserProfile;
 import com.mycompany.bioeshop.service.UserProfileService;
 import com.mycompany.bioeshop.service.UserService;
+import java.util.ArrayList;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -72,10 +74,13 @@ public class AppController {
 	public String newUser(ModelMap model) {
 		User user = new User();
                 Customer customer = new Customer();
+                List<UserProfile> userProfileList = new ArrayList();
                 user.setCustomer(customer);
+                user.setUserProfileList(userProfileList);
 		model.addAttribute("user", user);
 		model.addAttribute("edit", false);
                 model.addAttribute("action", "newuser");
+                
 //		model.addAttribute("loggedinuser", getPrincipal());
 		return "registration";
 	}
@@ -88,18 +93,6 @@ public class AppController {
 	public String saveUser(@Valid User user, BindingResult result,
 			ModelMap model) {
             
-            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-            System.out.println(user.getId());
-            System.out.println(user.getSsoId());
-            System.out.println(user.getPassword());
-            System.out.println(user.getCustomer());
-            System.out.println(user.getUserProfileList());
-            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-
 		if (result.hasErrors()) {
 			return "registration";
 		}
@@ -118,9 +111,13 @@ public class AppController {
 			return "registration";
 		}
 		
+                UserProfile userProfile = new UserProfile(new Long(1), "USER");
+                List<UserProfile> userProfileList = new ArrayList();
+                userProfileList.add(userProfile);
+                user.setUserProfileList(userProfileList);
 		userService.saveUser(user);
 
-		model.addAttribute("success", "User " + user.getPassword() + " "+ user.getSsoId() + " registered successfully");
+		model.addAttribute("success", "User " + user.getPassword() + " "+ user.getSsoId() + " registered successfully" + user.getUserProfileList());
 		model.addAttribute("loggedinuser", getPrincipal());
 		//return "success";
 		return "registrationsuccess";
