@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.mycompany.bioeshop.entities.User;
 import com.mycompany.bioeshop.entities.UserProfile;
+import com.mycompany.bioeshop.service.CustomerService;
 import com.mycompany.bioeshop.service.UserProfileService;
 import com.mycompany.bioeshop.service.UserService;
 import java.util.ArrayList;
@@ -41,6 +42,9 @@ public class AppController {
 
 	@Autowired
 	UserService userService;
+        
+        @Autowired
+        CustomerService customerService;
 	
 	@Autowired
 	UserProfileService userProfileService;
@@ -110,6 +114,13 @@ public class AppController {
 		    result.addError(ssoError);
 			return "registration";
 		}
+                
+                // Να δούμε γιατί δεν εμφανίζει το μήνυμα λάθους
+                if(!customerService.isEmailUnique(user.getCustomer().getCustomerId(), user.getCustomer().getEmail())) {
+                    FieldError emailError =new FieldError("user.customer","email",messageSource.getMessage("non.unique.email", new String[]{String.valueOf(user.getCustomer().getCustomerId())}, Locale.getDefault()));
+		    result.addError(emailError);
+                    return "registration";
+                }
 		
                 UserProfile userProfile = new UserProfile(new Long(1), "USER");
                 List<UserProfile> userProfileList = new ArrayList();

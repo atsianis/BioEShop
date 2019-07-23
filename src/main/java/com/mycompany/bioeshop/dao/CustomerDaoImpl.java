@@ -8,7 +8,11 @@ package com.mycompany.bioeshop.dao;
 import com.mycompany.bioeshop.entities.Customer;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+@Repository("cdao")
+@Transactional
 public class CustomerDaoImpl extends AbstractDao<Integer, Customer> implements CustomerDao {
 
     @Override
