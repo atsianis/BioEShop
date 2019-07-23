@@ -75,13 +75,18 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	}
         
         /////////////// Extra ////////
+        // Tested --> Works fine !!
         @Override
         public User getAccountByCustomomerId(int id){
-            Criteria crit = getSession().createCriteria(User.class);
-            Criteria suppCrit = crit.createCriteria("customer");
-            suppCrit.add(Restrictions.eq("customer.customerId",id));
-            User u = (User)crit.uniqueResult();
-            return u;
+//            Criteria crit = getSession().createCriteria(User.class);
+//            Criteria suppCrit = crit.createCriteria("customer");
+//            suppCrit.add(Restrictions.eq("customer.customerId",id));
+//            User u = (User)crit.uniqueResult();
+//            return u;
+                Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("customer.customerId", id));
+		User user = (User)crit.uniqueResult();
+		return user;
         }
         
         @Override
