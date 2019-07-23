@@ -128,8 +128,9 @@ public class AppController {
                 user.setUserProfileList(userProfileList);
 		userService.saveUser(user);
 
-		model.addAttribute("success", "User " + user.getPassword() + " "+ user.getSsoId() + " registered successfully" + user.getUserProfileList());
-		model.addAttribute("loggedinuser", getPrincipal());
+		model.addAttribute("success", "Dear " + user.getSsoId() + ", you have registered successfully.");
+                model.addAttribute("path", "4; URL=/BioEShop/");
+		//model.addAttribute("loggedinuser", getPrincipal());
 		//return "success";
 		return "registrationsuccess";
 	}
