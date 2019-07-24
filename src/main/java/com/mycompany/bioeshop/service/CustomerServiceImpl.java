@@ -8,6 +8,7 @@ package com.mycompany.bioeshop.service;
 import com.mycompany.bioeshop.dao.CustomerDao;
 import com.mycompany.bioeshop.dao.CustomerDaoImpl;
 import com.mycompany.bioeshop.entities.Customer;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,5 +47,10 @@ public class CustomerServiceImpl implements CustomerService {
     public boolean isEmailUnique(Integer id, String email) {
         Customer customer = getCustomerByEmail(email);
         return ( customer == null || ((id != null) && (customer.getCustomerId() == id)));
+    }
+    
+    @Override
+    public Customer getCustomerBySsoId(String ssoId){
+        return cdao.getCustomerBySsoId(ssoId);
     }
 }

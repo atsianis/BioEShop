@@ -6,6 +6,7 @@
 package com.mycompany.bioeshop.dao;
 
 import com.mycompany.bioeshop.entities.Customer;
+import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -52,5 +53,12 @@ public class CustomerDaoImpl extends AbstractDao<Integer, Customer> implements C
             return false;
         }
     }
-
+    
+    @Override
+    public Customer getCustomerBySsoId(String ssoId) {
+        String sqlQuery = "select c from Customer c inner join c.userList u where u.ssoId ='" + ssoId + "'";
+        Customer c =(Customer)getSession().createQuery(sqlQuery).uniqueResult();
+        return c;
+    }
+    
 }
