@@ -6,9 +6,11 @@
 package com.mycompany.bioeshop.dao;
 
 import com.mycompany.bioeshop.entities.Product;
+import com.mycompany.bioeshop.entities.User;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -28,6 +30,10 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
 
     @Override
     public List<Product> getProductByCategory(String category) {
+        Criteria crit = createEntityCriteria();
+        crit.add(Restrictions.eq("category", category));
+	List<Product> list = (List<Product>)crit.list()
+        return list;
     }
 
     @Override
