@@ -109,6 +109,44 @@ public class Product implements Serializable {
         this.price = price;
         this.category = category;
     }
+    // these are the minimum fields we need to create a nwe product, (according to the not null fields)
+    // this should be the constructor when creating a product, I guess
+    public Product(String path, String descr, int stock, String title, double price, String category) {
+        this.path = path;
+        this.descr = descr;
+        this.stock = stock;
+        this.title = title;
+        this.price = price;
+        this.category = category;
+    }
+
+    public Product(String path, String descr, int stock, String title, double price, String category, List<Orderdetails> orderdetailsList) {
+        this.path = path;
+        this.descr = descr;
+        this.stock = stock;
+        this.title = title;
+        this.price = price;
+        this.category = category;
+        this.orderdetailsList = orderdetailsList;
+    }
+    
+    
+
+    public Product(String path, String descr, int stock, String title, double price, String category, String color, String size, String material) {
+        this.path = path;
+        this.descr = descr;
+        this.stock = stock;
+        this.title = title;
+        this.price = price;
+        this.category = category;
+        this.color = color;
+        this.size = size;
+        this.material = material;
+    }
+
+    
+    
+    
 
     public Integer getProductId() {
         return productId;

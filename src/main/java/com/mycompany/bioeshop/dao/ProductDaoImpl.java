@@ -46,6 +46,7 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
         return p;
     }
     
+    @Override
     public boolean addProduct(Product p){
         try {
             persist(p);
@@ -55,11 +56,24 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
         }
     }
     
+    @Override
     public boolean updateProduct(Product p){
         try {
             update(p);
             return true;
         } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public boolean deleteProductById(int id){
+        try{
+            Criteria crit = createEntityCriteria();
+            crit.add(Restrictions.eq("productId", id));
+            Product p = (Product)crit.uniqueResult();
+            delete(p);
+            return true;
+        }catch(Exception e){
             return false;
         }
     }

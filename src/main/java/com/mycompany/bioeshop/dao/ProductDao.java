@@ -22,7 +22,9 @@ public interface ProductDao {
     
     public boolean addProduct(Product product); 
 
-    public boolean updateProduct(Product product); 
+    public boolean updateProduct(Product product);
+    
+    public boolean deleteProductById(int id);
     
     
 }
