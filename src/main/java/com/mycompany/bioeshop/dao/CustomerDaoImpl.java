@@ -14,7 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository("cdao")
 @Transactional
 public class CustomerDaoImpl extends AbstractDao<Integer, Customer> implements CustomerDao {
-
+    
+    // tested --> works
     @Override
     public boolean createCustomer(Customer c) {
         try {
@@ -32,7 +33,8 @@ public class CustomerDaoImpl extends AbstractDao<Integer, Customer> implements C
         Customer c = (Customer) crit.uniqueResult();
         return c;
     }
-
+    
+    // tested --> works
     @Override
     public Customer getCustomerById(int id) {
         Criteria crit = createEntityCriteria();

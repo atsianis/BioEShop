@@ -22,8 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
     
-        private static SessionFactory sessionFactory;
-        private Session session;
+//        private static SessionFactory sessionFactory;
+//        private Session session;
 
 	static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 	//Tested --> Works fine !! Make sure to initialize nested lists in customer field if you have to
@@ -62,11 +62,11 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		}
 		return users;
 	}
-
+        // tested --> works
 	public void save(User user) {
 		persist(user);
 	}
-
+        // tested --> works
 	public void deleteBySSO(String sso) {
 		Criteria crit = createEntityCriteria();
 		crit.add(Restrictions.eq("ssoId", sso));
@@ -89,6 +89,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		return user;
         }
         
+        // tested --> works
         @Override
         public boolean updateAccount(User u) {
             try {
