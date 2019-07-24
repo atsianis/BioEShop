@@ -87,6 +87,14 @@ public class Customer implements Serializable {
         this.email = email;
     }
 
+    public Customer(String fname, String lname, String email) {
+        this.fname = fname;
+        this.lname = lname;
+        this.email = email;
+    }
+    
+    
+
     public Integer getCustomerId() {
         return customerId;
     }
@@ -175,7 +183,7 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return "Customer{" + "customerId=" + customerId + ", fname=" + fname + ", lname=" + lname + ", email=" + email + ", address=" + address + ", phoneNumber=" + phoneNumber + ", orderList=" + orderList + ", userList=" + userList + '}';
+        return "Customer{" + "customerId=" + customerId + ", fname=" + fname + ", lname=" + lname + ", email=" + email + ", address=" + address + ", phoneNumber=" + phoneNumber +'}';
     }
 
     

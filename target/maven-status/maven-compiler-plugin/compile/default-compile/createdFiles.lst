@@ -1,9 +1,11 @@
 com\mycompany\bioeshop\controllers\AppController.class
 com\mycompany\bioeshop\dao\UserDao.class
+com\mycompany\bioeshop\service\CustomerService.class
 com\mycompany\bioeshop\dao\UserDaoImpl.class
 com\mycompany\bioeshop\entities\User.class
 com\mycompany\bioeshop\configuration\AppInitializer.class
 com\mycompany\bioeshop\configuration\AppConfig.class
+com\mycompany\bioeshop\service\CustomerServiceImpl.class
 com\mycompany\bioeshop\controllers\test.class
 com\mycompany\bioeshop\converter\RoleToUserProfileConverter.class
 com\mycompany\bioeshop\service\UserService.class
