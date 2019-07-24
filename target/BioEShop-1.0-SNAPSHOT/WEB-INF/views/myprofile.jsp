@@ -48,7 +48,7 @@
                     <div><a href="<c:url value='/admin/customers/delete/${customer.customerId}' />" class="btn btn-success custom-width">Delete customer</a></div>
                 </sec:authorize>
                 <sec:authorize access="hasRole('USER')">
-                    <div><a href="<c:url value='/profile/update/${customer.customerId}' />" class="btn btn-danger custom-width">Update info</a></div>
+                    <div><a href="<c:url value='/user/profile/update/${customer.customerId}' />" class="btn btn-danger custom-width">Update info</a></div>
                 </sec:authorize>
             </div>
         </div>

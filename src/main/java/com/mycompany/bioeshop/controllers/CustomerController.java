@@ -5,12 +5,17 @@
  */
 package com.mycompany.bioeshop.controllers;
 
+import com.mycompany.bioeshop.entities.Customer;
+import com.mycompany.bioeshop.entities.User;
 import com.mycompany.bioeshop.service.CustomerService;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -34,16 +39,26 @@ public class CustomerController {
         return "myprofile";
     }
 
-    @RequestMapping(value = {"/profile/update"}, method = RequestMethod.GET)
-    public String updateProfile(ModelMap model) {
-
-        return "";
+    @RequestMapping(value = {"/profile/update/{id}"}, method = RequestMethod.GET)
+    public String updateProfile(ModelMap model, @PathVariable String id) {
+        model.addAttribute("customer", customerService.getCustomerById(Integer.parseInt(id)));
+        return "updateprofile";
     }
 
-    @RequestMapping(value = {"/profile/update"}, method = RequestMethod.POST)
-    public String saveProfile(ModelMap model) {
+    @RequestMapping(value = {"/profile/save"}, method = RequestMethod.POST)
+    public String saveProfile(@Valid Customer customer, BindingResult result,
+            ModelMap model) {
+        if (result.hasErrors()) {
+            return "registration";
+        }
+        
+        if (!customerService.isEmailUnique(customer.getCustomerId(), customer.getEmail())) {
+            model.addAttribute("emailnotUnique", "Email " + customer.getEmail()
+                    + " already exists. Please fill in a different email.");
+            return "updateprofile";
+        }
 
-        return "";
+        return "redirect:/profile";
     }
 
     @RequestMapping(value = {"/profile/myorders"}, method = RequestMethod.GET)
