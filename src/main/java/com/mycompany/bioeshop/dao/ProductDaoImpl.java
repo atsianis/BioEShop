@@ -7,6 +7,7 @@ package com.mycompany.bioeshop.dao;
 
 import com.mycompany.bioeshop.entities.Product;
 import com.mycompany.bioeshop.entities.User;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
@@ -38,6 +39,7 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
 
     @Override
     public Product getProductById() {
+        return new Product();
     }
     
 }

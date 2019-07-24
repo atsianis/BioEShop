@@ -6,6 +6,7 @@
 package com.mycompany.bioeshop.dao;
 
 import com.mycompany.bioeshop.entities.Customer;
+import java.util.List;
 
 /**
  *
@@ -20,5 +21,7 @@ public interface CustomerDao {
     public Customer getCustomerById(int id);
 
     public boolean updateCustomer(Customer c);
+    
+    public Customer getCustomerBySsoId(String ssoId);
     
 }
