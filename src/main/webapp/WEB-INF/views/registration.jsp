@@ -79,7 +79,7 @@
 					<div class="col-md-7">
 						<form:input type="text" name="customer.email" path="customer.email" id="email" class="form-control input-sm" />
 						<div class="has-error">
-							<form:errors name="customer.email" class="help-inline"/>
+							<form:errors path="customer.email" class="help-inline"/>
 						</div>
 					</div>
 				</div>

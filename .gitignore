@@ -1,3 +1,6 @@
 *.class
 *.war
 *.dpf
+target/maven-archiver/pom.properties
+target/maven-archiver/pom.properties
+target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst

@@ -5,18 +5,23 @@
  */
 package com.mycompany.bioeshop.service;
 
+import com.mycompany.bioeshop.dao.CustomerDao;
 import com.mycompany.bioeshop.dao.CustomerDaoImpl;
 import com.mycompany.bioeshop.entities.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author samsung np350
  */
+@Service("customerService")
+@Transactional
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
-    CustomerDaoImpl cdao;
+    private CustomerDao cdao;
 
     @Override
     public boolean createCustomer(Customer c) {
