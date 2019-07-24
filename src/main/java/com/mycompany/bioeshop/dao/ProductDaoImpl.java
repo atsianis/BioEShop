@@ -6,8 +6,6 @@
 package com.mycompany.bioeshop.dao;
 
 import com.mycompany.bioeshop.entities.Product;
-import com.mycompany.bioeshop.entities.User;
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
@@ -23,9 +21,12 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
     public List<Product> getAllProducts() {
         Criteria criteria = createEntityCriteria();
         List<Product> products = (List<Product>) criteria.list();
-        for (Product p : products){
-            Hibernate.initialize(p.getOrderdetailsList());
-        }
+        //exw afairesei po tin toString ti lista
+        //an xreiastei kse-sxoliazoume auto to kommati
+        
+//        for (Product p : products){
+//            Hibernate.initialize(p.getOrderdetailsList());
+//        }
         return products;
     }
 
@@ -33,13 +34,34 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
     public List<Product> getProductByCategory(String category) {
         Criteria crit = createEntityCriteria();
         crit.add(Restrictions.eq("category", category));
-	List<Product> list = (List<Product>)crit.list()
+	List<Product> list = (List<Product>)crit.list();
         return list;
     }
 
     @Override
-    public Product getProductById() {
-        return new Product();
+    public Product getProductById(int id) {
+        Criteria crit = createEntityCriteria();
+        crit.add(Restrictions.eq("productId", id));
+        Product p = (Product) crit.uniqueResult();
+        return p;
+    }
+    
+    public boolean addProduct(Product p){
+        try {
+            persist(p);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public boolean updateProduct(Product p){
+        try {
+            update(p);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
     
 }
