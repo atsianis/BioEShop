@@ -24,4 +24,6 @@ public interface CustomerDao {
     
     public Customer getCustomerBySsoId(String ssoId);
     
+    public List<Customer> getAllRegisteredCustomers();
+    
 }
