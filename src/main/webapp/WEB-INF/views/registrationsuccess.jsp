@@ -11,6 +11,7 @@
         <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
     </head>
     <body>
+        <%@include file="menu.jsp" %>
         <div class="generic-container">
             <div class="alert alert-success lead">
                 ${success}

@@ -2,6 +2,7 @@
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/dao/UserDao.java
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/entities/UserProfile.java
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/dao/HibernateTokenRepositoryImpl.java
+/home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/controllers/CustomerController.java
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/entities/Orderdetails.java
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/controllers/AppController.java
 /home/giorgos/NetBeansProjects/BioEShop/src/main/java/com/mycompany/bioeshop/security/SecurityWebApplicationInitializer.java

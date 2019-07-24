@@ -26,6 +26,7 @@ com/mycompany/bioeshop/configuration/AppInitializer.class
 com/mycompany/bioeshop/dao/CustomerDaoImpl.class
 com/mycompany/bioeshop/service/UserProfileServiceImpl.class
 com/mycompany/bioeshop/entities/UserProfile.class
+com/mycompany/bioeshop/controllers/CustomerController.class
 com/mycompany/bioeshop/security/CustomUserDetailsService.class
 com/mycompany/bioeshop/entities/User.class
 com/mycompany/bioeshop/dao/CustomerDao.class

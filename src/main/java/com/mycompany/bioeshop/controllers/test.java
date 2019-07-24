@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author giorgos
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/xxx")
 public class test {
 
     @Autowired

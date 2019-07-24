@@ -13,9 +13,10 @@
 </head>
 
 <body>
+    <%@include file="menu.jsp" %>
  	<div class="generic-container">
 		<div class="well lead">User Registration Form</div>
-                <form:form action="/BioEShop/sss/${action}" method="POST" modelAttribute="user" class="form-horizontal">
+                <form:form action="/BioEShop/${action}" method="POST" modelAttribute="user" class="form-horizontal">
 			<form:input type="hidden" path="id" id="id"/>
 			
 			<div class="row">
@@ -54,6 +55,7 @@
 								<form:input type="text" path="ssoId" id="ssoId" class="form-control input-sm" />
 								<div class="has-error">
 									<form:errors path="ssoId" class="help-inline"/>
+                                                                        <span class="help-inline">${ssoIdNotUnique}</span>
 								</div>
 							</c:otherwise>
 						</c:choose>
@@ -80,6 +82,7 @@
 						<form:input type="text" name="customer.email" path="customer.email" id="email" class="form-control input-sm" />
 						<div class="has-error">
 							<form:errors path="customer.email" class="help-inline"/>
+                                                        <span class="help-inline">${emailnotUnique}</span>
 						</div>
 					</div>
 				</div>
