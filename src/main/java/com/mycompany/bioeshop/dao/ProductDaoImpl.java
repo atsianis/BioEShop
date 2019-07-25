@@ -6,10 +6,10 @@
 package com.mycompany.bioeshop.dao;
 
 import com.mycompany.bioeshop.entities.Product;
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -21,21 +21,74 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
     public List<Product> getAllProducts() {
         Criteria criteria = createEntityCriteria();
         List<Product> products = (List<Product>) criteria.list();
-        for (Product p : products){
-            Hibernate.initialize(p.getOrderdetailsList());
-        }
+        //exw afairesei po tin toString ti lista
+        //an xreiastei kse-sxoliazoume auto to kommati
+        
+//        for (Product p : products){
+//            Hibernate.initialize(p.getOrderdetailsList());
+//        }
         return products;
     }
 
     @Override
     public List<Product> getProductByCategory(String category) {
-        List<Product> p = new ArrayList();
-        return p;
+        Criteria crit = createEntityCriteria();
+        crit.add(Restrictions.eq("category", category));
+	List<Product> list = (List<Product>)crit.list();
+        return list;
     }
 
     @Override
-    public Product getProductById() {
-        return new Product();
+    public Product getProductById(int id) {
+        Criteria crit = createEntityCriteria();
+        crit.add(Restrictions.eq("productId", id));
+        Product p = (Product) crit.uniqueResult();
+        return p;
+    }
+    
+    @Override
+    public boolean addProduct(Product p){
+        try {
+            persist(p);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    @Override
+    public boolean updateProduct(Product p){
+        try {
+            update(p);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public boolean deleteProductById(int id){
+        try{
+            Criteria crit = createEntityCriteria();
+            crit.add(Restrictions.eq("productId", id));
+            Product p = (Product)crit.uniqueResult();
+            delete(p);
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+    
+    public boolean reduceProductStock(int id,int quantity){
+        try{
+            Criteria crit = createEntityCriteria();
+            crit.add(Restrictions.eq("productId", id));
+            Product p = (Product)crit.uniqueResult();
+            p.setStock(p.getStock()-quantity);
+            update(p);
+            return true;
+        }catch(Exception e){
+            return false;
+        }
     }
     
 }

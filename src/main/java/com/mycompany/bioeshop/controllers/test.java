@@ -7,6 +7,7 @@ package com.mycompany.bioeshop.controllers;
 
 import com.mycompany.bioeshop.dao.CustomerDao;
 import com.mycompany.bioeshop.entities.Customer;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,16 +19,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author giorgos
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/xxx")
 public class test {
 
     @Autowired
     CustomerDao cdao;
 
-    @RequestMapping(value="/xxx",method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String Testing(ModelMap model) {
-        Customer c = cdao.getCustomerById(2);
-        model.addAttribute("variable",c);
+        List<Customer> list = cdao.getAllRegisteredCustomers();
+        model.addAttribute("variable",list);
         return "testview";
     }
 }

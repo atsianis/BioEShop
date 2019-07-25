@@ -61,4 +61,32 @@ public class CustomerDaoImpl extends AbstractDao<Integer, Customer> implements C
         return c;
     }
     
+    @Override
+    public List<Customer> getAllRegisteredCustomers(){
+        String query = "select c from Customer c right join c.userList";
+        List<Customer> registeredCustomers = (List<Customer>)getSession().createQuery(query).list();
+        return registeredCustomers;
+    }
+    
+    public boolean deleteCustomerById(int id){
+        try{
+            Criteria crit = createEntityCriteria();
+            crit.add(Restrictions.eq("customerId", id));
+            Customer c = (Customer)crit.uniqueResult();
+            delete(c);
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+    
+    @Override
+    public Customer getCustomerByUserId(int id){
+        String sqlQuery = "select c from Customer c inner join c.userList u where u.id =" + id;
+        Customer c =(Customer)getSession().createQuery(sqlQuery).uniqueResult();
+        return c;
+    }
+    
+    
+    
 }

@@ -18,7 +18,15 @@ public interface ProductDao {
     
     public List<Product> getProductByCategory(String category);
     
-    public Product getProductById();
+    public Product getProductById(int id);
+    
+    public boolean addProduct(Product product); 
+
+    public boolean updateProduct(Product product);
+    
+    public boolean deleteProductById(int id);
+    
+    public boolean reduceProductStock(int id,int quantity);
     
     
 }
