@@ -23,6 +23,7 @@
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading"><span class="lead">My Profile </span></div>
+                <div>${success}</div>
                 <table class="table table-hover">
                     <thead>
                         <tr>

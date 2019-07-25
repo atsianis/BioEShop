@@ -18,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
@@ -47,18 +48,27 @@ public class CustomerController {
 
     @RequestMapping(value = {"/profile/save"}, method = RequestMethod.POST)
     public String saveProfile(@Valid Customer customer, BindingResult result,
-            ModelMap model) {
-        if (result.hasErrors()) {
-            return "registration";
-        }
+            ModelMap model, @RequestParam("oldemail") String oldemail) {
         
-        if (!customerService.isEmailUnique(customer.getCustomerId(), customer.getEmail())) {
-            model.addAttribute("emailnotUnique", "Email " + customer.getEmail()
-                    + " already exists. Please fill in a different email.");
+        if (result.hasErrors()) {
             return "updateprofile";
         }
-
-        return "redirect:/profile";
+        
+        if(!oldemail.equals(customer.getEmail())) {
+            if (!customerService.isEmailUnique(customer.getCustomerId(), customer.getEmail())) {
+                model.addAttribute("emailnotUnique", "Email " + customer.getEmail()
+                        + " already exists. Please fill in a different email.");
+                return "updateprofile";
+            }
+        }
+        
+        if(customerService.updateCustomer(customer)){
+            return "redirect:/user/profile";
+        }
+        
+        // It should redirect to a different jsp
+        model.addAttribute("success", "Your info was not updated.");
+        return "redirect:/user/profile";
     }
 
     @RequestMapping(value = {"/profile/myorders"}, method = RequestMethod.GET)

@@ -48,6 +48,7 @@
                         <label class="col-md-3 control-lable" for="email">Email</label>
                         <div class="col-md-7">
                             <form:input type="text" path="email" id="email" class="form-control input-sm" />
+                            <input type="text" name="oldemail" value="${customer.email}" hidden="true"/>
                             <div class="has-error">
                                 <form:errors path="email" class="help-inline"/>
                                 <span class="help-inline">${emailnotUnique}</span>
