@@ -10,15 +10,17 @@
     <body>
         <%@include file="z3authheader.jsp" %>
         <%@include file="menu.jsp" %>
-
+        <div class="generic-container">
         <div class="well lead">${action} product </div>
         <form:form action="/BioEShop/admin/products/save" method="POST" modelAttribute="p" class="form-horizontal">
             <form:input type="hidden" path="productId" id="id"/>
+            <c:choose>
             <c:when test="${edit}">
                 <div class="row">
                     <img width="300px" height="400px" src="${p.path}"/>
                 </div>
             </c:when>
+            </c:choose>
             <div class="row">
                 <div class="form-group col-md-12">
                     <label class="col-md-3 control-lable" for="path">Path</label>
@@ -74,6 +76,7 @@
                     </div>
                 </div>
             </div>
+                            <c:choose>
             <c:when test="${edit}">
                 <div class="row">
                     <div class="form-group col-md-12">
@@ -90,6 +93,7 @@
             <c:otherwise>
                 <form:input type="text" hidden="true" path="price" id="price" class="form-control input-sm" />
             </c:otherwise>
+                            </c:choose>
             <div class="row">
                 <div class="form-group col-md-12">
                     <label class="col-md-3 control-lable" for="color">Color</label>
@@ -105,6 +109,7 @@
                 <div class="form-group col-md-12">
                     <label class="col-md-3 control-lable" for="color">Size</label>
                     <div class="col-md-7">
+                        <c:choose>
                         <c:when test="${p.category=="cup"}">
                             <form:select type="text" path="size" id="size" class="form-control input-sm">
                                 <form:option value="0.5L">0.5L</form:option>
@@ -125,6 +130,7 @@
                                 <form:option value="adult">adult</form:option>
                             </form:select>
                         </c:when>
+                        </c:choose>
                         <div class="has-error">
                             <form:errors path="size" class="help-inline"/>
                         </div>
@@ -135,6 +141,7 @@
                 <div class="form-group col-md-12">
                     <label class="col-md-3 control-lable" for="material">Material</label>
                     <div class="col-md-7">
+                        <c:choose>
                         <c:when test="${p.category=="cup"}">
                             <form:select type="text" path="material" id="material" class="form-control input-sm">
                                 <form:option value="bamboo">Bamboo</form:option>
@@ -154,6 +161,7 @@
                                 <form:option value="wood">Wood</form:option>
                             </form:select>
                         </c:when>
+                            <c:choose>
                         <div class="has-error">
                             <form:errors path="material" class="help-inline"/>
                         </div>
