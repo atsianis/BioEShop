@@ -10,8 +10,11 @@
     <body>
         <%@include file="z3authheader.jsp" %>
         <%@include file="menu.jsp" %>
-        <a href="/BioEShop/admin/products/${category}/add">Add a new product for this category</a>
-    
+        <sec:authorize access="hasRole('ADMIN')">
+            <a href="/BioEShop/admin/products/${category}/add">Add a new product for this category</a>
+        </sec:authorize>
+        
+
 
         <div class="container">
             <c:forEach var="product" items="${products}">
@@ -33,15 +36,15 @@
 
                         <div class="bottom-wrap">
 
-                            <%! boolean isUser = true; %>
+                            <%! boolean isUser = true;%>
                             <sec:authorize access="hasRole('ADMIN')">
                                 <a href="/admin/products/edit/${product.productId}" class="btn btn-sm btn-primary float-right">Edit</a>
-                                <% isUser=false; %>
+                                <% isUser = false;%>
                             </sec:authorize>
                             <c:if test="${isUser = true}">
                                 <a href="/buy/product/${product.productId}" class="btn btn-sm btn-primary float-right">Order Now</a>
                             </c:if>
-                            
+
 
 
                             <div class="price-wrap h5">
