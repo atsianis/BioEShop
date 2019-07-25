@@ -10,11 +10,15 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author samsung np350
  */
+@Repository("pdao")
+@Transactional
 public class ProductDaoImpl extends AbstractDao<Integer,Product> implements ProductDao {
 
     @Override
@@ -66,6 +70,7 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
         }
     }
     
+    @Override
     public boolean deleteProductById(int id){
         try{
             Criteria crit = createEntityCriteria();
@@ -78,6 +83,7 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
         }
     }
     
+    @Override
     public boolean reduceProductStock(int id,int quantity){
         try{
             Criteria crit = createEntityCriteria();
