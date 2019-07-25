@@ -78,4 +78,17 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
         }
     }
     
+    public boolean reduceProductStock(int id,int quantity){
+        try{
+            Criteria crit = createEntityCriteria();
+            crit.add(Restrictions.eq("productId", id));
+            Product p = (Product)crit.uniqueResult();
+            p.setStock(p.getStock()-quantity);
+            update(p);
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+    
 }

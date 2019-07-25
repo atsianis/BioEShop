@@ -80,4 +80,13 @@ public class CustomerDaoImpl extends AbstractDao<Integer, Customer> implements C
         }
     }
     
+    @Override
+    public Customer getCustomerByUserId(int id){
+        String sqlQuery = "select c from Customer c inner join c.userList u where u.id =" + id;
+        Customer c =(Customer)getSession().createQuery(sqlQuery).uniqueResult();
+        return c;
+    }
+    
+    
+    
 }

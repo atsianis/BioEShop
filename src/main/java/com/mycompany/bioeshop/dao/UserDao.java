@@ -25,6 +25,8 @@ public interface UserDao {
         public User getAccountByCustomomerId(int id);
         
         public boolean updateAccount(User u);
+        
+        public boolean deleteAccountByCustomerId(int id);
 
 }
 
