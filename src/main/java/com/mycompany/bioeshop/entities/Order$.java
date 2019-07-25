@@ -28,6 +28,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -56,6 +57,7 @@ public class Order$ implements Serializable {
     @NotNull
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     @Basic(optional = false)
     @NotNull
@@ -82,6 +84,21 @@ public class Order$ implements Serializable {
         this.date = date;
         this.pending = pending;
     }
+
+    public Order$(Date date, short pending, Customer customer) {
+        this.date = date;
+        this.pending = pending;
+        this.customer = customer;
+    }
+
+    public Order$(Date date, short pending, String comments, Customer customer) {
+        this.date = date;
+        this.pending = pending;
+        this.comments = comments;
+        this.customer = customer;
+    }
+    
+    
 
     public Integer getOrderId() {
         return orderId;

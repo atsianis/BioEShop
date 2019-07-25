@@ -70,6 +70,7 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
         }
     }
     
+    @Override
     public boolean deleteProductById(int id){
         try{
             Criteria crit = createEntityCriteria();
@@ -82,6 +83,7 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
         }
     }
     
+    @Override
     public boolean reduceProductStock(int id,int quantity){
         try{
             Criteria crit = createEntityCriteria();

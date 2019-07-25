@@ -6,6 +6,7 @@
 package com.mycompany.bioeshop.dao;
 
 import com.mycompany.bioeshop.entities.Customer;
+import com.mycompany.bioeshop.entities.User;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -70,9 +71,7 @@ public class CustomerDaoImpl extends AbstractDao<Integer, Customer> implements C
     
     public boolean deleteCustomerById(int id){
         try{
-            Criteria crit = createEntityCriteria();
-            crit.add(Restrictions.eq("customerId", id));
-            Customer c = (Customer)crit.uniqueResult();
+            Customer c = getCustomerById(id);
             delete(c);
             return true;
         }catch(Exception e){
@@ -85,6 +84,13 @@ public class CustomerDaoImpl extends AbstractDao<Integer, Customer> implements C
         String sqlQuery = "select c from Customer c inner join c.userList u where u.id =" + id;
         Customer c =(Customer)getSession().createQuery(sqlQuery).uniqueResult();
         return c;
+    }
+    
+    @Override
+    public boolean isRegisteredUser(Customer c){
+        UserDaoImpl udi = new UserDaoImpl();
+        User u = udi.getAccountByCustomomerId(c.getCustomerId());
+        return u!=null;
     }
     
     

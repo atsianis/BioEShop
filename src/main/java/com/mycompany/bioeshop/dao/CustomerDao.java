@@ -28,4 +28,6 @@ public interface CustomerDao {
     
     public Customer getCustomerByUserId(int id);
     
+    public boolean isRegisteredUser(Customer c);
+    
 }
