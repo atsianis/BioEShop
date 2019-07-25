@@ -54,7 +54,7 @@ public class AdminController {
             return "products";
         }
         boolean done = false;
-        if(p.getProductId()==null){
+        if(p.getProductId() == null){
             done = pdao.addProduct(p);
         }else{
             done = pdao.updateProduct(p);
