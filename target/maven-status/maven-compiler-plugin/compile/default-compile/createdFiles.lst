@@ -1,6 +1,7 @@
 com\mycompany\bioeshop\controllers\AppController.class
 com\mycompany\bioeshop\controllers\CustomerController.class
 com\mycompany\bioeshop\dao\UserDao.class
+com\mycompany\bioeshop\controllers\AdminController.class
 com\mycompany\bioeshop\service\CustomerService.class
 com\mycompany\bioeshop\dao\UserDaoImpl.class
 com\mycompany\bioeshop\entities\User.class
@@ -22,8 +23,10 @@ com\mycompany\bioeshop\dao\OrderDetailsDao.class
 com\mycompany\bioeshop\service\UserProfileService.class
 com\mycompany\bioeshop\entities\PersistentLogin.class
 com\mycompany\bioeshop\security\SecurityConfiguration.class
+com\mycompany\bioeshop\service\ProductsServiceImpl.class
 com\mycompany\bioeshop\dao\UserProfileDao.class
 com\mycompany\bioeshop\security\SecurityWebApplicationInitializer.class
+com\mycompany\bioeshop\controllers\ProductsController.class
 com\mycompany\bioeshop\security\CustomUserDetailsService.class
 com\mycompany\bioeshop\entities\UserProfile.class
 com\mycompany\bioeshop\entities\UserProfileType.class
@@ -35,4 +38,5 @@ com\mycompany\bioeshop\dao\AbstractDao.class
 com\mycompany\bioeshop\dao\OrderDao.class
 com\mycompany\bioeshop\dao\UserProfileDaoImpl.class
 com\mycompany\bioeshop\entities\Order$.class
+com\mycompany\bioeshop\service\ProductsService.class
 com\mycompany\bioeshop\configuration\HibernateConfiguration.class

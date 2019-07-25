@@ -1,5 +1,6 @@
 package com.mycompany.bioeshop.controllers;
 
+import com.mycompany.bioeshop.dao.ProductDao;
 import com.mycompany.bioeshop.entities.Customer;
 import java.util.List;
 import java.util.Locale;
@@ -50,6 +51,9 @@ public class AppController {
 
     @Autowired
     MessageSource messageSource;
+    
+    @Autowired
+    ProductDao pdao;
 
     @Autowired
     PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
@@ -125,6 +129,17 @@ public class AppController {
         model.addAttribute("success", "Dear " + user.getSsoId() + ", you have registered successfully.");
         model.addAttribute("path", "4; URL=/BioEShop/");
         return "registrationsuccess";
+    }
+    
+    
+    
+    
+    @RequestMapping(value = {"/products"}, method = RequestMethod.GET)
+    public String allProducts(ModelMap model){
+        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("products", pdao.getAllProducts());
+        return "products";
+        
     }
 //
 //
