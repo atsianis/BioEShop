@@ -29,6 +29,7 @@ public class ProductsController {
     @RequestMapping(value = {"/{category}"}, method = RequestMethod.GET)
     public String getProductsOfCategory(ModelMap model, @PathVariable String category) {
         model.addAttribute("products", productsService.getProductByCategory(category));
+        model.addAttribute("category", category);
         String pagetitle = "";
         if(category.equals("cup")){
             pagetitle = "Cups made by nature";

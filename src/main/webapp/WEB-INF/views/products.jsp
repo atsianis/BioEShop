@@ -8,7 +8,10 @@
 <html>
     <%@include file="z2HTML_Head.jsp" %>
     <body>
-
+        <%@include file="z3authheader.jsp" %>
+        <%@include file="menu.jsp" %>
+        <a href="/BioEShop/admin/products/${category}/add">Add a new product for this category</a>
+    
 
         <div class="container">
             <c:forEach var="product" items="${products}">
@@ -38,7 +41,7 @@
                             <c:if test="${isUser = true}">
                                 <a href="/buy/product/${product.productId}" class="btn btn-sm btn-primary float-right">Order Now</a>
                             </c:if>
-
+                            
 
 
                             <div class="price-wrap h5">
@@ -52,7 +55,7 @@
 
 
 
-        <p>${product.category}</p>
+        <p></p>
         <p>${product.color}</p>
         <p>${product.material}</p>
 
