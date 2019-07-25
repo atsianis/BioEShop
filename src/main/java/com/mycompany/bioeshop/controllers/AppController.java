@@ -66,6 +66,7 @@ public class AppController {
 //		model.addAttribute("users", users);
 //        return "userslist";
         model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("pagetitle", "Home page");
         return "home";
     }
 
@@ -200,8 +201,9 @@ public class AppController {
      * tries to goto login page again, will be redirected to list page.
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage() {
+    public String loginPage(ModelMap model) {
         if (isCurrentAuthenticationAnonymous()) {
+            model.addAttribute("pagetitle", "Login");
             return "login";
         } else {
             return "redirect:/home";

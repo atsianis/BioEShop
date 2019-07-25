@@ -37,7 +37,7 @@ public class CustomerController {
     public String getProfile(ModelMap model) {
         model.addAttribute("loggedinuser", getPrincipal());
         model.addAttribute("customer", customerService.getCustomerBySsoId(getPrincipal()));
-        return "myprofile";
+        return "customer_profile";
     }
 
     @RequestMapping(value = {"/profile/update/{id}"}, method = RequestMethod.GET)
@@ -49,26 +49,26 @@ public class CustomerController {
     @RequestMapping(value = {"/profile/save"}, method = RequestMethod.POST)
     public String saveProfile(@Valid Customer customer, BindingResult result,
             ModelMap model, @RequestParam("oldemail") String oldemail) {
-        
+
         if (result.hasErrors()) {
             return "updateprofile";
         }
-        
-        if(!oldemail.equals(customer.getEmail())) {
+
+        if (!oldemail.equals(customer.getEmail())) {
             if (!customerService.isEmailUnique(customer.getCustomerId(), customer.getEmail())) {
                 model.addAttribute("emailnotUnique", "Email " + customer.getEmail()
                         + " already exists. Please fill in a different email.");
                 return "updateprofile";
             }
         }
-        
-        if(customerService.updateCustomer(customer)){
-            return "redirect:/user/profile";
+
+        if (customerService.updateCustomer(customer)) {
+            model.addAttribute("success", "Your info was updated successfully.");
+        } else {
+            model.addAttribute("success", "Your info was not updated.");
         }
-        
-        // It should redirect to a different jsp
-        model.addAttribute("success", "Your info was not updated.");
-        return "redirect:/user/profile";
+
+        return "customer_profile";
     }
 
     @RequestMapping(value = {"/profile/myorders"}, method = RequestMethod.GET)

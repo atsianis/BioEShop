@@ -4,19 +4,14 @@
     Author     : giorgos
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<%@include file="z1JSP_setup.jsp" %>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
+    <%@include file="z2HTML_Head.jsp" %>
     <body>
         <%@include file="menu.jsp" %>
         
         <c:if test="${loggedinuser != "anonymousUser"}">
-            <jsp:include page="authheader.jsp" flush="true"/>
+            <jsp:include page="z3authheader.jsp" flush="true"/>
         </c:if>
         
         

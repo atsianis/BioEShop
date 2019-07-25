@@ -4,25 +4,26 @@
     Author     : giorgos
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<%@include file="z1JSP_setup.jsp" %>
+
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link href="<c:url value='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' />" rel="stylesheet"></link>
-    </head>
+    <%@include file="z2HTML_Head.jsp" %>
     <body>
-        <%@include file="authheader.jsp" %>
+        <%@include file="z3authheader.jsp" %>
         <%@include file="menu.jsp" %>
         <h1>Hello World!</h1>
         <div class="generic-container">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
-                <div class="panel-heading"><span class="lead">My Profile </span></div>
+                
+                
+                <sec:authorize access="hasRole('ADMIN')">
+                <div class="panel-heading"><span class="lead">Customer Profile </span></div>
+                </sec:authorize>
+                <sec:authorize access="hasRole('USER')">
+                    <div class="panel-heading"><span class="lead">My Profile </span></div>
+                </sec:authorize>
+                
                 <div>${success}</div>
                 <table class="table table-hover">
                     <thead>
