@@ -65,7 +65,7 @@ public class AdminController {
         }else{
             model.addAttribute("message","There was a problem");
         }
-        return "products";
+        return "home";
     }
     
     private String getPrincipal() {
