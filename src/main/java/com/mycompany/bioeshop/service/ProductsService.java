@@ -18,6 +18,6 @@ public interface ProductsService {
      public Product getProductById(int id);
      public boolean addProduct(Product p);
      public boolean updateProduct(Product p);
-     public boolean deleteProductById(int id);
+     public boolean deleteProduct(Product p);
      public boolean reduceProductStock(int id,int quantity);
 }

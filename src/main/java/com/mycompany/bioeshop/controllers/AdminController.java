@@ -56,17 +56,13 @@ public class AdminController {
         
         if (result.hasErrors()) {
             model.addAttribute("message","There was an error trying to save. Please try again");
-            System.out.println("has Errors xxxxxxxxxxxxxxxxxxxxxxxx");
-            System.out.println(p);
             return "redirect:/products";
         }
         
         boolean done = false;
         if(p.getProductId() == null){
-            System.out.println("in nul_ID xxxxxxxxxxxxxxxxxxxx");
             done = pdao.addProduct(p);
         }else{
-            System.out.println("in notnoul");
             done = pdao.updateProduct(p);
         }
         // pithana minimata pou mporoun na emfanizontai kapou kapote. Twra de ta xeirizomai
@@ -75,7 +71,21 @@ public class AdminController {
         }else{
             model.addAttribute("message","There was a problem");
         }
-        return "redirect:/";
+        model.addAttribute("products", pdao.getAllProducts());
+        return "products";
+    }
+    
+    @RequestMapping(value = {"/products/delete/{id}"}, method = RequestMethod.GET)
+    public String saveProduct(ModelMap model,@PathVariable String id){
+        Product p = pdao.getProductById(Integer.parseInt(id));
+        boolean deleted = pdao.deleteProduct(p);
+        if (deleted){
+            model.addAttribute("message","Product deleted successfully");
+        }else{
+            model.addAttribute("message","Something went wrong. Could not delete");
+        }
+        model.addAttribute("products", pdao.getAllProducts());
+        return "products";
     }
     
     private String getPrincipal() {
