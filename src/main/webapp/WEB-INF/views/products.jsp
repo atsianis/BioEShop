@@ -20,7 +20,7 @@
             <c:forEach var="product" items="${products}">
                 <div class="col-md-4">
                     <figure class="card card-product">
-                        <div class="img-wrap"><img src="${product.path}"></div>
+                        <div class="img-wrap"><img width="300px" height="400px" src="${product.path}"></div>
                         <figcaption class="info-wrap">
                             <h4 class="title">${product.title}</h4>
                             <p class="desc">${product.descr}</p>
@@ -36,14 +36,15 @@
 
                         <div class="bottom-wrap">
 
-
+                            
                             <sec:authorize access="hasRole('ADMIN')">
-                                <a href="/admin/products/edit/${product.productId}" class="btn btn-sm btn-primary float-right">Edit</a>
-
+                                <a href="/BioEShop/admin/products/edit/${product.productId}" class="btn btn-sm btn-primary float-right">Edit</a>
+                                <a href="/BioEShop/admin/products/delete/${product.productId}" class="btn btn-sm btn-primary float-right">Delete</a>
+                                
                             </sec:authorize>
-                            <c:if test="${loggedinuser != "admin" }">
+                            <sec:authorize access="!hasRole('ADMIN')">
                                 <a href="/buy/product/${product.productId}" class="btn btn-sm btn-primary float-right">Order Now</a>
-                            </c:if>
+                            </sec:authorize>
 
 
 

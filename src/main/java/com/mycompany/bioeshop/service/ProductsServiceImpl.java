@@ -49,8 +49,8 @@ public class ProductsServiceImpl implements ProductsService {
     }
 
     @Override
-    public boolean deleteProductById(int id) {
-        return pdao.deleteProductById(id);
+    public boolean deleteProduct(Product p) {
+        return pdao.deleteProduct(p);
     }
 
     @Override

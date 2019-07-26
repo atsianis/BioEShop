@@ -71,14 +71,12 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
     }
     
     @Override
-    public boolean deleteProductById(int id){
+    public boolean deleteProduct(Product p){
         try{
-            Criteria crit = createEntityCriteria();
-            crit.add(Restrictions.eq("productId", id));
-            Product p = (Product)crit.uniqueResult();
             delete(p);
             return true;
         }catch(Exception e){
+            System.out.println(e.getMessage());
             return false;
         }
     }
