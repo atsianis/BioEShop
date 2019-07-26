@@ -11,7 +11,7 @@
         <%@include file="z3authheader.jsp" %>
         <%@include file="menu.jsp" %>
         <div class="generic-container">
-            <div class="well lead">${action} product </div>
+            <div class="well lead">${act} product </div>
             <form:form action="/BioEShop/admin/products/save" method="POST" modelAttribute="p" class="form-horizontal">
                 <form:input type="hidden" path="productId" id="id"/>
                 <c:choose>
@@ -47,7 +47,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable" for="stock">Stock</label>
                         <div class="col-md-7">
-                            <form:input type="text" path="stock" id="stock" class="form-control input-sm" />
+                            <form:input type="number" path="stock" id="stock" class="form-control input-sm" />
                             <div class="has-error">
                                 <form:errors path="stock" class="help-inline"/>
                             </div>
@@ -69,7 +69,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable" for="price">Price</label>
                         <div class="col-md-7">
-                            <form:input type="text" path="price" id="price" class="form-control input-sm" />
+                            <form:input type="number" step="0.1" path="price" id="price" class="form-control input-sm" />
                             <div class="has-error">
                                 <form:errors path="price" class="help-inline"/>
                             </div>
@@ -77,21 +77,25 @@
                     </div>
                 </div>
                 <c:choose>
-                    <c:when test="${edit}">
+                    <c:when test="${!edit}">
                         <div class="row">
                             <div class="form-group col-md-12">
-                                <label class="col-md-3 control-lable" for="price">Price</label>
+                                <label class="col-md-3 control-lable" for="category">Category</label>
                                 <div class="col-md-7">
-                                    <form:input type="text" path="price" id="price" class="form-control input-sm" />
+                                    <form:select type="text" path="category" id="category" class="form-control input-sm">
+                                         <form:option value="Cup">Cup</form:option>
+                                        <form:option value="Straw">Straw</form:option>
+                                        <form:option value="Toothbrush">Toothbrush</form:option>
+                                    </form:select>
                                     <div class="has-error">
-                                        <form:errors path="price" class="help-inline"/>
+                                        <form:errors path="category" class="help-inline"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </c:when>
                     <c:otherwise>
-                        <form:input type="text" hidden="true" path="price" id="price" class="form-control input-sm" />
+                        <form:input type="text" hidden="true" path="category" id="category" class="form-control input-sm" />
                     </c:otherwise>
                 </c:choose>
                 <div class="row">
@@ -169,7 +173,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-actions floatRight">
+                            <div class="form-actions">
                                 <input type="submit" value="Save" class="btn btn-primary btn-sm"/>
                             </div>
                         </div>

@@ -55,7 +55,7 @@ public class Product implements Serializable {
     private Integer productId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
+    @Size(min = 1, max = 200)
     @Column(nullable = false, length = 100)
     private String path;
     @Basic(optional = false)
@@ -109,6 +109,21 @@ public class Product implements Serializable {
         this.price = price;
         this.category = category;
     }
+
+    public Product(Integer productId, String path, String descr, int stock, String title, double price, String category, String color, String size, String material) {
+        this.productId = productId;
+        this.path = path;
+        this.descr = descr;
+        this.stock = stock;
+        this.title = title;
+        this.price = price;
+        this.category = category;
+        this.color = color;
+        this.size = size;
+        this.material = material;
+    }
+    
+    
     // these are the minimum fields we need to create a nwe product, (according to the not null fields)
     // this should be the constructor when creating a product, I guess
     public Product(String path, String descr, int stock, String title, double price, String category) {
@@ -259,7 +274,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "Product{" + "productId=" + productId + ", path=" + path + ", descr=" + descr + ", stock=" + stock + ", title=" + title + ", price=" + price + ", category=" + category + ", color=" + color + ", size=" + size + ", material=" + material + ", orderdetailsList=" + orderdetailsList + '}';
+        return "Product{" + "productId=" + productId + ", path=" + path + ", descr=" + descr + ", stock=" + stock + ", title=" + title + ", price=" + price + ", category=" + category + ", color=" + color + ", size=" + size + ", material=" + material +'}';
     }
 
     

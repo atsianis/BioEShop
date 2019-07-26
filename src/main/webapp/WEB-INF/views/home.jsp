@@ -16,6 +16,7 @@
         
         
         <h1>Homepage</h1>
+        ${message}
         
         
     </body>

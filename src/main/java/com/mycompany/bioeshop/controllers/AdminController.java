@@ -6,6 +6,7 @@ import com.mycompany.bioeshop.entities.Customer;
 import com.mycompany.bioeshop.entities.Product;
 import com.mycompany.bioeshop.service.CustomerService;
 import javax.validation.Valid;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,8 +31,10 @@ public class AdminController {
     @RequestMapping(value = {"/products/edit/{id}"}, method = RequestMethod.GET)
     public String editProduct(ModelMap model,@PathVariable String id){
         Product p = pdao.getProductById(Integer.parseInt(id));
+//        Hibernate.initialize(p.getOrderdetailsList());
         model.addAttribute("edit",true);
         model.addAttribute("p", p);
+        model.addAttribute("act","Edit");
         return "saveeditproduct";
         
     }
@@ -39,8 +42,10 @@ public class AdminController {
     @RequestMapping(value = {"/products/save"}, method = RequestMethod.GET)
     public String newProduct(ModelMap model){
         Product p = new Product();
+//        Hibernate.initialize(p.getOrderdetailsList());
         model.addAttribute("edit",false);
         model.addAttribute("p", p);
+        model.addAttribute("act","Create");
         return "saveeditproduct";
         
     }
@@ -51,12 +56,17 @@ public class AdminController {
         
         if (result.hasErrors()) {
             model.addAttribute("message","There was an error trying to save. Please try again");
-            return "products";
+            System.out.println("has Errors xxxxxxxxxxxxxxxxxxxxxxxx");
+            System.out.println(p);
+            return "redirect:/products";
         }
+        
         boolean done = false;
         if(p.getProductId() == null){
+            System.out.println("in nul_ID xxxxxxxxxxxxxxxxxxxx");
             done = pdao.addProduct(p);
         }else{
+            System.out.println("in notnoul");
             done = pdao.updateProduct(p);
         }
         // pithana minimata pou mporoun na emfanizontai kapou kapote. Twra de ta xeirizomai
@@ -65,7 +75,7 @@ public class AdminController {
         }else{
             model.addAttribute("message","There was a problem");
         }
-        return "home";
+        return "redirect:/";
     }
     
     private String getPrincipal() {
