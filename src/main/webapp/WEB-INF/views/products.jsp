@@ -11,7 +11,7 @@
         <%@include file="z3authheader.jsp" %>
         <%@include file="menu.jsp" %>
         <sec:authorize access="hasRole('ADMIN')">
-            <a href="/BioEShop/admin/products/${category}/add">Add a new product for this category</a>
+            <a href="/BioEShop/admin/products/create">Add a new product</a>
         </sec:authorize>
 
 

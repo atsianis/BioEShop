@@ -29,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Entity
 @Transactional
-@Table(catalog = "zzz", schema = "", uniqueConstraints = {
+@Table(name="orderdetails", catalog = "zzz", schema = "", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"order_id", "product_id"})})
 //@XmlRootElement
 @NamedQueries({

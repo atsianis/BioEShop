@@ -82,8 +82,8 @@
                             <div class="form-group col-md-12">
                                 <label class="col-md-3 control-lable" for="category">Category</label>
                                 <div class="col-md-7">
-                                    <form:select type="text" path="category" id="category" class="form-control input-sm">
-                                         <form:option value="Cup">Cup</form:option>
+                                    <form:select id="category" type="text" path="category" class="form-control input-sm">
+                                        <form:option value="Cup">Cup</form:option>
                                         <form:option value="Straw">Straw</form:option>
                                         <form:option value="Toothbrush">Toothbrush</form:option>
                                     </form:select>
@@ -114,26 +114,35 @@
                         <label class="col-md-3 control-lable" for="color">Size</label>
                         <div class="col-md-7">
                             <c:choose>
-                                <c:when test="${p.category=="cup"}">
-                                    <form:select type="text" path="size" id="size" class="form-control input-sm">
-                                        <form:option value="0.5L">0.5L</form:option>
-                                        <form:option value="0.75L">0.75L</form:option>
-                                        <form:option value="1L">1L</form:option>
-                                    </form:select>
+                                <c:when test='{edit}'>
+                                    <c:choose>
+                                        <c:when test="${p.category=="cup"}">
+                                            <form:select type="text" path="size" id="size" class="form-control input-sm">
+                                                <form:option value="0.5L">0.5L</form:option>
+                                                <form:option value="0.75L">0.75L</form:option>
+                                                <form:option value="1L">1L</form:option>
+                                            </form:select>
+                                        </c:when>
+                                        <c:when test="${p.category == "straw"}">
+                                            <form:select type="text" path="size" id="size" class="form-control input-sm">
+                                                <form:option value="3 inches">3"</form:option>
+                                                <form:option value="5 inches">5"</form:option>
+                                                <form:option value="7 inches">7"</form:option>
+                                            </form:select>
+                                        </c:when>
+                                        <c:when test="${p.category == "toothbrush"}">
+                                            <form:select type="text" path="size" id="size" class="form-control input-sm">
+                                                <form:option value="kid">kids</form:option>
+                                                <form:option value="adult">adult</form:option>
+                                            </form:select>
+                                        </c:when>
+                                    </c:choose>
                                 </c:when>
-                                <c:when test="${p.category == "straw"}">
-                                    <form:select type="text" path="size" id="size" class="form-control input-sm">
-                                        <form:option value="3 inches">3"</form:option>
-                                        <form:option value="5 inches">5"</form:option>
-                                        <form:option value="7 inches">7"</form:option>
+                                <c:otherwise>
+                                    <form:select path="size" id="size">
+
                                     </form:select>
-                                </c:when>
-                                <c:when test="${p.category == "toothbrush"}">
-                                    <form:select type="text" path="size" id="size" class="form-control input-sm">
-                                        <form:option value="kid">kids</form:option>
-                                        <form:option value="adult">adult</form:option>
-                                    </form:select>
-                                </c:when>
+                                </c:otherwise>
                             </c:choose>
                             <div class="has-error">
                                 <form:errors path="size" class="help-inline"/>
@@ -146,41 +155,52 @@
                         <label class="col-md-3 control-lable" for="material">Material</label>
                         <div class="col-md-7">
                             <c:choose>
-                                <c:when test="${p.category=="cup"}">
-                                    <form:select type="text" path="material" id="material" class="form-control input-sm">
-                                        <form:option value="bamboo">Bamboo</form:option>
-                                        <form:option value="steel">Steel</form:option>
-                                        <form:option value="hard paper">Hard paper</form:option>
-                                    </form:select>
+                                <c:when test='{edit}'>
+                                    <c:choose>
+                                        <c:when test="${p.category=="cup"}">
+                                            <form:select type="text" path="material" id="material" class="form-control input-sm">
+                                                <form:option value="bamboo">Bamboo</form:option>
+                                                <form:option value="steel">Steel</form:option>
+                                                <form:option value="hard paper">Hard paper</form:option>
+                                            </form:select>
+                                        </c:when>
+                                        <c:when test="${p.category == "straw"}">
+                                            <form:select type="text" path="material" id="material" class="form-control input-sm">
+                                                <form:option value="bamboo">Bamboo</form:option>
+                                                <form:option value="steel">Steel</form:option>
+                                            </form:select>
+                                        </c:when>
+                                        <c:when test="${p.category == "toothbrush"}">
+                                            <form:select type="text" path="material" id="material" class="form-control input-sm">
+                                                <form:option value="bamboo">Bamboo</form:option>
+                                                <form:option value="wood">Wood</form:option>
+                                            </form:select>
+                                        </c:when>
+                                    </c:choose>
                                 </c:when>
-                                <c:when test="${p.category == "straw"}">
-                                    <form:select type="text" path="material" id="material" class="form-control input-sm">
-                                        <form:option value="bamboo">Bamboo</form:option>
-                                        <form:option value="steel">Steel</form:option>
+                                <c:otherwise>
+                                    <form:select path="material" id="material">
+
                                     </form:select>
-                                </c:when>
-                                <c:when test="${p.category == "toothbrush"}">
-                                    <form:select type="text" path="material" id="material" class="form-control input-sm">
-                                        <form:option value="bamboo">Bamboo</form:option>
-                                        <form:option value="wood">Wood</form:option>
-                                    </form:select>
-                                </c:when>
-                                </c:choose>
-                                    <div class="has-error">
-                                        <form:errors path="material" class="help-inline"/>
-                                    </div>
-                                </div>
+                                </c:otherwise>
+                            </c:choose>
+                            <div class="has-error">
+                                <form:errors path="material" class="help-inline"/>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-actions">
-                                <input type="submit" value="Save" class="btn btn-primary btn-sm"/>
-                            </div>
-                        </div>
-                        </form:form>
                     </div>
-                </body>
-            </html>
+                </div>
+                <div class="row">
+                    <div class="form-actions">
+                        <input type="submit" value="Save" class="btn btn-primary btn-sm"/>
+                    </div>
+                </div>
+            </form:form>
+        </div>
+        <script src="${pageContext.request.contextPath}/BioEShop/src/main/webapp/WEB-INF/static/newjavascript.js"></script>
+
+        </body>
+    </html>
 
 
 

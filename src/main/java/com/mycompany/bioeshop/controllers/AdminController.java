@@ -1,10 +1,12 @@
 
 package com.mycompany.bioeshop.controllers;
 
+import com.mycompany.bioeshop.dao.CustomerDao;
 import com.mycompany.bioeshop.dao.ProductDao;
 import com.mycompany.bioeshop.entities.Customer;
 import com.mycompany.bioeshop.entities.Product;
 import com.mycompany.bioeshop.service.CustomerService;
+import java.util.List;
 import javax.validation.Valid;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -28,6 +31,12 @@ public class AdminController {
     @Autowired
     ProductDao pdao;
     
+    @Autowired
+    CustomerDao cdao;
+    
+    @Autowired 
+    CustomerService customerService;
+    
     @RequestMapping(value = {"/products/edit/{id}"}, method = RequestMethod.GET)
     public String editProduct(ModelMap model,@PathVariable String id){
         Product p = pdao.getProductById(Integer.parseInt(id));
@@ -39,7 +48,7 @@ public class AdminController {
         
     }
     
-    @RequestMapping(value = {"/products/save"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/products/create"}, method = RequestMethod.GET)
     public String newProduct(ModelMap model){
         Product p = new Product();
 //        Hibernate.initialize(p.getOrderdetailsList());
@@ -76,9 +85,8 @@ public class AdminController {
     }
     
     @RequestMapping(value = {"/products/delete/{id}"}, method = RequestMethod.GET)
-    public String saveProduct(ModelMap model,@PathVariable String id){
-        Product p = pdao.getProductById(Integer.parseInt(id));
-        boolean deleted = pdao.deleteProduct(p);
+    public String deleteProduct(ModelMap model,@PathVariable int id){
+        boolean deleted = pdao.deleteProductById(id);
         if (deleted){
             model.addAttribute("message","Product deleted successfully");
         }else{
@@ -87,6 +95,72 @@ public class AdminController {
         model.addAttribute("products", pdao.getAllProducts());
         return "products";
     }
+    
+    @RequestMapping(value = {"/customers"}, method = RequestMethod.GET)
+    public String allCustomers(ModelMap model){
+        Product p = new Product();
+//        Hibernate.initialize(p.getOrderdetailsList());
+        List<Customer> customers = cdao.getAllRegisteredCustomers();
+        model.addAttribute("customers",customers);
+        return "customers";
+        
+    }
+    
+    @RequestMapping(value = {"/customers/update/{id}"}, method = RequestMethod.GET)
+    public String editCustomer(ModelMap model,@PathVariable int id){
+        Customer c = cdao.getCustomerById(id);
+        model.addAttribute("customer",c);
+        model.addAttribute("action","/BioEShop/admin/customers/save");
+        model.addAttribute("cancel","BioEShop/admin/customers");
+        return "updateprofile";
+        
+    }
+    
+    @RequestMapping(value = {"/customers/save"}, method = RequestMethod.POST)
+    public String saveCustomer(@Valid Customer customer, BindingResult result,
+            ModelMap model, @RequestParam("oldemail") String oldemail) {
+
+        if (result.hasErrors()) {
+            return "updateprofile";
+        }
+        
+    
+    
+   
+
+        if (!oldemail.equals(customer.getEmail())) {
+            if (!customerService.isEmailUnique(customer.getCustomerId(), customer.getEmail())) {
+                model.addAttribute("emailnotUnique", "Email " + customer.getEmail()
+                        + " already exists. Please fill in a different email.");
+                return "updateprofile";
+            }
+        }
+        
+
+        if (customerService.updateCustomer(customer)) {
+            model.addAttribute("message", "Info was updated successfully.");
+        } else {
+            model.addAttribute("success", "Info was not updated.");
+        }
+        List<Customer> customers = cdao.getAllRegisteredCustomers();
+        model.addAttribute("customers",customers);
+        return "customers";
+    }
+    
+    @RequestMapping(value = {"/customers/delete/{id}"}, method = RequestMethod.GET)
+    public String deleteCustomer(ModelMap model,@PathVariable int id){
+        boolean deleted = cdao.deleteCustomerById(id);
+        if (deleted){
+            model.addAttribute("message","Customer deleted successfully");
+        }else{
+            model.addAttribute("message","Could not delete customer");
+        }
+        List<Customer> customers = cdao.getAllRegisteredCustomers();
+        model.addAttribute("customers",customers);
+        return "customers";
+        
+    }
+    
     
     private String getPrincipal() {
         String userName = null;

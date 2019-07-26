@@ -30,4 +30,6 @@ public interface CustomerDao {
     
     public boolean isRegisteredUser(Customer c);
     
+    public boolean deleteCustomerById(int id);
+    
 }

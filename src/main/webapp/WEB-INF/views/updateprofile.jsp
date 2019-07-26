@@ -12,7 +12,7 @@
         <%@include file="menu.jsp" %>
         <div class="generic-container">
             <div class="well lead">User Registration Form</div>
-            <form:form action="/BioEShop/user/profile/save" method="POST" modelAttribute="customer" class="form-horizontal">
+            <form:form action="${action}" method="POST" modelAttribute="customer" class="form-horizontal">
                 <form:input type="hidden" path="customerId" id="id"/>
 
                 <div class="row">
@@ -79,7 +79,7 @@
 
                 <div class="row">
                     <div class="form-actions floatRight">
-                        <input type="submit" value="save" class="btn btn-primary btn-sm"/> or <a href="<c:url value='/user/profile' />">Cancel</a>
+                        <input type="submit" value="save" class="btn btn-primary btn-sm"/> or <a href="<c:url value='${cancel}' />">Cancel</a>
                     </div>
                 </div>
             </form:form>

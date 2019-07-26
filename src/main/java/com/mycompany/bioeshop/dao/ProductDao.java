@@ -24,7 +24,7 @@ public interface ProductDao {
 
     public boolean updateProduct(Product product);
     
-    public boolean deleteProduct(Product p);
+    public boolean deleteProductById(int id);
     
     public boolean reduceProductStock(int id,int quantity);
     

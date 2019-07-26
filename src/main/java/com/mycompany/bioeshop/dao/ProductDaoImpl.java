@@ -44,9 +44,7 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
 
     @Override
     public Product getProductById(int id) {
-        Criteria crit = createEntityCriteria();
-        crit.add(Restrictions.eq("productId", id));
-        Product p = (Product) crit.uniqueResult();
+        Product p = getByKey(id);
         return p;
     }
     
@@ -71,7 +69,8 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
     }
     
     @Override
-    public boolean deleteProduct(Product p){
+    public boolean deleteProductById(int id){
+        Product p = getByKey(id);
         try{
             delete(p);
             return true;
@@ -84,9 +83,7 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
     @Override
     public boolean reduceProductStock(int id,int quantity){
         try{
-            Criteria crit = createEntityCriteria();
-            crit.add(Restrictions.eq("productId", id));
-            Product p = (Product)crit.uniqueResult();
+            Product p = getByKey(id);
             p.setStock(p.getStock()-quantity);
             update(p);
             return true;

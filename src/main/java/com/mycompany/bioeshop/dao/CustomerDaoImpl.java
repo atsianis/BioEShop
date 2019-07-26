@@ -39,9 +39,7 @@ public class CustomerDaoImpl extends AbstractDao<Integer, Customer> implements C
     // tested --> works
     @Override
     public Customer getCustomerById(int id) {
-        Criteria crit = createEntityCriteria();
-        crit.add(Restrictions.eq("customerId", id));
-        Customer c = (Customer) crit.uniqueResult();
+        Customer c = (Customer) getByKey(id);
         return c;
     }
 
