@@ -36,14 +36,6 @@ import org.springframework.transaction.annotation.Transactional;
     @UniqueConstraint(columnNames = {"email"})
     , @UniqueConstraint(columnNames = {"phone_number"})})
 //@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c")
-    , @NamedQuery(name = "Customer.findByCustomerId", query = "SELECT c FROM Customer c WHERE c.customerId = :customerId")
-    , @NamedQuery(name = "Customer.findByFname", query = "SELECT c FROM Customer c WHERE c.fname = :fname")
-    , @NamedQuery(name = "Customer.findByLname", query = "SELECT c FROM Customer c WHERE c.lname = :lname")
-    , @NamedQuery(name = "Customer.findByEmail", query = "SELECT c FROM Customer c WHERE c.email = :email")
-    , @NamedQuery(name = "Customer.findByAddress", query = "SELECT c FROM Customer c WHERE c.address = :address")
-    , @NamedQuery(name = "Customer.findByPhoneNumber", query = "SELECT c FROM Customer c WHERE c.phoneNumber = :phoneNumber")})
 public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;

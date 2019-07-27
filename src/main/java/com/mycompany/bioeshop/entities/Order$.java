@@ -28,6 +28,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,12 +40,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Table(name = "orders", catalog = "zzz", schema = "")
 //@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Order$.findAll", query = "SELECT o FROM Order$ o")
-    , @NamedQuery(name = "Order$.findByOrderId", query = "SELECT o FROM Order$ o WHERE o.orderId = :orderId")
-    , @NamedQuery(name = "Order$.findByDate", query = "SELECT o FROM Order$ o WHERE o.date = :date")
-    , @NamedQuery(name = "Order$.findByPending", query = "SELECT o FROM Order$ o WHERE o.pending = :pending")
-    , @NamedQuery(name = "Order$.findByComments", query = "SELECT o FROM Order$ o WHERE o.comments = :comments")})
 public class Order$ implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -67,7 +62,7 @@ public class Order$ implements Serializable {
     @Column(length = 200)
     private String comments;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.LAZY)
-    private List<Orderdetails> orderdetailsList;
+    private List<OrderDetails> orderDetailsList;
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Customer customer;
@@ -131,22 +126,23 @@ public class Order$ implements Serializable {
     public void setComments(String comments) {
         this.comments = comments;
     }
-
-    @XmlTransient
-    public List<Orderdetails> getOrderdetailsList() {
-        return orderdetailsList;
+    
+    //@XmlTransient
+    @Bean("list")
+    public List<OrderDetails> getOrderDetailsList() {
+        return orderDetailsList;
     }
 
-    public void setOrderdetailsList(List<Orderdetails> orderdetailsList) {
-        this.orderdetailsList = orderdetailsList;
+    public void setOrderDetailsList(List<OrderDetails> orderdetailsList) {
+        this.orderDetailsList = orderdetailsList;
     }
 
-    public Customer getCustomerId() {
+    public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomerId(Customer customerId) {
-        this.customer = customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     @Override
@@ -171,7 +167,7 @@ public class Order$ implements Serializable {
 
     @Override
     public String toString() {
-        return "Order${" + "orderId=" + orderId + ", date=" + date + ", pending=" + pending + ", comments=" + comments + ", orderdetailsList=" + orderdetailsList + ", customer=" + customer + '}';
+        return "Order${" + "orderId=" + orderId + ", date=" + date + ", pending=" + pending + ", comments=" + comments + ", orderdetailsList=" + orderDetailsList + ", customer=" + customer + '}';
     }
 
     

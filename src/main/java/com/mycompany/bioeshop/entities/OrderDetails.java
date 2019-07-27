@@ -32,11 +32,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Table(name="orderdetails", catalog = "zzz", schema = "", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"order_id", "product_id"})})
 //@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Orderdetails.findAll", query = "SELECT o FROM Orderdetails o")
-    , @NamedQuery(name = "Orderdetails.findByOdId", query = "SELECT o FROM Orderdetails o WHERE o.odId = :odId")
-    , @NamedQuery(name = "Orderdetails.findByQuantity", query = "SELECT o FROM Orderdetails o WHERE o.quantity = :quantity")})
-public class Orderdetails implements Serializable {
+
+public class OrderDetails implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -55,14 +52,14 @@ public class Orderdetails implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Product product;
 
-    public Orderdetails() {
+    public OrderDetails() {
     }
 
-    public Orderdetails(Integer odId) {
+    public OrderDetails(Integer odId) {
         this.odId = odId;
     }
 
-    public Orderdetails(Integer odId, int quantity) {
+    public OrderDetails(Integer odId, int quantity) {
         this.odId = odId;
         this.quantity = quantity;
     }
@@ -78,24 +75,25 @@ public class Orderdetails implements Serializable {
     public int getQuantity() {
         return quantity;
     }
+    
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public Order$ getOrderId() {
+    public Order$ getOrder() {
         return order;
     }
 
-    public void setOrderId(Order$ order) {
+    public void setOrder(Order$ order) {
         this.order = order;
     }
 
-    public Product getProductId() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProductId(Product product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 
@@ -109,10 +107,10 @@ public class Orderdetails implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Orderdetails)) {
+        if (!(object instanceof OrderDetails)) {
             return false;
         }
-        Orderdetails other = (Orderdetails) object;
+        OrderDetails other = (OrderDetails) object;
         if ((this.odId == null && other.odId != null) || (this.odId != null && !this.odId.equals(other.odId))) {
             return false;
         }

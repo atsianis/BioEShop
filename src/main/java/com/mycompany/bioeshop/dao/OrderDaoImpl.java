@@ -6,7 +6,7 @@
 package com.mycompany.bioeshop.dao;
 import com.mycompany.bioeshop.entities.Customer;
 import com.mycompany.bioeshop.entities.Order$;
-import com.mycompany.bioeshop.entities.Orderdetails;
+import com.mycompany.bioeshop.entities.OrderDetails;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
@@ -38,7 +38,7 @@ public class OrderDaoImpl extends AbstractDao<Integer,Order$> implements OrderDa
         crit.add(Restrictions.eq("customer.customerId", id));
         List<Order$> list = (List<Order$>) crit.list();
         for ( Order$ o : list){
-            Hibernate.initialize(o.getOrderdetailsList());
+            Hibernate.initialize(o.getOrderDetailsList());
         } 
         return list;
     }

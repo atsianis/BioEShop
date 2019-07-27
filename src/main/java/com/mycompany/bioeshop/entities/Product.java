@@ -91,7 +91,7 @@ public class Product implements Serializable {
     @Column(length = 45)
     private String material;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
-    private List<Orderdetails> orderdetailsList;
+    private List<OrderDetails> orderdetailsList;
 
     public Product() {
     }
@@ -135,7 +135,7 @@ public class Product implements Serializable {
         this.category = category;
     }
 
-    public Product(String path, String descr, int stock, String title, double price, String category, List<Orderdetails> orderdetailsList) {
+    public Product(String path, String descr, int stock, String title, double price, String category, List<OrderDetails> orderdetailsList) {
         this.path = path;
         this.descr = descr;
         this.stock = stock;
@@ -244,11 +244,11 @@ public class Product implements Serializable {
     }
 
     //@XmlTransient
-    public List<Orderdetails> getOrderdetailsList() {
+    public List<OrderDetails> getOrderdetailsList() {
         return orderdetailsList;
     }
 
-    public void setOrderdetailsList(List<Orderdetails> orderdetailsList) {
+    public void setOrderdetailsList(List<OrderDetails> orderdetailsList) {
         this.orderdetailsList = orderdetailsList;
     }
 

@@ -43,7 +43,7 @@
                                 
                             </sec:authorize>
                             <sec:authorize access="!hasRole('ADMIN')">
-                                <a href="/buy/product/${product.productId}" class="btn btn-sm btn-primary float-right">Order Now</a>
+                                <a href="/BioEShop/user/order/buy/${product.productId}" class="btn btn-sm btn-primary float-right">Order Now</a>
                             </sec:authorize>
 
 
