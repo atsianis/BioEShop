@@ -1,4 +1,4 @@
-            <%@page contentType="text/javascript" pageEncoding="UTF-8"%>
+            
             let cat = document.getElementById("category");
             let mat = document.getElementById("material");
             let size = document.getElementById("size");

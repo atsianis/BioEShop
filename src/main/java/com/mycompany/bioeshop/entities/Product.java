@@ -5,6 +5,7 @@
  */
 package com.mycompany.bioeshop.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -90,6 +91,7 @@ public class Product implements Serializable {
     @Size(max = 45)
     @Column(length = 45)
     private String material;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
     private List<Orderdetails> orderdetailsList;
 

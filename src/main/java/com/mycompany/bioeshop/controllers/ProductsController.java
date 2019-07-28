@@ -30,66 +30,18 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 public class ProductsController {
 
     @Autowired
-    ProductsService productsService;
-
-    @RequestMapping(value = {"/{category}"}, method = RequestMethod.GET)
-    public String getProductsOfCategory(ModelMap model, @PathVariable String category) {
-
-        List<Product> products = productsService.getProductByCategory(category);
-
-        model.addAttribute("products", products);
-        model.addAttribute("category", category);
-        model.addAttribute("loggedinuser", getPrincipal());
-
-        String pagetitle = "";
-        if (category.equals("cup")) {
-            pagetitle = "Cups made by nature";
-        } else if (category.equals("straw")) {
-            pagetitle = "No more plastic straws!";
-        } else {
-            pagetitle = "Shinny smiles, with these cool toothbrushes!";
-        }
-        model.addAttribute("pagetitle", pagetitle);
-
-        double minPrice = 100000;
-        double maxPrice = 0;
-        Set<String> colors = new TreeSet();
-        Set<String> sizes = new TreeSet();
-        Set<String> materials = new TreeSet();
-
-        for (Product p : products) {
-            if (minPrice > p.getPrice()) {
-                minPrice = p.getPrice();
-            }
-            if (maxPrice < p.getPrice()) {
-                maxPrice = p.getPrice();
-            }
-
-            colors.add(p.getColor());
-            sizes.add(p.getSize());
-            materials.add(p.getMaterial());
-        }
-        
-        double step = (maxPrice - minPrice) / 10;
-        model.addAttribute("minPrice", minPrice);
-        model.addAttribute("maxPrice", maxPrice);
-        model.addAttribute("step", step);
-        model.addAttribute("colors", colors);
-        model.addAttribute("sizes", sizes);
-        model.addAttribute("materials", materials);
-        
-        return "products";
+    ProductsService productsService;    
+      
+    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
+    public String getProductsOfCategory(ModelMap model) {
+        model.addAttribute("loggedinuser", getPrincipal());        
+        return "view_product";
     }
-
-//    @RequestMapping(value = {"/{category}/{filter}"}, method = RequestMethod.GET)
-//    public String getProductsFiltered(ModelMap model, @PathVariable String category, @PathVariable String filter) {
-//        
-//        return "";
-//    }
-    @RequestMapping(value = {"/{category}/{id}"}, method = RequestMethod.GET)
-    public String getProductsFiltered(ModelMap model, @PathVariable String category, @PathVariable String id) {
-
-        return "";
+    
+    @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
+    public String getProductsFiltered(ModelMap model, @PathVariable int id) {
+        model.addAttribute("loggedinuser", getPrincipal());
+        return "view_product";
     }
 
     /**
