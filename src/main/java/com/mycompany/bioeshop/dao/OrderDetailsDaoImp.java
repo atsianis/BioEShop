@@ -5,16 +5,16 @@
  */
 package com.mycompany.bioeshop.dao;
 
-import com.mycompany.bioeshop.entities.Orderdetails;
+import com.mycompany.bioeshop.entities.OrderDetails;
 
 /**
  *
  * @author samsung np350
  */
-public class OrderDetailsDaoImp extends AbstractDao<Integer,Orderdetails> implements OrderDetailsDao{
+public class OrderDetailsDaoImp extends AbstractDao<Integer,OrderDetails> implements OrderDetailsDao{
     
     @Override
-    public boolean updateOrderDetails(Orderdetails od){
+    public boolean updateOrderDetails(OrderDetails od){
         try {
             update(od);
             return true;

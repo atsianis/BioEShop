@@ -5,7 +5,7 @@
  */
 package com.mycompany.bioeshop.dao;
 
-import com.mycompany.bioeshop.entities.Orderdetails;
+import com.mycompany.bioeshop.entities.OrderDetails;
 
 /**
  *
@@ -14,6 +14,6 @@ import com.mycompany.bioeshop.entities.Orderdetails;
 public interface OrderDetailsDao {
     
     
-    public boolean updateOrderDetails(Orderdetails od);
+    public boolean updateOrderDetails(OrderDetails od);
     
 }

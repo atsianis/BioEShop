@@ -8,6 +8,7 @@ package com.mycompany.bioeshop.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,6 +29,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,12 +41,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Table(name = "orders", catalog = "zzz", schema = "")
 //@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Order$.findAll", query = "SELECT o FROM Order$ o")
-    , @NamedQuery(name = "Order$.findByOrderId", query = "SELECT o FROM Order$ o WHERE o.orderId = :orderId")
-    , @NamedQuery(name = "Order$.findByDate", query = "SELECT o FROM Order$ o WHERE o.date = :date")
-    , @NamedQuery(name = "Order$.findByPending", query = "SELECT o FROM Order$ o WHERE o.pending = :pending")
-    , @NamedQuery(name = "Order$.findByComments", query = "SELECT o FROM Order$ o WHERE o.comments = :comments")})
 public class Order$ implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,8 +50,6 @@ public class Order$ implements Serializable {
     @Column(name = "order_id", nullable = false)
     private Integer orderId;
     @Basic(optional = false)
-    @NotNull
-    @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
@@ -67,7 +61,7 @@ public class Order$ implements Serializable {
     @Column(length = 200)
     private String comments;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.LAZY)
-    private List<Orderdetails> orderdetailsList;
+    private List<OrderDetails> orderDetailsList;
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Customer customer;
@@ -131,47 +125,85 @@ public class Order$ implements Serializable {
     public void setComments(String comments) {
         this.comments = comments;
     }
-
-    @XmlTransient
-    public List<Orderdetails> getOrderdetailsList() {
-        return orderdetailsList;
+    
+    //@XmlTransient
+    @Bean("list")
+    public List<OrderDetails> getOrderDetailsList() {
+        return orderDetailsList;
     }
 
-    public void setOrderdetailsList(List<Orderdetails> orderdetailsList) {
-        this.orderdetailsList = orderdetailsList;
+    public void setOrderDetailsList(List<OrderDetails> orderdetailsList) {
+        this.orderDetailsList = orderdetailsList;
     }
+    
+    
+    
+    public void addOrderDetailsToList(OrderDetails od){
+        this.orderDetailsList.add(od);
+    }
+    
+    
 
-    public Customer getCustomerId() {
+    public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomerId(Customer customerId) {
-        this.customer = customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (orderId != null ? orderId.hashCode() : 0);
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.orderId);
+        hash = 97 * hash + Objects.hashCode(this.date);
+        hash = 97 * hash + this.pending;
+        hash = 97 * hash + Objects.hashCode(this.comments);
+        hash = 97 * hash + Objects.hashCode(this.orderDetailsList);
+        hash = 97 * hash + Objects.hashCode(this.customer);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Order$)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Order$ other = (Order$) object;
-        if ((this.orderId == null && other.orderId != null) || (this.orderId != null && !this.orderId.equals(other.orderId))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Order$ other = (Order$) obj;
+        if (this.pending != other.pending) {
+            return false;
+        }
+        if (!Objects.equals(this.comments, other.comments)) {
+            return false;
+        }
+        if (!Objects.equals(this.orderId, other.orderId)) {
+            return false;
+        }
+        if (!Objects.equals(this.date, other.date)) {
+            return false;
+        }
+        if (!Objects.equals(this.orderDetailsList, other.orderDetailsList)) {
+            return false;
+        }
+        if (!Objects.equals(this.customer, other.customer)) {
             return false;
         }
         return true;
     }
 
+    
+
+    
+
     @Override
     public String toString() {
-        return "Order${" + "orderId=" + orderId + ", date=" + date + ", pending=" + pending + ", comments=" + comments + ", orderdetailsList=" + orderdetailsList + ", customer=" + customer + '}';
+        return "Order${" + "orderId=" + orderId + ", date=" + date + ", pending=" + pending + ", comments=" + comments +", customer=" + customer + '}';
     }
 
     

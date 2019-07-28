@@ -6,6 +6,7 @@
 package com.mycompany.bioeshop.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,11 +33,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Table(name="orderdetails", catalog = "zzz", schema = "", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"order_id", "product_id"})})
 //@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Orderdetails.findAll", query = "SELECT o FROM Orderdetails o")
-    , @NamedQuery(name = "Orderdetails.findByOdId", query = "SELECT o FROM Orderdetails o WHERE o.odId = :odId")
-    , @NamedQuery(name = "Orderdetails.findByQuantity", query = "SELECT o FROM Orderdetails o WHERE o.quantity = :quantity")})
-public class Orderdetails implements Serializable {
+
+public class OrderDetails implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -45,8 +43,6 @@ public class Orderdetails implements Serializable {
     @Column(name = "od_id", nullable = false)
     private Integer odId;
     @Basic(optional = false)
-    @NotNull
-    @Column(nullable = false)
     private int quantity;
     @JoinColumn(name = "order_id", referencedColumnName = "order_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
@@ -55,14 +51,14 @@ public class Orderdetails implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Product product;
 
-    public Orderdetails() {
+    public OrderDetails() {
     }
 
-    public Orderdetails(Integer odId) {
+    public OrderDetails(Integer odId) {
         this.odId = odId;
     }
 
-    public Orderdetails(Integer odId, int quantity) {
+    public OrderDetails(Integer odId, int quantity) {
         this.odId = odId;
         this.quantity = quantity;
     }
@@ -78,46 +74,68 @@ public class Orderdetails implements Serializable {
     public int getQuantity() {
         return quantity;
     }
+    
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public Order$ getOrderId() {
+    public Order$ getOrder() {
         return order;
     }
 
-    public void setOrderId(Order$ order) {
+    public void setOrder(Order$ order) {
         this.order = order;
     }
 
-    public Product getProductId() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProductId(Product product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (odId != null ? odId.hashCode() : 0);
+        int hash = 5;
+        hash = 59 * hash + Objects.hashCode(this.odId);
+        hash = 59 * hash + this.quantity;
+        hash = 59 * hash + Objects.hashCode(this.order);
+        hash = 59 * hash + Objects.hashCode(this.product);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Orderdetails)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Orderdetails other = (Orderdetails) object;
-        if ((this.odId == null && other.odId != null) || (this.odId != null && !this.odId.equals(other.odId))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final OrderDetails other = (OrderDetails) obj;
+        if (this.quantity != other.quantity) {
+            return false;
+        }
+        if (!Objects.equals(this.odId, other.odId)) {
+            return false;
+        }
+        if (!Objects.equals(this.order, other.order)) {
+            return false;
+        }
+        if (!Objects.equals(this.product, other.product)) {
             return false;
         }
         return true;
     }
+
+    
+
+    
 
     @Override
     public String toString() {

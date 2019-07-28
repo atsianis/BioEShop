@@ -6,7 +6,7 @@
 package com.mycompany.bioeshop.dao;
 import com.mycompany.bioeshop.entities.Customer;
 import com.mycompany.bioeshop.entities.Order$;
-import com.mycompany.bioeshop.entities.Orderdetails;
+import com.mycompany.bioeshop.entities.OrderDetails;
 import java.util.List;
 
 /**
