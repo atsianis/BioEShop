@@ -5,9 +5,12 @@
  */
 package com.mycompany.bioeshop.controllers;
 
+import com.mycompany.bioeshop.dao.OrderDao;
 import com.mycompany.bioeshop.entities.Customer;
 import com.mycompany.bioeshop.entities.User;
+import com.mycompany.bioeshop.entities.Order$;
 import com.mycompany.bioeshop.service.CustomerService;
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,6 +35,9 @@ public class CustomerController {
 
     @Autowired
     CustomerService customerService;
+    
+    @Autowired
+    OrderDao odao;
 
     @RequestMapping(value = {"/profile"}, method = RequestMethod.GET)
     public String getProfile(ModelMap model) {
@@ -75,8 +81,11 @@ public class CustomerController {
 
     @RequestMapping(value = {"/profile/myorders"}, method = RequestMethod.GET)
     public String getOrders(ModelMap model) {
-
-        return "";
+            String username = getPrincipal();
+            int id = customerService.getCustomerBySsoId(username).getCustomerId();
+            List<Order$> orders = odao.getOrdersForCustomerById(id);
+            model.addAttribute("orders",orders);
+        return "myorders";
     }
 
     /**
