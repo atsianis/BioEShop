@@ -92,7 +92,7 @@
 
     <script>
         
-        // let form = $("#form");
+        let form = $("#form");
         // Render the PayPal button into #paypal-button-container
         paypal.Buttons({
 
