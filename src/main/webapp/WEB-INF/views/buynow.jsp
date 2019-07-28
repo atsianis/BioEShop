@@ -7,7 +7,7 @@
         
         <div class="generic-container">
             <div class="well lead">Buy Now</div>
-            <form:form action="/BioEShop/${action}" method="POST" modelAttribute="order" class="form-horizontal">
+            <form:form id="form" action="/BioEShop/${action}" method="POST" modelAttribute="order" class="form-horizontal">
                 <form:input type="number" hidden="true" path="orderId"/>
                 <form:input type="number" hidden="true" path="pending"/>
                 <form:input type="number" hidden="true" path="customer.customerId"/>
@@ -81,11 +81,18 @@
                 <form:button hidden="true" id="button" type="submit" value="Buy Now">Buy now</form:button>
             </form:form>
         </div>
+        <!-- jQuery -->
+        <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous">
+        </script>
         <!-- Include the PayPal JavaScript SDK -->
     <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
 
     <script>
-        let button = document.querySelector("#button");
+        
+        // let form = $("#form");
         // Render the PayPal button into #paypal-button-container
         paypal.Buttons({
 
@@ -105,12 +112,14 @@
                 return actions.order.capture().then(function(details) {
                     // Show a success message to the buyer
                     alert('Transaction completed by ' + details.payer.name.given_name + '!');
-                    button.hidden="false";
+                    // added by me
+                    form.submit();
                 });
             }
 
 
         }).render('#paypal-button-container');
+    
     </script>
     </body>
 </html>
