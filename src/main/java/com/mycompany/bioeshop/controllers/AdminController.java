@@ -161,6 +161,13 @@ public class AdminController {
         
     }
     
+    @RequestMapping (value = {"/orders/pending"}, method = RequestMethod.GET)
+    public String pendingOrders(ModelMap model){
+        
+        
+        return "pendingorders";
+    }
+    
     
     private String getPrincipal() {
         String userName = null;
