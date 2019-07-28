@@ -7,6 +7,7 @@ package com.mycompany.bioeshop.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -32,19 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Entity
 @Transactional
 @Table(name = "products", catalog = "zzz", schema = "")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")
-    , @NamedQuery(name = "Product.findByProductId", query = "SELECT p FROM Product p WHERE p.productId = :productId")
-    , @NamedQuery(name = "Product.findByPath", query = "SELECT p FROM Product p WHERE p.path = :path")
-    , @NamedQuery(name = "Product.findByDescr", query = "SELECT p FROM Product p WHERE p.descr = :descr")
-    , @NamedQuery(name = "Product.findByStock", query = "SELECT p FROM Product p WHERE p.stock = :stock")
-    , @NamedQuery(name = "Product.findByTitle", query = "SELECT p FROM Product p WHERE p.title = :title")
-    , @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price")
-    , @NamedQuery(name = "Product.findByCategory", query = "SELECT p FROM Product p WHERE p.category = :category")
-    , @NamedQuery(name = "Product.findByColor", query = "SELECT p FROM Product p WHERE p.color = :color")
-    , @NamedQuery(name = "Product.findBySize", query = "SELECT p FROM Product p WHERE p.size = :size")
-    , @NamedQuery(name = "Product.findByMaterial", query = "SELECT p FROM Product p WHERE p.material = :material")})
+//@XmlRootElement
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,7 +41,7 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "product_id", nullable = false)
-    private Integer productId;
+    private int productId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
@@ -254,23 +243,70 @@ public class Product implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (productId != null ? productId.hashCode() : 0);
+        int hash = 5;
+        hash = 59 * hash + this.productId;
+        hash = 59 * hash + Objects.hashCode(this.path);
+        hash = 59 * hash + Objects.hashCode(this.descr);
+        hash = 59 * hash + this.stock;
+        hash = 59 * hash + Objects.hashCode(this.title);
+        hash = 59 * hash + (int) (Double.doubleToLongBits(this.price) ^ (Double.doubleToLongBits(this.price) >>> 32));
+        hash = 59 * hash + Objects.hashCode(this.category);
+        hash = 59 * hash + Objects.hashCode(this.color);
+        hash = 59 * hash + Objects.hashCode(this.size);
+        hash = 59 * hash + Objects.hashCode(this.material);
+        hash = 59 * hash + Objects.hashCode(this.orderdetailsList);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Product)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Product other = (Product) object;
-        if ((this.productId == null && other.productId != null) || (this.productId != null && !this.productId.equals(other.productId))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Product other = (Product) obj;
+        if (this.productId != other.productId) {
+            return false;
+        }
+        if (this.stock != other.stock) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.price) != Double.doubleToLongBits(other.price)) {
+            return false;
+        }
+        if (!Objects.equals(this.path, other.path)) {
+            return false;
+        }
+        if (!Objects.equals(this.descr, other.descr)) {
+            return false;
+        }
+        if (!Objects.equals(this.title, other.title)) {
+            return false;
+        }
+        if (!Objects.equals(this.category, other.category)) {
+            return false;
+        }
+        if (!Objects.equals(this.color, other.color)) {
+            return false;
+        }
+        if (!Objects.equals(this.size, other.size)) {
+            return false;
+        }
+        if (!Objects.equals(this.material, other.material)) {
+            return false;
+        }
+        if (!Objects.equals(this.orderdetailsList, other.orderdetailsList)) {
             return false;
         }
         return true;
     }
+
+    
 
     @Override
     public String toString() {

@@ -7,6 +7,7 @@ package com.mycompany.bioeshop.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -43,7 +44,7 @@ public class Customer implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "customer_id", nullable = false)
-    private Integer customerId;
+    private int customerId;
     @Size(max = 45)
     @Column(length = 45)
     private String fname;
@@ -155,23 +156,58 @@ public class Customer implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (customerId != null ? customerId.hashCode() : 0);
+        int hash = 5;
+        hash = 71 * hash + this.customerId;
+        hash = 71 * hash + Objects.hashCode(this.fname);
+        hash = 71 * hash + Objects.hashCode(this.lname);
+        hash = 71 * hash + Objects.hashCode(this.email);
+        hash = 71 * hash + Objects.hashCode(this.address);
+        hash = 71 * hash + Objects.hashCode(this.phoneNumber);
+        hash = 71 * hash + Objects.hashCode(this.orderList);
+        hash = 71 * hash + Objects.hashCode(this.userList);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Customer)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Customer other = (Customer) object;
-        if ((this.customerId == null && other.customerId != null) || (this.customerId != null && !this.customerId.equals(other.customerId))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Customer other = (Customer) obj;
+        if (this.customerId != other.customerId) {
+            return false;
+        }
+        if (!Objects.equals(this.fname, other.fname)) {
+            return false;
+        }
+        if (!Objects.equals(this.lname, other.lname)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.address, other.address)) {
+            return false;
+        }
+        if (!Objects.equals(this.phoneNumber, other.phoneNumber)) {
+            return false;
+        }
+        if (!Objects.equals(this.orderList, other.orderList)) {
+            return false;
+        }
+        if (!Objects.equals(this.userList, other.userList)) {
             return false;
         }
         return true;
     }
+
+    
 
     @Override
     public String toString() {

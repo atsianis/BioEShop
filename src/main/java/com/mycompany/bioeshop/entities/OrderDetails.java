@@ -6,6 +6,7 @@
 package com.mycompany.bioeshop.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,8 +43,6 @@ public class OrderDetails implements Serializable {
     @Column(name = "od_id", nullable = false)
     private Integer odId;
     @Basic(optional = false)
-    @NotNull
-    @Column(nullable = false)
     private int quantity;
     @JoinColumn(name = "order_id", referencedColumnName = "order_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
@@ -99,23 +98,44 @@ public class OrderDetails implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (odId != null ? odId.hashCode() : 0);
+        int hash = 5;
+        hash = 59 * hash + Objects.hashCode(this.odId);
+        hash = 59 * hash + this.quantity;
+        hash = 59 * hash + Objects.hashCode(this.order);
+        hash = 59 * hash + Objects.hashCode(this.product);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof OrderDetails)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        OrderDetails other = (OrderDetails) object;
-        if ((this.odId == null && other.odId != null) || (this.odId != null && !this.odId.equals(other.odId))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final OrderDetails other = (OrderDetails) obj;
+        if (this.quantity != other.quantity) {
+            return false;
+        }
+        if (!Objects.equals(this.odId, other.odId)) {
+            return false;
+        }
+        if (!Objects.equals(this.order, other.order)) {
+            return false;
+        }
+        if (!Objects.equals(this.product, other.product)) {
             return false;
         }
         return true;
     }
+
+    
+
+    
 
     @Override
     public String toString() {

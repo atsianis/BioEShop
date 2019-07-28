@@ -8,8 +8,11 @@
         <div class="generic-container">
             <div class="well lead">Buy Now</div>
             <form:form action="/BioEShop/${action}" method="POST" modelAttribute="order" class="form-horizontal">
-                <form:input type="number" hidden="true" path="orderId" id="id"/>
-                <form:input type="date" hidden="true" path="date" id="id"/>
+                <form:input type="number" hidden="true" path="orderId"/>
+                <form:input type="number" hidden="true" path="pending"/>
+                <form:input type="number" hidden="true" path="customer.customerId"/>
+                <form:input type="number" hidden="true" path="customer.phoneNumber"/>
+                
                 <strong>Your Info</strong>
                 <div class="row">
                     <div class="form-group col-md-12">
@@ -62,12 +65,13 @@
                 <div class="container">
                 <table border="1" id="example" class="stripe order-column hover cell-border display myTable" style="width:50vw">
                     <c:forEach var="details" items="${order.orderDetailsList}">
+                        <input name="pid" hidden="true" type="int" value="${details.product.productId}"/><!-- @RequestParam("pid") int pid ston controller ?!?!?-->
                         <th>PHOTO</th><th>INFO</th><th>PRICE</th><th>QUANTITY</th>
                         <tr>
                             <td height="250px" width="250px"><img height="200px" width="200px" src="${details.product.path}"/></td>
                             <td>${details.product.material}-${details.product.category}-${details.product.color}-${details.product.title}</td>
                             <td>${details.product.price}</td>
-                            <td><input type="number" value="${details.quantity}"/></td>
+                            <td><input name="quantity" type="number" min="1" max="${details.product.stock}"/></td> <!-- @RequestParam("quantity") ston controller ?!?!?-->
                         </tr>
                     </c:forEach>
                 </table>
