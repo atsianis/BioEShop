@@ -15,7 +15,7 @@
     
     
     <!-- Our CSS -->
-    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
+    <link href="<c:url value='/static/css/app.css' />" type="text/css" rel="stylesheet"></link>
     
      <!-- AngularJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
