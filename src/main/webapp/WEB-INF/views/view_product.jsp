@@ -61,7 +61,7 @@
                                class="btn btn-primary">Delete</a>
                         </sec:authorize>
                         <sec:authorize access="!hasRole('ADMIN')">
-                            <a href="/BioEShop/buy/product/{{product.productId}}"
+                            <a href="/BioEShop/order/buy/{{product.productId}}"
                                class="btn btn-primary">Order now!</a>
                         </sec:authorize>
 

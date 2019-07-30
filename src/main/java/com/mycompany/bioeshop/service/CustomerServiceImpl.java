@@ -28,6 +28,11 @@ public class CustomerServiceImpl implements CustomerService {
     public boolean createCustomer(Customer c) {
         return true;
     }
+    
+    @Override
+    public int saveCustomer(Customer c){
+        return cdao.saveCustomer(c);
+    }
 
     @Override
     public Customer getCustomerByEmail(String email) {

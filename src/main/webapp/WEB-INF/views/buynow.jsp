@@ -12,16 +12,20 @@
                 <form:input type="number" hidden="true" path="pending"/>
                 <form:input type="number" hidden="true" path="customer.customerId"/>
                 <form:input type="number" hidden="true" path="customer.phoneNumber"/>
-
-                <!-- CUSTOMER'S INFO -->
-                <strong>Your Info</strong>
-
-                <!-- First Name -->
+                <c:choose>
+                    <c:when test="{registered}">
+                        <strong>Your Info</strong>
+                    </c:when>
+                    <c:otherwise>
+                        <Strong>Please Insert your info</Strong>
+                    </c:otherwise>
+                </c:choose>
+                
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable" for="fname">First Name</label>
                         <div class="col-md-7">
-                            <form:input readonly="true" type="text" path="customer.fname" id="fname" class="form-control input-sm"/>
+                            <form:input readonly="${registered}" required="true" type="text" path="customer.fname" id="fname" class="form-control input-sm"/>
                             <div class="has-error">
                                 <form:errors path="customer.fname" class="help-inline"/>
                             </div>
@@ -34,7 +38,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable" for="lname">Last Name</label>
                         <div class="col-md-7">
-                            <form:input readonly="true" type="text" path="customer.lname" id="lname" class="form-control input-sm"/>
+                            <form:input readonly="${registered}" required="true" type="text" path="customer.lname" id="lname" class="form-control input-sm"/>
                             <div class="has-error">
                                 <form:errors path="customer.lname" class="help-inline"/>
                             </div>
@@ -47,7 +51,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable" for="address">Address</label>
                         <div class="col-md-7">
-                            <form:input readonly="true" type="text" path="customer.address" id="address" class="form-control input-sm"/>
+                            <form:input readonly="${registered}" required="true" type="text" path="customer.address" id="address" class="form-control input-sm"/>
                             <div class="has-error">
                                 <form:errors path="customer.address" class="help-inline"/>
                             </div>
@@ -60,15 +64,24 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable" for="email">Email</label>
                         <div class="col-md-7">
-                            <form:input readonly="true" type="text" path="customer.email" id="email" class="form-control input-sm"/>
+                            <form:input readonly="${registered}" required="true" type="text" path="customer.email" id="email" class="form-control input-sm"/>
                             <div class="has-error">
                                 <form:errors path="customer.email" class="help-inline"/>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- ORDER INFO -->
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-3 control-lable" for="email">Phone number</label>
+                        <div class="col-md-7">
+                            <form:input readonly="${registered}" required="true" type="text" path="customer.phoneNumber" id="phone" class="form-control input-sm"/>
+                            <div class="has-error">
+                                <form:errors path="customer.phoneNumber" class="help-inline"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <strong>Product</strong>
                 <div class="container">
                     <table border="1" id="example" class="stripe order-column hover cell-border display myTable" style="width:50vw">

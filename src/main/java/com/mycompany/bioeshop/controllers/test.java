@@ -27,8 +27,8 @@ public class test {
 
     @RequestMapping(method = RequestMethod.GET)
     public String Testing(ModelMap model) {
-        List<Customer> list = cdao.getAllRegisteredCustomers();
-        model.addAttribute("variable",list);
+        Customer c = cdao.getCustomerByEmail("val@val.gr");
+        model.addAttribute("variable",c);
         return "testview";
     }
 }
