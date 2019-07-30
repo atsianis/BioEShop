@@ -41,10 +41,10 @@ public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "customer_id", nullable = false)
-    private int customerId;
+    private Integer customerId;
     @Size(max = 45)
     @Column(length = 45)
     private String fname;
@@ -85,13 +85,19 @@ public class Customer implements Serializable {
         this.lname = lname;
         this.email = email;
     }
-    
-    
 
+    public Customer(String fname, String lname, String email, String address, String phoneNumber) {
+        this.fname = fname;
+        this.lname = lname;
+        this.email = email;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+    }
+    
     public Integer getCustomerId() {
         return customerId;
     }
-
+    
     public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
     }
@@ -156,15 +162,15 @@ public class Customer implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 71 * hash + this.customerId;
-        hash = 71 * hash + Objects.hashCode(this.fname);
-        hash = 71 * hash + Objects.hashCode(this.lname);
-        hash = 71 * hash + Objects.hashCode(this.email);
-        hash = 71 * hash + Objects.hashCode(this.address);
-        hash = 71 * hash + Objects.hashCode(this.phoneNumber);
-        hash = 71 * hash + Objects.hashCode(this.orderList);
-        hash = 71 * hash + Objects.hashCode(this.userList);
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.customerId);
+        hash = 41 * hash + Objects.hashCode(this.fname);
+        hash = 41 * hash + Objects.hashCode(this.lname);
+        hash = 41 * hash + Objects.hashCode(this.email);
+        hash = 41 * hash + Objects.hashCode(this.address);
+        hash = 41 * hash + Objects.hashCode(this.phoneNumber);
+        hash = 41 * hash + Objects.hashCode(this.orderList);
+        hash = 41 * hash + Objects.hashCode(this.userList);
         return hash;
     }
 
@@ -180,9 +186,6 @@ public class Customer implements Serializable {
             return false;
         }
         final Customer other = (Customer) obj;
-        if (this.customerId != other.customerId) {
-            return false;
-        }
         if (!Objects.equals(this.fname, other.fname)) {
             return false;
         }
@@ -198,6 +201,9 @@ public class Customer implements Serializable {
         if (!Objects.equals(this.phoneNumber, other.phoneNumber)) {
             return false;
         }
+        if (!Objects.equals(this.customerId, other.customerId)) {
+            return false;
+        }
         if (!Objects.equals(this.orderList, other.orderList)) {
             return false;
         }
@@ -206,6 +212,8 @@ public class Customer implements Serializable {
         }
         return true;
     }
+
+    
 
     
 

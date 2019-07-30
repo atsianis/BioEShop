@@ -27,6 +27,13 @@ public class CustomerDaoImpl extends AbstractDao<Integer, Customer> implements C
             return false;
         }
     }
+    
+    @Override
+    public int saveCustomer(Customer c){
+            getSession().save(c);
+            getSession().flush();
+            return c.getCustomerId();
+    }
 
     @Override
     public Customer getCustomerByEmail(String email) {

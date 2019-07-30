@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("user/order")
+@RequestMapping("/order")
 public class OrderController {
     
     @Autowired
@@ -41,8 +41,17 @@ public class OrderController {
     
     @RequestMapping(value = {"/buy/{id}"}, method = RequestMethod.GET)
     public String newOrder(ModelMap model,@PathVariable int id) {
+        Customer c;
+        boolean isRegistered;
+        String username = getPrincipal();
+        if (username=="anonymousUser"){
+            c = new Customer();
+            isRegistered = false;
+        }else{
+            c = customerService.getCustomerBySsoId(username);
+            isRegistered = true;
+        }
         Order$ o = new Order$();
-        Customer c = customerService.getCustomerBySsoId(getPrincipal());
         Product p = pdao.getProductById(id);
         
         List<OrderDetails> list = new ArrayList();
@@ -61,16 +70,32 @@ public class OrderController {
 //        Hibernate.initialize(o.getOrderDetailsList());
         // mesa stin post na setarw kai date !
         model.addAttribute("order",o);
-        model.addAttribute("action", "user/order/save");
+        model.addAttribute("action", "order/save");
+        model.addAttribute("registered",isRegistered);
         return "buynow";
     }
     
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
     public String newOrder(@ModelAttribute("order") Order$ order,@RequestParam("pid") List<Integer> pid,@RequestParam("quantity") List<Integer> quantity, BindingResult result,
             ModelMap model) {
+        
         if (result.hasErrors()) {
             model.addAttribute("message","problem");
             return "home";
+        }
+        
+        Customer c = order.getCustomer();
+//        Customer newC;
+        System.out.println("////////////");
+        System.out.println(c);
+        System.out.println("////////////////////");
+        if(c.getCustomerId()==null){
+            c.setCustomerId(customerService.saveCustomer(c));
+//            newC = customerService.getCustomerByEmail(c.getEmail());
+//            System.out.println("////////////");
+            System.out.println(c);
+            System.out.println("//////////////////////");
+            order.setCustomer(c);  
         }
         //set order time
         Date date = new Date(System.currentTimeMillis());

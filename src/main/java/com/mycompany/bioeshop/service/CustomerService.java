@@ -8,6 +8,8 @@ public interface CustomerService {
     
     public boolean createCustomer(Customer c);
     
+    public int saveCustomer(Customer c);
+    
     public Customer getCustomerByEmail(String email);
     
     public Customer getCustomerById(int id);

@@ -12,13 +12,20 @@
                 <form:input type="number" hidden="true" path="pending"/>
                 <form:input type="number" hidden="true" path="customer.customerId"/>
                 <form:input type="number" hidden="true" path="customer.phoneNumber"/>
+                <c:choose>
+                    <c:when test="{registered}">
+                        <strong>Your Info</strong>
+                    </c:when>
+                    <c:otherwise>
+                        <Strong>Please Insert your info</Strong>
+                    </c:otherwise>
+                </c:choose>
                 
-                <strong>Your Info</strong>
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable" for="fname">First Name</label>
                         <div class="col-md-7">
-                            <form:input readonly="true" type="text" path="customer.fname" id="fname" class="form-control input-sm"/>
+                            <form:input readonly="${registered}" required="true" type="text" path="customer.fname" id="fname" class="form-control input-sm"/>
                             <div class="has-error">
                                 <form:errors path="customer.fname" class="help-inline"/>
                             </div>
@@ -30,7 +37,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable" for="lname">Last Name</label>
                         <div class="col-md-7">
-                            <form:input readonly="true" type="text" path="customer.lname" id="lname" class="form-control input-sm"/>
+                            <form:input readonly="${registered}" required="true" type="text" path="customer.lname" id="lname" class="form-control input-sm"/>
                             <div class="has-error">
                                 <form:errors path="customer.lname" class="help-inline"/>
                             </div>
@@ -42,7 +49,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable" for="address">Address</label>
                         <div class="col-md-7">
-                            <form:input readonly="true" type="text" path="customer.address" id="address" class="form-control input-sm"/>
+                            <form:input readonly="${registered}" required="true" type="text" path="customer.address" id="address" class="form-control input-sm"/>
                             <div class="has-error">
                                 <form:errors path="customer.address" class="help-inline"/>
                             </div>
@@ -54,9 +61,20 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable" for="email">Email</label>
                         <div class="col-md-7">
-                            <form:input readonly="true" type="text" path="customer.email" id="email" class="form-control input-sm"/>
+                            <form:input readonly="${registered}" required="true" type="text" path="customer.email" id="email" class="form-control input-sm"/>
                             <div class="has-error">
                                 <form:errors path="customer.email" class="help-inline"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-3 control-lable" for="email">Phone number</label>
+                        <div class="col-md-7">
+                            <form:input readonly="${registered}" required="true" type="text" path="customer.phoneNumber" id="phone" class="form-control input-sm"/>
+                            <div class="has-error">
+                                <form:errors path="customer.phoneNumber" class="help-inline"/>
                             </div>
                         </div>
                     </div>
@@ -70,12 +88,12 @@
                         <tr>
                             <td height="250px" width="250px"><img height="200px" width="200px" src="${details.product.path}"/></td>
                             <td>${details.product.material}-${details.product.category}-${details.product.color}-${details.product.title}</td>
-                            <td>${details.product.price}</td>
-                            <td><input name="quantity" type="number" min="1" max="${details.product.stock}"/></td> <!-- @RequestParam("quantity") ston controller ?!?!?-->
+                            <td class="prices">${details.product.price}</td>
+                            <td><input class="quantity" name="quantity" type="number" min="1" max="${details.product.stock}"/></td> <!-- @RequestParam("quantity") ston controller ?!?!?-->
                         </tr>
                     </c:forEach>
                 </table>
-                    <div class="row">Total Price: <span id="total"></span></div>
+                    <div class="row"> <span id="total"></span></div>
                 </div>
                 <div id="paypal-button-container"></div>
                 <form:button hidden="true" id="button" type="submit" value="Buy Now">Buy now</form:button>
@@ -91,6 +109,20 @@
     <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
 
     <script>
+//        let total=0;
+//        let totalprice = document.getElementById("total");
+//        let prices = document.getElementsByClassName("prices");
+//        let quantities = document.getElementsByClassName("quantity");
+//        for(i=0;i<quantities.length;i++){
+//            quantities[i].addEventListener("onkeyup",handlequantity);
+//        }
+//        function handlequantity(event){
+//            
+//        }
+//        for (i=0;i<prices.length;i++){
+//            total+=Number(prices[i].innerHTML)*Number(quantities[i].innerHTML);
+//        }
+//        totalprice.innerHTML="total="+total;
         
         let form = $("#form");
         // Render the PayPal button into #paypal-button-container
@@ -101,7 +133,7 @@
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: '49.99'
+                            value: 49.99
                         }
                     }]
                 });
