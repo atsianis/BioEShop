@@ -1,10 +1,9 @@
 <%@include file="z1JSP_setup.jsp" %>
+
 <html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>AccessDenied page</title>
-</head>
-<body>
+    <%@include file="z2HTML_Head.jsp" %>
+    <body>
+        <%@include file="z3authheader.jsp" %>
     <%@include file="menu.jsp" %>
 	<div class="generic-container">
 		<div class="authbar">
