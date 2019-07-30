@@ -4,7 +4,7 @@
     <body>
         <%@include file="z3authheader.jsp" %>
         <%@include file="menu.jsp" %>
-        
+
         <div class="generic-container">
             <div class="well lead">Buy Now</div>
             <form:form id="form" action="/BioEShop/${action}" method="POST" modelAttribute="order" class="form-horizontal">
@@ -12,8 +12,11 @@
                 <form:input type="number" hidden="true" path="pending"/>
                 <form:input type="number" hidden="true" path="customer.customerId"/>
                 <form:input type="number" hidden="true" path="customer.phoneNumber"/>
-                
+
+                <!-- CUSTOMER'S INFO -->
                 <strong>Your Info</strong>
+
+                <!-- First Name -->
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable" for="fname">First Name</label>
@@ -25,7 +28,8 @@
                         </div>
                     </div>
                 </div>
-                            
+
+                <!-- Last Name -->
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable" for="lname">Last Name</label>
@@ -37,7 +41,8 @@
                         </div>
                     </div>
                 </div>
-                            
+
+                <!-- Address -->
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable" for="address">Address</label>
@@ -49,7 +54,8 @@
                         </div>
                     </div>
                 </div>
-                            
+
+                <!-- Email -->
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-lable" for="email">Email</label>
@@ -61,65 +67,52 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- ORDER INFO -->
                 <strong>Product</strong>
                 <div class="container">
-                <table border="1" id="example" class="stripe order-column hover cell-border display myTable" style="width:50vw">
-                    <c:forEach var="details" items="${order.orderDetailsList}">
-                        <input name="pid" hidden="true" type="int" value="${details.product.productId}"/><!-- @RequestParam("pid") int pid ston controller ?!?!?-->
-                        <th>PHOTO</th><th>INFO</th><th>PRICE</th><th>QUANTITY</th>
+                    <table border="1" id="example" class="stripe order-column hover cell-border display myTable" style="width:50vw">
                         <tr>
-                            <td height="250px" width="250px"><img height="200px" width="200px" src="${details.product.path}"/></td>
-                            <td>${details.product.material}-${details.product.category}-${details.product.color}-${details.product.title}</td>
-                            <td>${details.product.price}</td>
-                            <td><input name="quantity" type="number" min="1" max="${details.product.stock}"/></td> <!-- @RequestParam("quantity") ston controller ?!?!?-->
+                            <th hidden="true">ID</th>
+                            <th>PHOTO</th>
+                            <th>INFO</th>
+                            <th>PRICE</th>
+                            <th>QUANTITY</th>
                         </tr>
-                    </c:forEach>
-                </table>
-                    <div class="row">Total Price: <span id="total"></span></div>
+                        <c:forEach var="details" items="${order.orderDetailsList}">
+                            <tr class="product">
+                                <td>
+                                    <input class="productId" name="pid" hidden="true" type="number" value="${details.product.productId}" /><!-- @RequestParam("pid") int pid ston controller ?!?!?-->
+                                </td>
+                                <td height="250px" width="250px">
+                                    <img height="200px" width="200px" src="${details.product.path}" />
+                                </td>
+                                <td>
+                                    ${details.product.material}-${details.product.category}-${details.product.color}-${details.product.title}
+                                </td>
+                                <td>
+                                    <input type="number" class="price" disabled value="${details.product.price}" />
+                                </td>
+                                <td>
+                                    <input id="q${details.product.productId}" onchange="updateQuantity(this)" class="quantity" name="quantity" type="number" min="1" max="${details.product.stock}" /> <!-- @RequestParam("quantity") ston controller ?!?!?-->
+                                </td>
+                            </tr>
+                        </c:forEach>
+                            <tr>
+                                <td hidden="true"></td>
+                                <td colspan="4" id="totalOutput">Total price: 0 euro</td><!-- Thano to id to eixes 'total'. Tsekare an soy xalaei tipota -->
+                            </tr>
+                    </table>
+                    
                 </div>
                 <div id="paypal-button-container"></div>
                 <form:button hidden="true" id="button" type="submit" value="Buy Now">Buy now</form:button>
             </form:form>
         </div>
-        <!-- jQuery -->
-        <script
-            src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-            crossorigin="anonymous">
-        </script>
+
+        <%@include file="z4scriptsBeforeBody.jsp" %>
         <!-- Include the PayPal JavaScript SDK -->
-    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
-
-    <script>
-        
-        let form = $("#form");
-        // Render the PayPal button into #paypal-button-container
-        paypal.Buttons({
-
-            // Set up the transaction
-            createOrder: function(data, actions) {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: '49.99'
-                        }
-                    }]
-                });
-            },
-
-            // Finalize the transaction
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    // Show a success message to the buyer
-                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
-                    // added by me
-                    form.submit();
-                });
-            }
-
-
-        }).render('#paypal-button-container');
-    
-    </script>
+        <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+        <script src="${pageContext.request.contextPath}/static/scripts/buynow.js"></script>
     </body>
 </html>
