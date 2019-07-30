@@ -197,10 +197,83 @@
                 </div>
             </form:form>
         </div>
-        <script src="${pageContext.request.contextPath}/BioEShop/src/main/webapp/WEB-INF/static/newjavascript.js"></script>
+        <script>
+            let CupArray = [
+                {
+                    material1: "Bamboo",
+                    material2: "Steel",
+                    material3: "Hard Paper"
+                },
+                {
+                    size1: "0.5L",
+                    size2: "0.75L",
+                    size3: "1L"
+                }
+            ]
+            let StrawArray = [
+                {
+                    material1: "Bamboo",
+                    material2: "Steel"
+                },
+                {
+                    size1: "3 inches",
+                    size2: "5 inches",
+                    size3: "7 inches"
+                }
+            ]
+            let ToothbrushArray = [
+                {
+                    material1: "Bamboo",
+                    material2: "Wood"
+                },
+                {
+                    size1: "kids",
+                    size2: "adult"
+                }
+            ]
+            let category = document.querySelector("#category");
+            let material = document.querySelector("#material");
+            let size = document.querySelector("#size");
+            console.log(material);
+            console.log(size);
+            // let selected = category.options[category.selectedIndex].value;
+            let handleChange = (e) => {
+                if (category.options[category.selectedIndex].value === "Cup") {
+                    material.options.length = 0;
+                    size.options.length = 0;
+                    for (index in CupArray[0]) {
+                        material.options[material.options.length] = new Option(CupArray[0][index], index);
+                    }
+                    for (index in CupArray[1]) {
+                        size.options[size.options.length] = new Option(CupArray[1][index], index);
+                    }
+                } else if (category.options[category.selectedIndex].value === "Straw") {
+                    material.options.length = 0;
+                    size.options.length = 0;
+                    for (index in StrawArray[0]) {
+                        material.options[material.options.length] = new Option(StrawArray[0][index], index);
+                    }
+                    for (index in StrawArray[1]) {
+                        size.options[size.options.length] = new Option(StrawArray[1][index], index);
+                    }
+                } else {
+                    material.options.length = 0;
+                    size.options.length = 0;
+                    for (index in ToothbrushArray[0]) {
+                        material.options[material.options.length] = new Option(ToothbrushArray[0][index], index);
+                    }
+                    for (index in ToothbrushArray[1]) {
+                        size.options[size.options.length] = new Option(ToothbrushArray[1][index], index);
+                    }
+                }
+            }
 
-        </body>
-    </html>
+            category.addEventListener("change", handleChange);
+
+
+        </script>
+    </body>
+</html>
 
 
 
