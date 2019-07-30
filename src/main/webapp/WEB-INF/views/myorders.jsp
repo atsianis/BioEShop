@@ -4,13 +4,13 @@
     <body>
         <%@include file="z3authheader.jsp" %>
         <%@include file="menu.jsp" %>
-        
+        <div class="container">
         <table border="1">
             <thead
-                <tr><th>Date</th><th>Order #</th><th>Status</th><th>Details</th><th>Total Price</th></tr>
+                <tr><th>Date</th><th>Order #</th><th>Status</th><th>Details</th><th hidden="true">Total Price</th></tr>
             </thead>
             <c:forEach var="o" items="${orders}">
-                <tr><td>${o.date}</td><td>${o.orderId}</td><td><c:choose><c:when test="{o.pending=1}"><i>Pending</i></c:when><c:otherwise><i>Sent</i></c:otherwise></c:choose></td>
+                <tr><td>${o.date}</td><td>${o.orderId}</td><td><c:choose><c:when test="${o.pending ==1}"><i>Pending</i></c:when><c:otherwise><i>Sent</i></c:otherwise></c:choose></td>
                 <td>
                     <table border="1">
                 <c:forEach var="d" items="${o.orderDetailsList}">
@@ -19,12 +19,13 @@
                 </c:forEach>
                     </table>
                         </td>
-                        <td>JScript or SQL trigger</td>
+                        <td hidden="true"></td>
                 </tr>
             </c:forEach>
         
                     
         </table>
+        </div>
         <p>${message}</p><br>
     </body>
 </html>
