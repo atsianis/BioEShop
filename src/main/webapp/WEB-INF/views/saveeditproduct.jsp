@@ -114,23 +114,23 @@
                         <label class="col-md-3 control-lable" for="color">Size</label>
                         <div class="col-md-7">
                             <c:choose>
-                                <c:when test='{edit}'>
+                                <c:when test="{edit}">
                                     <c:choose>
-                                        <c:when test="${p.category=="cup"}">
+                                        <c:when test="${category =='Cup'}">
                                             <form:select type="text" path="size" id="size" class="form-control input-sm">
                                                 <form:option value="0.5L">0.5L</form:option>
                                                 <form:option value="0.75L">0.75L</form:option>
                                                 <form:option value="1L">1L</form:option>
                                             </form:select>
                                         </c:when>
-                                        <c:when test="${p.category == "straw"}">
+                                        <c:when test="${category == "Straw"}">
                                             <form:select type="text" path="size" id="size" class="form-control input-sm">
                                                 <form:option value="3 inches">3"</form:option>
                                                 <form:option value="5 inches">5"</form:option>
                                                 <form:option value="7 inches">7"</form:option>
                                             </form:select>
                                         </c:when>
-                                        <c:when test="${p.category == "toothbrush"}">
+                                        <c:when test="${category == "Toothbrush"}">
                                             <form:select type="text" path="size" id="size" class="form-control input-sm">
                                                 <form:option value="kid">kids</form:option>
                                                 <form:option value="adult">adult</form:option>
@@ -157,20 +157,20 @@
                             <c:choose>
                                 <c:when test='{edit}'>
                                     <c:choose>
-                                        <c:when test="${p.category=="cup"}">
+                                        <c:when test="${category == "Cup"}">
                                             <form:select type="text" path="material" id="material" class="form-control input-sm">
                                                 <form:option value="bamboo">Bamboo</form:option>
                                                 <form:option value="steel">Steel</form:option>
                                                 <form:option value="hard paper">Hard paper</form:option>
                                             </form:select>
                                         </c:when>
-                                        <c:when test="${p.category == "straw"}">
+                                        <c:when test="${category == "Straw"}">
                                             <form:select type="text" path="material" id="material" class="form-control input-sm">
                                                 <form:option value="bamboo">Bamboo</form:option>
                                                 <form:option value="steel">Steel</form:option>
                                             </form:select>
                                         </c:when>
-                                        <c:when test="${p.category == "toothbrush"}">
+                                        <c:when test="${category == "Toothbrush"}">
                                             <form:select type="text" path="material" id="material" class="form-control input-sm">
                                                 <form:option value="bamboo">Bamboo</form:option>
                                                 <form:option value="wood">Wood</form:option>
@@ -216,9 +216,9 @@
                     material2: "Steel"
                 },
                 {
-                    size1: "3 inches",
-                    size2: "5 inches",
-                    size3: "7 inches"
+                    size1: '3"',
+                    size2: '5"',
+                    size3: '7"'
                 }
             ]
             let ToothbrushArray = [
@@ -242,28 +242,28 @@
                     material.options.length = 0;
                     size.options.length = 0;
                     for (index in CupArray[0]) {
-                        material.options[material.options.length] = new Option(CupArray[0][index], index);
+                        material.options[material.options.length] = new Option(CupArray[0][index], CupArray[0][index]);
                     }
                     for (index in CupArray[1]) {
-                        size.options[size.options.length] = new Option(CupArray[1][index], index);
+                        size.options[size.options.length] = new Option(CupArray[1][index], CupArray[1][index]);
                     }
                 } else if (category.options[category.selectedIndex].value === "Straw") {
                     material.options.length = 0;
                     size.options.length = 0;
                     for (index in StrawArray[0]) {
-                        material.options[material.options.length] = new Option(StrawArray[0][index], index);
+                        material.options[material.options.length] = new Option(StrawArray[0][index], StrawArray[0][index]);
                     }
                     for (index in StrawArray[1]) {
-                        size.options[size.options.length] = new Option(StrawArray[1][index], index);
+                        size.options[size.options.length] = new Option(StrawArray[1][index], StrawArray[1][index]);
                     }
                 } else {
                     material.options.length = 0;
                     size.options.length = 0;
                     for (index in ToothbrushArray[0]) {
-                        material.options[material.options.length] = new Option(ToothbrushArray[0][index], index);
+                        material.options[material.options.length] = new Option(ToothbrushArray[0][index], ToothbrushArray[0][index]);
                     }
                     for (index in ToothbrushArray[1]) {
-                        size.options[size.options.length] = new Option(ToothbrushArray[1][index], index);
+                        size.options[size.options.length] = new Option(ToothbrushArray[1][index], ToothbrushArray[0][index]);
                     }
                 }
             }

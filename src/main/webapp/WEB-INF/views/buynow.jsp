@@ -13,7 +13,7 @@
                 <form:input type="number" hidden="true" path="customer.customerId"/>
                 <form:input type="number" hidden="true" path="customer.phoneNumber"/>
                 <c:choose>
-                    <c:when test="{registered}">
+                    <c:when test="${registered}">
                         <strong>Your Info</strong>
                     </c:when>
                     <c:otherwise>
@@ -84,7 +84,8 @@
                 </div>
                 <strong>Product</strong>
                 <div class="container">
-                    <table border="1" id="example" class="stripe order-column hover cell-border display myTable" style="width:50vw">
+                    <div class="row">
+                    <table border="1" id="example" class="col-md-6 stripe order-column hover cell-border display myTable" style="width:50vw">
                         <tr>
                             <th hidden="true">ID</th>
                             <th>PHOTO</th>
@@ -94,7 +95,7 @@
                         </tr>
                         <c:forEach var="details" items="${order.orderDetailsList}">
                             <tr class="product">
-                                <td>
+                                <td hidden="true">
                                     <input class="productId" name="pid" hidden="true" type="number" value="${details.product.productId}" /><!-- @RequestParam("pid") int pid ston controller ?!?!?-->
                                 </td>
                                 <td height="250px" width="250px">
@@ -107,7 +108,7 @@
                                     <input type="number" class="price" disabled value="${details.product.price}" />
                                 </td>
                                 <td>
-                                    <input id="q${details.product.productId}" onchange="updateQuantity(this)" class="quantity" name="quantity" type="number" min="1" max="${details.product.stock}" /> <!-- @RequestParam("quantity") ston controller ?!?!?-->
+                                    <input id="q${details.product.productId}" onchange="updateQuantity(this)" class="quantity" name="quantity" type="number" value="1" min="1" max="${details.product.stock}" /> <!-- @RequestParam("quantity") ston controller ?!?!?-->
                                 </td>
                             </tr>
                         </c:forEach>
@@ -116,9 +117,15 @@
                                 <td colspan="4" id="totalOutput">Total price: 0 euro</td><!-- Thano to id to eixes 'total'. Tsekare an soy xalaei tipota -->
                             </tr>
                     </table>
+                            <div class="container" id="paypal-button-container"></div>
+                        
+                        
                     
+                        
+                    </div>
                 </div>
-                <div id="paypal-button-container"></div>
+                    
+                    
                 <form:button hidden="true" id="button" type="submit" value="Buy Now">Buy now</form:button>
             </form:form>
         </div>

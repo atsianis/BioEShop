@@ -1,6 +1,52 @@
 let productsNodeList = document.querySelectorAll(".product");
 let products = [];
 let totalOutput = document.querySelector("#totalOutput");
+let form = document.querySelector("#form");
+
+let input1 = document.forms["form"]["lname"];
+let input2 = document.forms["form"]["fname"];
+let input3 = document.forms["form"]["address"];
+let input4 = document.forms["form"]["phone"];
+let input5 = document.forms["form"]["email"];
+let pay = document.getElementById("paypal-button-container");
+
+form.addEventListener("keyup", validateForm);
+
+
+window.addEventListener("load", firstValidation);
+
+function firstValidation(){
+    console.log("form loaded");
+    let a = input1.value;
+    let b = input2.value;
+    let c = input3.value;
+    let d = input4.value;
+    let x = input5.value;
+    if (((a === null || a === "") || (b === null || b === "") || (c === null || c === "") || (d === null || d === "") || (x === null || x === ""))) {
+        console.log("empty form");
+        pay.style.display="none";
+    } else {
+        console.log("filled form");
+        pay.style.display="block";
+    }
+}
+
+function validateForm() {
+    console.log("button pressed");
+    let a = input1.value;
+    let b = input2.value;
+    let c = input3.value;
+    let d = input4.value;
+    let x = input5.value;
+    if (((a === null || a === "") || (b === null || b === "") || (c === null || c === "") || (d === null || d === "") || (x === null || x === ""))) {
+        console.log("NOT filled form");
+        pay.style.display="none";
+    } else {
+        console.log("filled form");
+        pay.style.display="block";
+    }
+}
+
 
 
 productsNodeList.forEach(function (val) {
@@ -29,7 +75,11 @@ function updateQuantity(e) {
         idOfProduct = idOfProduct.substr(1);
     }
 
-    products[idOfProduct - 1].quantity = e.value;
+    products.forEach(function(product){
+        if(product.productId === idOfProduct){
+            product.quantity = e.value;
+        }
+    });
     total = (Math.round((products.reduce(findTotal, 0)) * 100)) / 100;
     totalOutput.innerText = `Total price: ${total} euro`;
     console.log(total);
