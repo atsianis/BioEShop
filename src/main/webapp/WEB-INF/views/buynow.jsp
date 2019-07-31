@@ -13,7 +13,7 @@
                 <form:input type="number" hidden="true" path="customer.customerId"/>
                 <form:input type="number" hidden="true" path="customer.phoneNumber"/>
                 <c:choose>
-                    <c:when test="{registered}">
+                    <c:when test="${registered}">
                         <strong>Your Info</strong>
                     </c:when>
                     <c:otherwise>
@@ -117,7 +117,11 @@
                                 <td colspan="4" id="totalOutput">Total price: 0 euro</td><!-- Thano to id to eixes 'total'. Tsekare an soy xalaei tipota -->
                             </tr>
                     </table>
-                        <div class="col-md-6" id="paypal-button-container" hidden="true"></div>
+                            <div class="container" id="paypal-button-container"></div>
+                        
+                        
+                    
+                        
                     </div>
                 </div>
                     

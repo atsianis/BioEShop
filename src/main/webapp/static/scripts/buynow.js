@@ -8,26 +8,45 @@ let input2 = document.forms["form"]["fname"];
 let input3 = document.forms["form"]["address"];
 let input4 = document.forms["form"]["phone"];
 let input5 = document.forms["form"]["email"];
-let pay = document.querySelector("#paypal-button-container");
+let pay = document.getElementById("paypal-button-container");
 
-input1.addEventListener("keyup", validateForm);
-input2.addEventListener("keyup", validateForm);
-input3.addEventListener("keyup", validateForm);
-input4.addEventListener("keyup", validateForm);
-input5.addEventListener("keyup", validateForm);
+form.addEventListener("keyup", validateForm);
 
-function validateForm() {
-    var a = input1.value;
-    var b = input2.value;
-    var c = input3.value;
-    var d = input4.value;
-    var e = input5.value;
-    if (!((a == null || a == "") || (b == null || b == "") || (c == null || c == "") || (d == null || d == "") || (e == null || e == ""))) {
-        pay.removeAttribute("hidden");
+
+window.addEventListener("load", firstValidation);
+
+function firstValidation(){
+    console.log("form loaded");
+    let a = input1.value;
+    let b = input2.value;
+    let c = input3.value;
+    let d = input4.value;
+    let x = input5.value;
+    if (((a === null || a === "") || (b === null || b === "") || (c === null || c === "") || (d === null || d === "") || (x === null || x === ""))) {
+        console.log("empty form");
+        pay.style.display="none";
     } else {
-        pay.setAttribute("hidden","true");
+        console.log("filled form");
+        pay.style.display="block";
     }
 }
+
+function validateForm() {
+    console.log("button pressed");
+    let a = input1.value;
+    let b = input2.value;
+    let c = input3.value;
+    let d = input4.value;
+    let x = input5.value;
+    if (((a === null || a === "") || (b === null || b === "") || (c === null || c === "") || (d === null || d === "") || (x === null || x === ""))) {
+        console.log("NOT filled form");
+        pay.style.display="none";
+    } else {
+        console.log("filled form");
+        pay.style.display="block";
+    }
+}
+
 
 
 productsNodeList.forEach(function (val) {
