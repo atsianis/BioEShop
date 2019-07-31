@@ -115,9 +115,15 @@ public class OrderController {
         // theoretically we have a list of products and a list of quantitiew from the requests param
         // so this code might be expandable for an order with multiple products
         // for now it has only been tested with one
+        Product p;
+        int q;
         for (int i=0;i<orderLength;i++){
-            order.getOrderDetailsList().get(i).setProduct(pdao.getProductById(pid.get(i)));
-            order.getOrderDetailsList().get(i).setQuantity(quantity.get(i));
+            p = pdao.getProductById(pid.get(i));
+            q = quantity.get(i);
+            order.getOrderDetailsList().get(i).setProduct(p);
+            order.getOrderDetailsList().get(i).setQuantity(q);
+            p.setStock(p.getStock()-q);
+            pdao.updateProduct(p);
         }
         boolean created = odao.createOrder(order);
         if(created){
