@@ -32,17 +32,17 @@ public class ProductsController {
     @Autowired
     ProductsService productsService;    
       
-    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
-    public String getProductsOfCategory(ModelMap model) {
+    @RequestMapping(value = {"/", "/{something}"}, method = RequestMethod.GET)
+    public String getProductsOfCategory(ModelMap model ) {
         model.addAttribute("loggedinuser", getPrincipal());        
         return "view_product";
     }
     
-    @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
-    public String getProductsFiltered(ModelMap model, @PathVariable int id) {
-        model.addAttribute("loggedinuser", getPrincipal());
-        return "view_product";
-    }
+//    @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
+//    public String getProductsFiltered(ModelMap model, @PathVariable int id) {
+//        model.addAttribute("loggedinuser", getPrincipal());
+//        return "view_product";
+//    }
 
     /**
      * This method returns the principal[user-name] of logged-in user.

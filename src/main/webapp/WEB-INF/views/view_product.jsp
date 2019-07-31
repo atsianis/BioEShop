@@ -29,20 +29,49 @@
         <!-- CONTENT -->
         <main class="bg-secondary container">
 
-            <!-- FILTERS -->
-
-            <label for="titleFilter">Filter by title</label>
-            <input id="titleFilter" type="text" ng-model="title">
-            <!-- <label for="priceFilter">Filter by price</label>
-            <input id="priceFilter" type="number" ng-model="maxPrice"> -->
-
-            <div>{{maxPrice}}</div>
-
             <h1>{{categoryMessage}}</h1>
+
+            <!-- PRODUCTS FILTERS -->
+            <form>
+                <label for="titleFilter">Search in title</label>
+                <input id="titleFilter" type="text" ng-model="titleFilter">
+                <label for="descrFilter">Search in description</label>
+                <input id="descrFilter" type="text" ng-model="descrFilter">
+                <label for="sizeFilter">Size</label>
+                <select id="sizeFilter" ng-model="sizeFilter">
+                    <option ng-repeat="size in sizes" value="{{size}}">
+                        {{size}}
+                    </option>
+                </select>
+                <label for="colorFilter">Color</label>
+                <select id="colorFilter" ng-model="colorFilter">
+                    <option ng-repeat="color in colors" value="{{color}}">
+                        {{color}}
+                    </option>
+                </select>
+                <label for="materialFilter">Material</label>
+                <select id="materialFilter" ng-model="materialFilter">
+                    <option ng-repeat="material in materials" value="{{material}}">
+                        {{material}}
+                    </option>
+                </select>
+                <label for="orderbyFilter">Order by</label>
+                <select id="orderbyFilter" class="filter" ng-model="orderBy">
+                    <option value=""></option>
+                    <option value="price">Price (-/+)</option>
+                    <option value="-price">Price (+/-)</option>
+                    <option value="stock">Availability (-/+)</option>
+                    <option value="-stock">Availability (+/-)</option>
+                </select>
+            </form>
+
+
+            <!-- PRODUCTS GRID -->
             <div class="card-columns">
-                <div class="card" ng-repeat="product in products| filter: title">
+                <div class="card" ng-repeat="product in products | orderBy: orderBy | 
+                        filter:{title:titleFilter, descr:descrFilter, size:sizeFilter, color:colorFilter, material:materialFilter}">
                     <a id="productLink" href="/BioEShop/products/{{product.productId}}">
-                    <img class="card-img-top img-fluid" src="{{product.path}}" alt="Card image" style="width:100%">
+                        <img class="card-img-top img-fluid" src="{{product.path}}" alt="Card image" style="width:100%">
                     </a>
                     <div class="card-body">
 
@@ -67,7 +96,6 @@
 
                     </div>
                 </div>
-
             </div>
         </main>
 

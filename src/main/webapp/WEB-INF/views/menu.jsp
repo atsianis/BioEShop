@@ -9,6 +9,9 @@
 <a href="/BioEShop/user/profile/myorders">My orders | </a>
 
 <a href="/BioEShop/products/">Products | </a>
+<a href="/BioEShop/products/cup">Cups | </a>
+<a href="/BioEShop/products/straw">Straws | </a>
+<a href="/BioEShop/products/toothbrush">Toothbrushes | </a>
 </br>
 <div>Admin menu</div>
 <a href="/BioEShop/admin/customers">Customers | </a>
