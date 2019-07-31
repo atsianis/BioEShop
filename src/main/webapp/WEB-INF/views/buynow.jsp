@@ -117,7 +117,7 @@
                                 <td colspan="4" id="totalOutput">Total price: 0 euro</td><!-- Thano to id to eixes 'total'. Tsekare an soy xalaei tipota -->
                             </tr>
                     </table>
-                            <div class="container" id="paypal-button-container"></div>
+                            <div style="display:none;" class="container" id="paypal-button-container"></div>
                         
                         
                     

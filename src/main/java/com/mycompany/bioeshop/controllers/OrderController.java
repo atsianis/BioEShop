@@ -90,12 +90,26 @@ public class OrderController {
         System.out.println(c);
         System.out.println("////////////////////");
         if(c.getCustomerId()==null){
-            c.setCustomerId(customerService.saveCustomer(c));
+            Customer existingCustomer = customerService.getCustomerByEmail(c.getEmail());
+            if( existingCustomer != null) {
+                // updating customer's info
+                existingCustomer.setAddress(c.getAddress());
+                existingCustomer.setFname(c.getFname());
+                existingCustomer.setLname(c.getLname());
+                existingCustomer.setPhoneNumber(c.getPhoneNumber());
+                customerService.updateCustomer(existingCustomer);
+                
+                // setting customer for order
+                c.setCustomerId(existingCustomer.getCustomerId());
+            } else {
+                // setting customer for order
+                c.setCustomerId(customerService.saveCustomer(c));
 //            newC = customerService.getCustomerByEmail(c.getEmail());
 //            System.out.println("////////////");
-            System.out.println(c);
-            System.out.println("//////////////////////");
-            order.setCustomer(c);  
+                System.out.println(c);
+                System.out.println("//////////////////////");
+                order.setCustomer(c);
+            }
         }
         //set order time
         Date date = new Date(System.currentTimeMillis());
