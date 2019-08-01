@@ -5,6 +5,7 @@
  */
 package com.mycompany.bioeshop.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -60,8 +61,10 @@ public class Order$ implements Serializable {
     @Size(max = 200)
     @Column(length = 200)
     private String comments;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.LAZY)
     private List<OrderDetails> orderDetailsList;
+  
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Customer customer;

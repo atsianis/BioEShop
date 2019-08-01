@@ -5,6 +5,7 @@
  */
 package com.mycompany.bioeshop.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Basic;
@@ -22,6 +23,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.springframework.context.annotation.Bean;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -44,6 +46,7 @@ public class OrderDetails implements Serializable {
     private Integer odId;
     @Basic(optional = false)
     private int quantity;
+    @JsonIgnore
     @JoinColumn(name = "order_id", referencedColumnName = "order_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Order$ order;

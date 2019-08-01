@@ -5,6 +5,7 @@
  */
 package com.mycompany.bioeshop.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -63,8 +64,10 @@ public class Customer implements Serializable {
     @Size(max = 45)
     @Column(name = "phone_number", length = 45)
     private String phoneNumber;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<Order$> orderList;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<User> userList;
 

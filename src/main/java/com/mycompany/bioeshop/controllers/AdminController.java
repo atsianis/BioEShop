@@ -148,10 +148,10 @@ public class AdminController {
 
     }
 
-    @RequestMapping(value = {"/orders/pending"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/orders/", "/orders/{something}"}, method = RequestMethod.GET)
     public String pendingOrders(ModelMap model) {
-
-        return "pendingorders";
+            model.addAttribute("loggedinuser", getPrincipal());
+        return "view_orders";
     }
 
     private String getPrincipal() {

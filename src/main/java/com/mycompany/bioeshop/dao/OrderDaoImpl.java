@@ -46,16 +46,22 @@ public class OrderDaoImpl extends AbstractDao<Integer,Order$> implements OrderDa
     @Override
     public List<Order$> getPendingOrders(){
         Criteria crit = createEntityCriteria();
-        crit.add(Restrictions.eq("pending", 1));
+        crit.add(Restrictions.eq("pending", (short)1));
         List<Order$> list = (List<Order$>) crit.list();
+        for ( Order$ o : list){
+            Hibernate.initialize(o.getOrderDetailsList());
+        } 
         return list;
     }
     
     @Override
     public List<Order$> getDoneOrders(){
         Criteria crit = createEntityCriteria();
-        crit.add(Restrictions.eq("pending", 0));
+        crit.add(Restrictions.eq("pending", (short)0));
         List<Order$> list = (List<Order$>) crit.list();
+        for ( Order$ o : list){
+            Hibernate.initialize(o.getOrderDetailsList());
+        } 
         return list;
     }
     
@@ -64,6 +70,7 @@ public class OrderDaoImpl extends AbstractDao<Integer,Order$> implements OrderDa
         Criteria crit = createEntityCriteria();
         crit.add(Restrictions.eq("orderId", id));
         Order$ o = (Order$) crit.uniqueResult();
+        Hibernate.initialize(o.getOrderDetailsList());
         return o;
     }
     
