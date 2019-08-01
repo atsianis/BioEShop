@@ -56,6 +56,9 @@ public class OrderDaoImpl extends AbstractDao<Integer,Order$> implements OrderDa
         Criteria crit = createEntityCriteria();
         crit.add(Restrictions.eq("pending", 0));
         List<Order$> list = (List<Order$>) crit.list();
+        for (Order$ o : list){
+            Hibernate.initialize(o.getOrderDetailsList());
+        }
         return list;
     }
     
