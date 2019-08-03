@@ -5,6 +5,7 @@ import com.mycompany.bioeshop.dao.ProductDao;
 import com.mycompany.bioeshop.entities.Customer;
 import com.mycompany.bioeshop.entities.Product;
 import com.mycompany.bioeshop.service.CustomerService;
+import com.mycompany.bioeshop.service.OrderService;
 import java.util.List;
 import javax.validation.Valid;
 import org.hibernate.Hibernate;
@@ -35,6 +36,9 @@ public class AdminController {
 
     @Autowired
     CustomerService customerService;
+    
+    @Autowired
+    OrderService orderService;
 
     @RequestMapping(value = {"/products/edit/{id}"}, method = RequestMethod.GET)
     public String editProduct(ModelMap model, @PathVariable String id) {
@@ -153,6 +157,23 @@ public class AdminController {
             model.addAttribute("loggedinuser", getPrincipal());
         return "view_orders";
     }
+    
+    @RequestMapping(value = {"/order/edit/{id}"}, method = RequestMethod.GET)
+    public String editOrder(ModelMap model) {
+            model.addAttribute("loggedinuser", getPrincipal());
+        return "view_orders";
+    }
+    
+    @RequestMapping(value = {"/order/delete/{id}"}, method = RequestMethod.GET)
+    public String deleteOrder(ModelMap model, @PathVariable int id) {
+            if(orderService.deleteOrderById(id)) {
+                return "redirect:/admin/orders/pending";
+            }
+            
+            model.addAttribute("loggedinuser", getPrincipal());
+        return "view_orders";
+    }
+    
 
     private String getPrincipal() {
         String userName = null;

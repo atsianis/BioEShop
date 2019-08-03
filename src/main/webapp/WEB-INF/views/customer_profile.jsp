@@ -7,7 +7,11 @@
 <%@include file="z1JSP_setup.jsp" %>
 
 <html>
-    <%@include file="z2HTML_Head.jsp" %>
+    <head>
+        <%@include file="z2HTML_Head.jsp" %>
+        <!-- Our CSS -->
+    <link href="<c:url value='/static/css/app.css' />" type="text/css" rel="stylesheet"></link>
+    </head>
     <body>
         <%@include file="z3authheader.jsp" %>
         <%@include file="menu.jsp" %>

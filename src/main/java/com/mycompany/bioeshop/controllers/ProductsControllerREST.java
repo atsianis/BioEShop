@@ -47,9 +47,15 @@ public class ProductsControllerREST {
                 response.put("category", category);
                 break;
             default:
-                Product p = productsService.getProductById(Integer.parseInt(category));
-                products.add(p);
-                break;
+                try {
+                    Product p = productsService.getProductById(Integer.parseInt(category));
+                    products.add(p);
+                } catch(NumberFormatException e){
+                    e.printStackTrace();
+                    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                } finally {
+                    break;
+                }
         }
         
         response.put("products", products);
@@ -60,7 +66,4 @@ public class ProductsControllerREST {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-
-
 }

@@ -43,6 +43,8 @@ public class ProductsController {
 //        model.addAttribute("loggedinuser", getPrincipal());
 //        return "view_product";
 //    }
+    
+    
 
     /**
      * This method returns the principal[user-name] of logged-in user.

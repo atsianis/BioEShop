@@ -1,4 +1,4 @@
-<head>
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <!-- Bootstrap 4 -->
@@ -14,13 +14,10 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,400i,700&display=swap" rel="stylesheet">
     
     
-    <!-- Our CSS -->
-    <link href="<c:url value='/static/css/app.css' />" type="text/css" rel="stylesheet"></link>
-    
      <!-- AngularJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
     
     <title>${pagetitle}</title>
     
     
-</head>
+

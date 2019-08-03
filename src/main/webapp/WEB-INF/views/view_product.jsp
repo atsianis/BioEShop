@@ -6,7 +6,11 @@
 
 <%@include file="z1JSP_setup.jsp" %>
 <html>
+    <head>
+        <!-- Our CSS -->
+    <link href="<c:url value='/static/css/app.css' />" type="text/css" rel="stylesheet"></link>
     <%@include file="z2HTML_Head.jsp" %>
+    </head>
     <body ng-app="App" ng-controller="MainCtrl" ng-cloak>
         <%@include file="z3authheader.jsp" %>
         <%@include file="menu.jsp" %>

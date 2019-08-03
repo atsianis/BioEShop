@@ -29,34 +29,38 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/admin/api")
 public class AdminControllerREST {
-    
+
     @Autowired
     OrderService orderService;
-    
-    
-    
-   @RequestMapping(value = {"/orders/{something}"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/orders/{something}"}, method = RequestMethod.GET)
     public ResponseEntity<Map<String, Object>> getOrders(@PathVariable String something) {
-        
+
         List<Order$> orders = new ArrayList();
         Map<String, Object> response = new HashMap();
-        
+
         switch (something) {
             case "pending":
                 orders = orderService.getPendingOrders();
+                // JSON https://api.myjson.com/bins/tjez1
                 break;
             case "done":
                 orders = orderService.getDoneOrders();
+                // JSON https://api.myjson.com/bins/6z359
                 break;
             default:
-                
-                Order$ o = orderService.getOrderById(Integer.parseInt(something));
-                System.out.println("/////////////////////////");
-                System.out.println(o);
-                orders.add(o);
-                break;
+                try {
+                    Order$ o = orderService.getOrderById(Integer.parseInt(something));
+                    // JSON https://api.myjson.com/bins/1d8v3h
+                    orders.add(o);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                } finally {
+                    break;
+                }
         }
-        
+
         response.put("orders", orders);
 
         if (orders.isEmpty()) {
