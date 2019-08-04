@@ -17,11 +17,11 @@
         <ul class="navbar-nav mr-auto">
 
           <li class="nav-item active">
-            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/BioEShop/">Home <span class="sr-only">(current)</span></a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="about.html">About</a>
+            <a class="nav-link" href="/BioEShop/about">About</a>
           </li>
 
           <li class="nav-item dropdown">
@@ -30,32 +30,34 @@
               Products
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="gridall.html">All products</a>
-              <a class="dropdown-item" href="viewcutomers.html">Cups</a>
-              <a class="dropdown-item" href="gridcup.html">Straws</a>
-              <a class="dropdown-item" href="vieworders.html">Toothbrushes</a>
+              <a class="dropdown-item" href="/BioEShop/products/">All products</a>
+              <a class="dropdown-item" href="/BioEShop/products/cup">Cups</a>
+              <a class="dropdown-item" href="/BioEShop/products/straw">Straws</a>
+              <a class="dropdown-item" href="/BioEShop/products/toothbrush">Toothbrushes</a>
             </div>
           </li>
-
+          
+          
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               Admin
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="viewcutomers.html">Customers</a>
-              <a class="dropdown-item" href="gridcup.html">Pending Orders</a>
-              <a class="dropdown-item" href="vieworders.html">Orders History</a>
-              <a class="dropdown-item" href="vieworders.html">Messages</a>
+              <a class="dropdown-item" href="/BioEShop/admin/customers">Customers</a>
+              <a class="dropdown-item" href="/BioEShop/admin/orders/pending">Pending Orders</a>
+              <a class="dropdown-item" href="/BioEShop/admin/orders/done">Completed orders</a>
+              <a class="dropdown-item" href="#">Messages</a>
             </div>
           </li>
         </ul>
-
+          
+        <%@include file="z3authheader.jsp" %>
         <!--Profile button -->
         <button type="button" class="btn">
           <span class="glyphicon glyphicon-cog"></span>
           <span class="caret"></span>
-          <a href="profile.html">
+          <a href="/BioEShop/user/profile">
             <i class="fas fa-user icon"></i>
           </a>
         </button>
@@ -68,8 +70,8 @@
             <span class="sr-only"><i class="fas fa-usercicon"></i>Toggle Dropdown</span>
           </button>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="registration.html">Resigster Now</a>
-            <a class="dropdown-item" href="login.html">Login</a>
+            <a class="dropdown-item" href="/BioEShop/register">Resigster Now</a>
+            <a class="dropdown-item" href="/BioEShop/login">Login</a>
           </div>
         </div>
 

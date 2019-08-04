@@ -128,7 +128,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr scope="row">
-                                                    <td>{{order.customer.comments}}</td>
+                                                    <td>{{order.comments}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>

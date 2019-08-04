@@ -19,4 +19,6 @@ public interface CustomerService {
     public boolean isEmailUnique(Integer id, String email);
     
     public Customer getCustomerBySsoId(String ssoId);
+    
+    public Customer updateCustomer(Customer newCustomer, Customer oldCustomer);
 }

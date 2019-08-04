@@ -58,4 +58,24 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer getCustomerBySsoId(String ssoId){
         return cdao.getCustomerBySsoId(ssoId);
     }
+    
+    /**
+     * This method updates an existing customer, and if succeeds it returns
+     * the updated customer. It it fails it returns null. It updates the Address,
+     * First name, Last name and Phone number.
+     * @param newCustomer
+     * @param oldCustomer
+     * @return 
+     */
+    @Override
+    public Customer updateCustomer(Customer newCustomer, Customer oldCustomer) {
+        oldCustomer.setAddress(newCustomer.getAddress());
+        oldCustomer.setFname(newCustomer.getFname());
+        oldCustomer.setLname(newCustomer.getLname());
+        oldCustomer.setPhoneNumber(newCustomer.getPhoneNumber());
+        if(cdao.updateCustomer(oldCustomer)) {
+            return cdao.getCustomerById(oldCustomer.getCustomerId());
+        }
+        return null;
+    }
 }

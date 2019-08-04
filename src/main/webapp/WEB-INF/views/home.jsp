@@ -13,10 +13,11 @@
     </head>
     <body>
         <%@include file="menu.jsp" %>
+        <%@include file="z3authheader.jsp" %>
         
-        <c:if test="${loggedinuser != "anonymousUser"}">
-            <jsp:include page="z3authheader.jsp" flush="true"/>
-        </c:if>
+       
+            
+        
         
         
         <h1>Homepage</h1>

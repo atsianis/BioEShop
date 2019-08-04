@@ -159,9 +159,13 @@ public class AdminController {
     }
     
     @RequestMapping(value = {"/order/edit/{id}"}, method = RequestMethod.GET)
-    public String editOrder(ModelMap model) {
+    public String editOrder(ModelMap model, @PathVariable int id) {
             model.addAttribute("loggedinuser", getPrincipal());
-        return "view_orders";
+            model.addAttribute("order", orderService.getOrderById(id));
+            System.out.println("//////////////////////");
+            System.out.println(orderService.getOrderById(id));
+            model.addAttribute("action", "order/save");
+        return "view_edit_order";
     }
     
     @RequestMapping(value = {"/order/delete/{id}"}, method = RequestMethod.GET)
