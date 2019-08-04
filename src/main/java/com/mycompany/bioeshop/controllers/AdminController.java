@@ -47,7 +47,8 @@ public class AdminController {
         model.addAttribute("edit", true);
         model.addAttribute("p", p);
         model.addAttribute("act", "Edit");
-        return "saveeditproduct";
+        model.addAttribute("button", "Update product");
+        return "view_create_edit_product";
 
     }
 
@@ -57,8 +58,9 @@ public class AdminController {
 //        Hibernate.initialize(p.getOrderdetailsList());
         model.addAttribute("edit", false);
         model.addAttribute("p", p);
-        model.addAttribute("act", "Create");
-        return "saveeditproduct";
+        model.addAttribute("act", "Add a new ");
+        model.addAttribute("button", "Add product");
+        return "view_create_edit_product";
 
     }
 
