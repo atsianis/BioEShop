@@ -127,10 +127,6 @@
             <artifactId>jackson-dataformat-xml</artifactId>
             <version>${jackson.library}</version>
         </dependency>-->
-                
-                
-                
-		
     </dependencies>
 
     <build>

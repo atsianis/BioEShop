@@ -36,10 +36,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.headers().frameOptions().sameOrigin();
         http.authorizeRequests()
                 .antMatchers("/", "/register", "/about", "/contact", "/products/**", "/orders/**")
                 .permitAll()
                 .antMatchers("/user/**")
+                .access("hasRole('USER')")
+                .antMatchers("/chat/**")
                 .access("hasRole('USER')")
                 .antMatchers("/admin/**")
                 .access("hasRole('ADMIN')")

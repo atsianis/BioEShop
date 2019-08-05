@@ -16,6 +16,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 import com.mycompany.bioeshop.converter.RoleToUserProfileConverter;
+import org.springframework.web.servlet.DispatcherServlet;
 
 
 @Configuration
