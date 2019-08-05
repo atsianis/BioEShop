@@ -235,6 +235,8 @@
                     size2: "adult"
                 }
             ]
+            
+            
             let category = document.querySelector("#category");
             let material = document.querySelector("#material");
             let size = document.querySelector("#size");

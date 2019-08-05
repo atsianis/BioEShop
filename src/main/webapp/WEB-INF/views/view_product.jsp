@@ -134,13 +134,13 @@
 
                                 <sec:authorize access="hasRole('ADMIN')">
                                     <a href="/BioEShop/admin/products/edit/{{product.productId}}"
-                                       class="btn btn-primary">Edit</a>
+                                       class="btn btn-outline-warning">Edit</a>
                                     <a href="/BioEShop/admin/products/delete/{{product.productId}}"
-                                       class="btn btn-primary">Delete</a>
+                                       class="btn btn-outline-danger">Delete</a>
                                 </sec:authorize>
                                 <sec:authorize access="!hasRole('ADMIN')">
                                     <a href="/BioEShop/order/buy/{{product.productId}}"
-                                       class="btn btn-primary">Order now!</a>
+                                       class="btn btn-outline-success">Order now!</a>
                                 </sec:authorize>
 
                             </div>

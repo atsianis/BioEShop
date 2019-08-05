@@ -43,6 +43,23 @@ public class AdminController {
     @RequestMapping(value = {"/products/edit/{id}"}, method = RequestMethod.GET)
     public String editProduct(ModelMap model, @PathVariable String id) {
         Product p = pdao.getProductById(Integer.parseInt(id));
+        switch(p.getCategory()){
+            case "Cup":
+                model.addAttribute("cupSelected", true);
+                model.addAttribute("strawSelected", false);
+                model.addAttribute("toothbrushSelected", false);
+                break;
+            case "Straw":
+                model.addAttribute("cupSelected", false);
+                model.addAttribute("strawSelected", true);
+                model.addAttribute("toothbrushSelected", false);
+                break;
+            case "Toothbrush":
+                model.addAttribute("cupSelected", false);
+                model.addAttribute("strawSelected", false);
+                model.addAttribute("toothbrushSelected", true);
+                break;
+        }
 //        Hibernate.initialize(p.getOrderdetailsList());
         model.addAttribute("edit", true);
         model.addAttribute("p", p);

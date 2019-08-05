@@ -46,7 +46,7 @@ public class Product implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 500)
     private String path;
     @Basic(optional = false)
     @NotNull
