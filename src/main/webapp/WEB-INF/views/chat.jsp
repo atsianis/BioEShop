@@ -26,9 +26,9 @@
             padding-right: 10px;
             display:flex;
             border:1px solid black;
-            background-color:moccasin;
-            margin:20px;
-            height:600px;
+            background-color:lemonchiffon;
+            margin-top:20px;
+            height:500px;
             width:600px;
             overflow:scroll;
         }
@@ -36,26 +36,32 @@
             display:flex;
             justify-content:flex-end;
         }
-        .mymessage{
-            border-radius:10px;
-            width: 200px;
-            margin: 10px;
-            padding: 2px;
-        }
         .messagebox{
             display:flex;
             justify-content: flex-start;
         }
-        .message{
+        .mymessage{
+            display:flex;
+            align-items: flex-end;
             border-radius:10px;
-            width: 200px;
             margin: 10px;
             padding: 2px;
         }
-        .input{
-            
+        .message{
+            display:flex;
+            align-items: flex-start;
+            border-radius:10px;
+            margin: 10px;
+            padding: 2px;
         }
-        
+/*        #send{
+            width:600px;
+        }*/
+        .input{
+            display:flex;
+            width:600px;
+            flex-direction:row;
+        }
     </style>
     <!-- Bootstrap 4 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -99,8 +105,10 @@
         <div class="row input">
                 <form:form action="/BioEShop/chat/addMessage" method="POST" modelAttribute="message" id="myform2">
                         <form:input type="text" value="${name}" path="name" hidden ="true"/>
-                        <form:input type="text" path="content" class="form-control" id="send" placeholder="Say something"/>
-                        <form:button class="btn btn-info">Send</form:button>
+                        <div class="input">
+                            <form:input type="text" path="content" class="form-control" id="send" placeholder="Say something"/>
+                            <form:button class="btn btn-success">Send</form:button>
+                        </div>
                 </form:form>
             </div>
         </div>     
@@ -138,6 +146,11 @@
              let message;
              
              $interval(reloadMessages,1000);
+             
+             window.addEventListener("load",handleLoad);
+             function handleLoad(){
+                    chatbox.scrollTop = 100000;
+             }
 
 //             window.addEventListener("load",handleWindowLoad);
 //             function handleWindowLoad(){
