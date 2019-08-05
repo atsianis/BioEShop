@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Navbar -->
   <header>
     <nav class="container navbar navbar-expand-lg navbar-light" style="background-color: lightgoldenrodyellow;">
@@ -37,19 +38,21 @@
             </div>
           </li>
           
+          <sec:authorize access="hasRole('ADMIN')">
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                     aria-haspopup="true" aria-expanded="false">
+                      Admin
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="/BioEShop/admin/customers">Customers</a>
+                      <a class="dropdown-item" href="/BioEShop/admin/orders/pending">Pending Orders</a>
+                      <a class="dropdown-item" href="/BioEShop/admin/orders/done">Completed orders</a>
+                      <a class="dropdown-item" href="#">Messages</a>
+                  </div>
+              </li>
+          </sec:authorize>
           
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Admin
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/BioEShop/admin/customers">Customers</a>
-              <a class="dropdown-item" href="/BioEShop/admin/orders/pending">Pending Orders</a>
-              <a class="dropdown-item" href="/BioEShop/admin/orders/done">Completed orders</a>
-              <a class="dropdown-item" href="#">Messages</a>
-            </div>
-          </li>
         </ul>
           
         <%@include file="z3authheader.jsp" %>
