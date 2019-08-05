@@ -72,9 +72,14 @@
             aria-haspopup="true" aria-expanded="false">
             <span class="sr-only"><i class="fas fa-usercicon"></i>Toggle Dropdown</span>
           </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="/BioEShop/register">Resigster Now</a>
+            <div class="dropdown-menu">
+            <sec:authorize access="hasRole('ADMIN') or hasRole('USER')">
+                <a class="dropdown-item" href="/BioEShop/logout">Logout</a>
+            </sec:authorize>
+            <sec:authorize access="!hasRole('ADMIN') and !hasRole('USER')">
+                <a class="dropdown-item" href="/BioEShop/register">Resigster Now</a>
             <a class="dropdown-item" href="/BioEShop/login">Login</a>
+            </sec:authorize>
           </div>
         </div>
 
