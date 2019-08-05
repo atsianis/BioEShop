@@ -34,6 +34,7 @@ public class ProductsController {
       
     @RequestMapping(value = {"/", "/{something}"}, method = RequestMethod.GET)
     public String getProductsOfCategory(ModelMap model ) {
+        model.addAttribute("pagetitle", "Products");
         model.addAttribute("loggedinuser", getPrincipal());        
         return "view_product";
     }

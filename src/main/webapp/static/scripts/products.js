@@ -45,8 +45,16 @@ function MainCtrl($scope, $http) {
         let pathFragment = "";
         if (lastElementOfPath === "") {
             pathFragment = "all";
+            $scope.categoryMessage = "Shoping eco products makes Pandas happy!";
         } else {
             pathFragment = lastElementOfPath;
+            if(pathFragment === 'cup'){
+                $scope.categoryMessage = "Cups made by nature";
+            } else if(pathFragment === 'straw'){
+                $scope.categoryMessage = "No more plastic straws!";
+            } else {
+                 $scope.categoryMessage = "Shinny smiles, with these cool toothbrushes!";
+            }
         }
 
         const URL = "http://localhost:8084/BioEShop/products/api/" + pathFragment;
@@ -55,7 +63,7 @@ function MainCtrl($scope, $http) {
 
         function handleJson(response) {
             $scope.products = response.data.products;
-            $scope.categoryMessage = "Shoping eco products makes Pandas happy!";
+            
 
             // creating custom filters for products
             $scope.colors = [];

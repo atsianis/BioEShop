@@ -3,7 +3,6 @@ package com.mycompany.bioeshop.controllers;
 import com.mycompany.bioeshop.dao.ProductDao;
 import com.mycompany.bioeshop.entities.Customer;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,9 +18,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -32,8 +29,6 @@ import com.mycompany.bioeshop.service.CustomerService;
 import com.mycompany.bioeshop.service.UserProfileService;
 import com.mycompany.bioeshop.service.UserService;
 import java.util.ArrayList;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
@@ -51,7 +46,7 @@ public class AppController {
 
     @Autowired
     MessageSource messageSource;
-    
+
     @Autowired
     ProductDao pdao;
 
@@ -65,13 +60,24 @@ public class AppController {
      * This method will list all existing users.
      */
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
-    public String listUsers(ModelMap model) {
-//		List<User> users = userService.findAllUsers();
-//		model.addAttribute("users", users);
-//        return "userslist";
+    public String goHome(ModelMap model) {
         model.addAttribute("loggedinuser", getPrincipal());
-        model.addAttribute("pagetitle", "Home page");
-        return "home";
+        model.addAttribute("pagetitle", "Pand-Eco");
+        return "view_landing_page";
+    }
+
+    @RequestMapping(value = {"/categories/"}, method = RequestMethod.GET)
+    public String goCategories(ModelMap model) {
+        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("pagetitle", "Pand-Eco");
+        return "view_categories";
+    }
+
+    @RequestMapping(value = {"/contact"}, method = RequestMethod.GET)
+    public String goContact(ModelMap model) {
+        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("pagetitle", "Contact");
+        return "view_contact";
     }
 
     /**
@@ -130,16 +136,13 @@ public class AppController {
         model.addAttribute("path", "4; URL=/BioEShop/");
         return "registrationsuccess";
     }
-    
-    
-    
-    
+
     @RequestMapping(value = {"/products"}, method = RequestMethod.GET)
-    public String allProducts(ModelMap model){
+    public String allProducts(ModelMap model) {
         model.addAttribute("loggedinuser", getPrincipal());
         model.addAttribute("products", pdao.getAllProducts());
         return "products";
-        
+
     }
 //
 //

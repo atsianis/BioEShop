@@ -1,7 +1,7 @@
 
 <!-- Navbar -->
 <header>
-    <nav class="container navbar navbar-expand-lg navbar-light" style="background-color: lightgoldenrodyellow;">
+    <nav class="container-fluid navbar navbar-expand-lg navbar-light" style="background-color: lightgoldenrodyellow;">
         <!-- Logo -->
         <a class="navbar-brand" href="index.html">
             <img src="${pageContext.request.contextPath}/static/img/logoo.jpg" alt="Pand-Eco logo"
@@ -94,6 +94,5 @@
             </form> -->
         </div>
     </nav>
-    <!-- Background image -->
-    <div class="container-fluid color header"></div>
+
 </header>
