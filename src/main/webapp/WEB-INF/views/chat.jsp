@@ -1,30 +1,18 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+<%@include file="z1JSP_setup.jsp" %>
+<html>
+    <head>
+        <%@include file="z2HTML_Head.jsp" %>
+        <!-- Our CSS -->
+        <link href="<c:url value='/static/css/style.css' />" type="text/css" rel="stylesheet"></link>
     <style>
 /*        #myform{
             margin-top:10px;
         }*/
-        .main{
-            margin-top:20px;
-            display:flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
         .chatbox{
             padding-left: 10px;
             padding-right: 10px;
             display:flex;
+            flex-direction: row-reverse;
             border:1px solid black;
             background-color:lemonchiffon;
             margin-top:20px;
@@ -69,12 +57,13 @@
      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
 </head>
 <body ng-app="myChat" ng-controller="MainCtrl" ng-cloak>
+    <%@include file="z5HTML_NavBar_Menu_FLUID.jsp" %>
 <!--    <form id="myform" class="container">
             <label for="name">Type in your nickname and start chatting</label>
             <input type="text" id="name" ng-model="nickname" placeholder="Choose a nickname">
             <button id="namebutton">Start Chatting</button>
     </form>-->
-<div class="container main">
+<div class="container-fluid main">
         <div class="row chatbox">
             <div class="container" id="box">
                 <div ng-repeat="message in messages">
@@ -111,20 +100,9 @@
                         </div>
                 </form:form>
             </div>
-        </div>    
-
-
-
-
-
-<%@include file="z5HTML_Footer.jsp" %>
-
-
-
-
-
-
-
+        </div>
+        <%@include file="z5HTML_Footer.jsp" %>
+        <%@include file="z4scriptsBeforeBody.jsp" %>
      <script>
          const myChat = angular.module("myChat",[]);
 //                 .config(['$qProvider', function($qProvider){
@@ -236,6 +214,5 @@
              }
          }
      </script>
-     
 </body>
 </html>
