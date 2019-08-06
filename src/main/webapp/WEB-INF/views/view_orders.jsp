@@ -53,7 +53,7 @@
                         <div class="row">
                             <div class="card poside" style="width:100%;">
                                 <h5 class="text-center">Options</h5>
-                                <a href="addorder.html" class="btn btn-outline-dark "> Add New Order</a>
+                                <a href="/BioEShop/admin/products/create" class="btn btn-outline-dark "> Add New Product</a>
                             </div>
                             <input type="text" placeholder="Search on orders" ng-model="selected">
                             <img src="${pageContext.request.contextPath}/static/img/pandacoollike.jpg" alt="cool like" style="width: 100%; height: 100%;object-fit:cover;">

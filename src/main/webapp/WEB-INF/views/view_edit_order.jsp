@@ -54,7 +54,7 @@
                         <div class="row">
                             <div class="card poside" style="width:100%;">
                                 <h5 class="text-center">Options</h5>
-                                <a href="addorder.html" class="btn btn-outline-dark "> Add New Order</a>
+                                <a href="/BioEShop/products/" class="btn btn-outline-dark">Buy a product</a>
                             </div>
                             <img src="${pageContext.request.contextPath}/static/img/pandacoollike.jpg" alt="cool like" style="width: 100%; height: 100%;object-fit:cover;">
                         </div>
@@ -161,7 +161,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <form:button type="submit" class="btn btn-primary">Update order</form:button>
+                            <form:button type="submit" class="btn btn-success">Update order</form:button>
                         </form:form>
 
 

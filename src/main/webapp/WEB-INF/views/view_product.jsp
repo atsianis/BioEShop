@@ -43,9 +43,10 @@
             .centertext {
                 text-align: center;
             }
-
-            .card-deck {
-                padding: 10px;
+            
+            .orderBtn{
+                padding: 5px;
+                margin: 5px;
             }
         </style>
     </head>
@@ -73,7 +74,7 @@
                 <div class="row">
 
                     <!-- PRODUCTS FILTERS -->
-                    <div class="col-md-3 col-sm-12 left_content">
+                    <div class="col-md-3 col-sm-12">
                         <div class="row">
                             <sec:authorize access="hasRole('ADMIN')">
                                 <a class="btn btn-success mx-auto d-block" href="/BioEShop/admin/products/create">Add a new product</a>
@@ -116,9 +117,9 @@
                     </div>
 
                     <!-- PRODUCTS GRID -->
-                    <div class="card-columns col-md-9">
-                        <div class="card" ng-repeat="product in products| orderBy: orderBy | 
+                    <div class="col-md-4 col-sm-12" ng-repeat="product in products| orderBy: orderBy | 
                         filter:{title:titleFilter, descr:descrFilter, size:sizeFilter, color:colorFilter, material:materialFilter}">
+                        <div class="card h-100 border" >
                             <a id="productLink" href="/BioEShop/products/{{product.productId}}">
                                 <img class="card-img-top img-fluid" src="{{product.path}}" alt="Card image" style="width:100%">
                             </a>
@@ -134,15 +135,13 @@
 
                                 <sec:authorize access="hasRole('ADMIN')">
                                     <a href="/BioEShop/admin/products/edit/{{product.productId}}"
-                                       class="btn btn-outline-warning">Edit</a>
+                                       class="btn btn-outline-warning orderBtn">Edit</a>
                                     <a href="/BioEShop/admin/products/delete/{{product.productId}}"
-                                       class="btn btn-outline-danger">Delete</a>
+                                       class="btn btn-outline-danger orderBtn">Delete</a>
                                 </sec:authorize>
-                                <sec:authorize access="!hasRole('ADMIN')">
-                                    <a href="/BioEShop/order/buy/{{product.productId}}"
-                                       class="btn btn-outline-success">Order now!</a>
-                                </sec:authorize>
-
+                                <br>
+                                <a href="/BioEShop/order/buy/{{product.productId}}"
+                                   class="btn btn-outline-success orderBtn" style="width: 110px;">Order now!</a>
                             </div>
                         </div>
                     </div>

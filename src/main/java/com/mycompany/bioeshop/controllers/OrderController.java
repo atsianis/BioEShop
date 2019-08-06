@@ -77,7 +77,8 @@ public class OrderController {
         model.addAttribute("order", o);
         model.addAttribute("action", "order/save");
         model.addAttribute("registered", isRegistered);
-        return "buynow";
+        model.addAttribute("loggedinuser", getPrincipal());
+        return "view_buynow";
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)

@@ -2,6 +2,7 @@
 <html>
     <head>
         <%@include file="z2HTML_Head.jsp" %>
+        
         <!-- Our CSS -->
         <style type="text/css">
             .login-form {
@@ -81,7 +82,7 @@
                     <p class="text-center "><a style="color: #5cb85c" href="/BioEShop/register">Create an Account</a></p>
                 </div>
                 <div class="form-group">
-                    <p class="text-center "><a style="color: #5cb85c" href="/BioEShop/">Home</a></p>
+                    <p class="text-center "><a style="color: #5cb85c" href="/BioEShop/categories/">Home</a></p>
                 </div>
 
 

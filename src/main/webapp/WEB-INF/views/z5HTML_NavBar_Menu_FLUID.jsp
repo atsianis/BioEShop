@@ -1,7 +1,7 @@
 
 <!-- Navbar -->
 <header>
-    <nav class="container navbar navbar-expand-lg navbar-light" style="background-color: lightgoldenrodyellow;">
+    <nav class="container-fluid navbar navbar-expand-lg navbar-light" style="background-color: lightgoldenrodyellow;">
         <!-- Logo -->
         <a class="navbar-brand" href="index.html">
             <img src="${pageContext.request.contextPath}/static/img/logoo.jpg" alt="Pand-Eco logo"
@@ -32,10 +32,10 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/BioEShop/categories/">Categories</a>
-                        <a id="all" class="dropdown-item" href="/BioEShop/products/">All products</a>
-                        <a id="cups" class="dropdown-item" href="/BioEShop/products/cup">Cups</a>
-                        <a id="straws" class="dropdown-item" href="/BioEShop/products/straw">Straws</a>
-                        <a id="tooth" class="dropdown-item" href="/BioEShop/products/toothbrush">Toothbrushes</a>
+                        <a class="dropdown-item" href="/BioEShop/products/">All products</a>
+                        <a class="dropdown-item" href="/BioEShop/products/cup">Cups</a>
+                        <a class="dropdown-item" href="/BioEShop/products/straw">Straws</a>
+                        <a class="dropdown-item" href="/BioEShop/products/toothbrush">Toothbrushes</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -94,6 +94,5 @@
             </form> -->
         </div>
     </nav>
-    <!-- Background image -->
-    <div class="container-fluid color header"></div>
+
 </header>
