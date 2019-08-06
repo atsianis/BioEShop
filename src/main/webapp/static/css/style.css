@@ -52,7 +52,17 @@ body {
     min-height:200px;;
 }
 
-
+.mainchat{
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image:linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url(../../static/img/tim-foster-CEoJe2ppaoo-unsplash.jpg);
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
 
 .hero {
     /* Sizing */
@@ -182,7 +192,6 @@ table{
 .list-group{text-align:center;}
 .card-body{text-align: center;}
 .card-footer{text-align:center;}
-
 
 .ran {
     flex-grow: unset;
