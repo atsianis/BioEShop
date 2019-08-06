@@ -60,6 +60,7 @@ public class CustomerController {
             ModelMap model, @RequestParam("oldemail") String oldemail) {
 
         if (result.hasErrors()) {
+            model.addAttribute("loggedinuser", getPrincipal());
             return "updateprofile";
         }
 
@@ -67,6 +68,7 @@ public class CustomerController {
             if (!customerService.isEmailUnique(customer.getCustomerId(), customer.getEmail())) {
                 model.addAttribute("emailnotUnique", "Email " + customer.getEmail()
                         + " already exists. Please fill in a different email.");
+                model.addAttribute("loggedinuser", getPrincipal());
                 return "updateprofile";
             }
         }
