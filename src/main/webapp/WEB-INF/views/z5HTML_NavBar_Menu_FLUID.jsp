@@ -4,7 +4,7 @@
     <nav class="container-fluid navbar navbar-expand-lg navbar-light" style="background-color: lightgoldenrodyellow;">
         <!-- Logo -->
         <a class="navbar-brand" href="index.html">
-            <img src="${pageContext.request.contextPath}/static/img/logoo.jpg" alt="Pand-Eco logo"
+            <img src="${pageContext.request.contextPath}/static/img/peslogo.jpg" alt="Pand-Eco logo"
                  style=" position:relative; bottom: 7px; width:100px;height:60px; border-radius: 50%;">
         </a>
         <!-- Collapse button -->
@@ -71,7 +71,7 @@
 
 
             <!-- Register / Login dropdown -->
-            <div class="btn-group">
+            <div class="btn-group dropleft">
                 <button type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                     <span class="sr-only"><i class="fas fa-usercicon"></i>Toggle Dropdown</span>
