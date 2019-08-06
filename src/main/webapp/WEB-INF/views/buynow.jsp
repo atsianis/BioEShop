@@ -111,7 +111,7 @@
                                 <td>
                                     <input type="number" class="price" disabled value="${details.product.price}" />
                                 </td>
-                                <td>
+                                    <td>
                                     <input id="q${details.product.productId}" onchange="updateQuantity(this)" class="quantity" name="quantity" type="number" value="1" min="1" max="${details.product.stock}" /> <!-- @RequestParam("quantity") ston controller ?!?!?-->
                                 </td>
                             </tr>

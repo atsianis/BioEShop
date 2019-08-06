@@ -61,7 +61,7 @@ console.log(products);
 
 let total = products.reduce(findTotal, 0);
 total = (Math.round(total * 100)) / 100;
-totalOutput.innerText = `Total price: ${total} euro`;
+totalOutput.setAttribute("value",`Total price: ${total} euro`);
 function findTotal(accumulator, product) {
     accumulator += product.price * product.quantity;
     return accumulator;
@@ -81,7 +81,7 @@ function updateQuantity(e) {
         }
     });
     total = (Math.round((products.reduce(findTotal, 0)) * 100)) / 100;
-    totalOutput.innerText = `Total price: ${total} euro`;
+    totalOutput.setAttribute("value",`Total price: ${total} euro`);
     console.log(total);
 
 }

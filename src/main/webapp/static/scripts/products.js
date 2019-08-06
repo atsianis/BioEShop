@@ -21,16 +21,16 @@ EcoShopApp.controller("MainCtrl", ['$scope', '$http', MainCtrl]);
 
 function MainCtrl($scope, $http) {
 
+    let all = document.querySelector("#all");
     let cup = document.querySelector("#cups");
     let straw = document.querySelector("#straws");
     let tooth = document.querySelector("#tooth");
-    // let priceInput = document.querySelector("#priceFilter");
 
     window.addEventListener("load", handleWindowLoad);
+    all.addEventListener("click", bringAll);
     cup.addEventListener("click", bringCups);
     straw.addEventListener("click", bringStraws);
     tooth.addEventListener("click", bringToothbrushes);
-    // priceInput.addEventListener("submit", handlePriceFilter);
 
     /**
      * This method handles the fetch once the window loads. It checks if the
@@ -48,12 +48,12 @@ function MainCtrl($scope, $http) {
             $scope.categoryMessage = "Shoping eco products makes Pandas happy!";
         } else {
             pathFragment = lastElementOfPath;
-            if(pathFragment === 'cup'){
+            if (pathFragment === 'cup') {
                 $scope.categoryMessage = "Cups made by nature";
-            } else if(pathFragment === 'straw'){
+            } else if (pathFragment === 'straw') {
                 $scope.categoryMessage = "No more plastic straws!";
             } else {
-                 $scope.categoryMessage = "Shinny smiles, with these cool toothbrushes!";
+                $scope.categoryMessage = "Shinny smiles, with these cool toothbrushes!";
             }
         }
 
@@ -63,7 +63,7 @@ function MainCtrl($scope, $http) {
 
         function handleJson(response) {
             $scope.products = response.data.products;
-            
+
 
             // creating custom filters for products
             $scope.colors = [];
@@ -73,7 +73,27 @@ function MainCtrl($scope, $http) {
         }
     }
 
+    function bringAll(e) {
+        console.log("entered bringAll")
+        e.preventDefault();
+        const URL = "http://localhost:8084/BioEShop/products/api/all";
+        $http.get(URL).then(handleJson);
+
+        function handleJson(response) {
+            $scope.products = response.data.products;
+            $scope.categoryMessage = "Shoping eco products makes Pandas happy!";
+
+            // creating custom filters for products
+            $scope.colors = [];
+            $scope.sizes = [];
+            $scope.materials = [];
+            createFilters($scope.products);
+
+        }
+    }
+
     function bringCups(e) {
+        console.log("entered bringCUps")
         e.preventDefault();
         const URL = "http://localhost:8084/BioEShop/products/api/cup";
         $http.get(URL).then(handleJson);
@@ -81,8 +101,6 @@ function MainCtrl($scope, $http) {
         function handleJson(response) {
             $scope.products = response.data.products;
             $scope.categoryMessage = "Cups made by nature";
-            // let prices = $scope.products.map(getPrices);
-            // $scope.maxPrice = getMax(prices);
 
             // creating custom filters for products
             $scope.colors = [];
@@ -101,8 +119,6 @@ function MainCtrl($scope, $http) {
         function handleJson(response) {
             $scope.products = response.data.products;
             $scope.categoryMessage = "No more plastic straws!";
-            // let prices = $scope.products.map(getPrices);
-            // $scope.maxPrice = getMax(prices);
 
             // creating custom filters for products
             $scope.colors = [];
@@ -120,8 +136,6 @@ function MainCtrl($scope, $http) {
         function handleJson(response) {
             $scope.products = response.data.products;
             $scope.categoryMessage = "Shinny smiles, with these cool toothbrushes!";
-            // let prices = $scope.products.map(getPrices);
-            // $scope.maxPrice = getMax(prices);
 
             // creating custom filters for products
             $scope.colors = [];
@@ -131,26 +145,6 @@ function MainCtrl($scope, $http) {
         }
     }
 
-//    function getPrices(products) {
-//        return products.price;
-//    }
-//
-//    function getMax(prices) {
-//        let max = 0;
-//        prices.forEach(element => {
-//            if (max < element) {
-//                max = element;
-//            }
-//        });
-//        return max;
-//    }
-
-    // function handlePriceFilter(){
-    //    // $scope.maxPrice = getMax(prices);
-    //     $scope.priceFilter = priceInput.value > $scope.maxPrice;
-    //     priceInput.value = "";
-
-    // }
 
     function capitalizeFirstLetter(string) {
         return string.toLowerCase().charAt(0).toUpperCase() + string.slice(1);
@@ -166,15 +160,12 @@ function MainCtrl($scope, $http) {
             let m = capitalizeFirstLetter(product.material);
             if (!($scope.colors.includes(c))) {
                 $scope.colors.push(c);
-                //console.log($scope.colors);
             }
             if (!($scope.sizes.includes(s))) {
                 $scope.sizes.push(s);
-                //console.log($scope.sizes);
             }
             if (!($scope.materials.includes(m))) {
                 $scope.materials.push(m);
-                //console.log($scope.materials);
             }
         });
 

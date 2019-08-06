@@ -32,10 +32,10 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/BioEShop/categories/">Categories</a>
-                        <a class="dropdown-item" href="/BioEShop/products/">All products</a>
-                        <a class="dropdown-item" href="/BioEShop/products/cup">Cups</a>
-                        <a class="dropdown-item" href="/BioEShop/products/straw">Straws</a>
-                        <a class="dropdown-item" href="/BioEShop/products/toothbrush">Toothbrushes</a>
+                        <a id="all" class="dropdown-item" href="/BioEShop/products/">All products</a>
+                        <a id="cups" class="dropdown-item" href="/BioEShop/products/cup">Cups</a>
+                        <a id="straws" class="dropdown-item" href="/BioEShop/products/straw">Straws</a>
+                        <a id="tooth" class="dropdown-item" href="/BioEShop/products/toothbrush">Toothbrushes</a>
                     </div>
                 </li>
                 <li class="nav-item">
