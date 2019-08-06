@@ -133,7 +133,7 @@
                 <form:button hidden="true" id="button" type="submit" value="Buy Now">Buy now</form:button>
             </form:form>
         </div>
-
+        <%@include file="z5HTML_Footer.jsp" %>
         <%@include file="z4scriptsBeforeBody.jsp" %>
         <!-- Include the PayPal JavaScript SDK -->
         <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>

@@ -167,7 +167,7 @@
             </div>
         </main>
 
-        <footer></footer>
+        <%@include file="z5HTML_Footer.jsp" %>
 
         <%@include file="z4scriptsBeforeBody.jsp" %>
         <script src="${pageContext.request.contextPath}/static/scripts/orders.js"></script>

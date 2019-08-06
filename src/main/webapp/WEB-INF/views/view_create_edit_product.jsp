@@ -13,7 +13,31 @@
         <link href="<c:url value='/static/css/contact.css' />" type="text/css" rel="stylesheet"></link>
         <link href="<c:url value='/static/css/style.css' />" type="text/css" rel="stylesheet"></link>
         <style>
+            h1 {
+                background-color: black;
+            }
 
+            body {
+                background-color: lightgoldenrodyellow;
+            }
+
+            nav {
+                background-color: lightgoldenrodyellow;
+            }
+
+            .color {
+                background-color: lightgreen;
+            }
+
+            .gr {
+                background-color: greenyellow;
+            }
+
+            .ran {
+                flex-grow: unset;
+                background-color: rgb(219, 219, 130);
+                color: rgb(6, 8, 6);
+            }
         </style>
 
     </head>
@@ -117,7 +141,7 @@
 
 
 
-        <footer></footer>
+        <%@include file="z5HTML_Footer.jsp" %>
 
         <%@include file="z4scriptsBeforeBody.jsp" %>
         <script src="${pageContext.request.contextPath}/static/scripts/savaEditProducts.js"></script>

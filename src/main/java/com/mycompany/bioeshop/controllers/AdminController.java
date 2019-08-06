@@ -65,6 +65,7 @@ public class AdminController {
         model.addAttribute("p", p);
         model.addAttribute("act", "Edit");
         model.addAttribute("button", "Update product");
+        model.addAttribute("loggedinuser", getPrincipal());
         return "view_create_edit_product";
 
     }
@@ -77,6 +78,7 @@ public class AdminController {
         model.addAttribute("p", p);
         model.addAttribute("act", "Add a new ");
         model.addAttribute("button", "Add product");
+        model.addAttribute("loggedinuser", getPrincipal());
         return "view_create_edit_product";
 
     }
@@ -87,16 +89,19 @@ public class AdminController {
 
         if (result.hasErrors()) {
             //model.addAttribute("message", "There was an error trying to save. Please try again");
+            model.addAttribute("loggedinuser", getPrincipal());
             return "redirect:/products/";
         }
         
         if ((p.getProductId() == 0) && (pdao.addProduct(p))) {
                // model.addAttribute("message", "Entry done");
         } else if (pdao.updateProduct(p)) {
+            model.addAttribute("loggedinuser", getPrincipal());
             return "redirect:/products/" + p.getProductId();
         }
 
         //model.addAttribute("message", "There was a problem");
+        model.addAttribute("loggedinuser", getPrincipal());
         return "redirect:/products/";
     }
 
@@ -108,6 +113,7 @@ public class AdminController {
             model.addAttribute("message", "Something went wrong. Could not delete");
         }
         //model.addAttribute("products", pdao.getAllProducts());
+        model.addAttribute("loggedinuser", getPrincipal());
         return "redirect:/products/";
     }
 
@@ -117,6 +123,7 @@ public class AdminController {
 //        Hibernate.initialize(p.getOrderdetailsList());
         List<Customer> customers = cdao.getAllRegisteredCustomers();
         model.addAttribute("customers", customers);
+        model.addAttribute("loggedinuser", getPrincipal());
         return "customers";
 
     }
@@ -127,6 +134,7 @@ public class AdminController {
         model.addAttribute("customer", c);
         model.addAttribute("action", "/BioEShop/admin/customers/save");
         model.addAttribute("cancel", "BioEShop/admin/customers");
+        model.addAttribute("loggedinuser", getPrincipal());
         return "updateprofile";
 
     }
@@ -136,6 +144,7 @@ public class AdminController {
             ModelMap model, @RequestParam("oldemail") String oldemail) {
 
         if (result.hasErrors()) {
+            model.addAttribute("loggedinuser", getPrincipal());
             return "updateprofile";
         }
 

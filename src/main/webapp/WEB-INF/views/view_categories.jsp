@@ -145,7 +145,7 @@
 
         </main>
 
-        <footer class="ran footer"></footer>
+        <%@include file="z5HTML_Footer.jsp" %>
             <%@include file="z4scriptsBeforeBody.jsp" %>
     </body>
 </html>

@@ -111,7 +111,20 @@
                         </div>
                 </form:form>
             </div>
-        </div>     
+        </div>    
+
+
+
+
+
+<%@include file="z5HTML_Footer.jsp" %>
+
+
+
+
+
+
+
      <script>
          const myChat = angular.module("myChat",[]);
 //                 .config(['$qProvider', function($qProvider){
@@ -222,5 +235,6 @@
              }
          }
      </script>
+     
 </body>
 </html>

@@ -89,6 +89,7 @@ public class OrderController {
 
         if (result.hasErrors()) {
             model.addAttribute("message", "problem");
+            model.addAttribute("loggedinuser", getPrincipal());
             return "home";
         }
         
@@ -140,13 +141,18 @@ public class OrderController {
             }
             boolean created = orderService.createOrder(order);
             if (created) {
-                model.addAttribute("message", "Dear " + order.getCustomer().getFname() + ", your ordered has been placed");
+                model.addAttribute("customerName", order.getCustomer().getFname());
+                model.addAttribute("orderNumber", order.getOrderId());
+                model.addAttribute("update", false);
+                model.addAttribute("loggedinuser", getPrincipal());
             } else {
-                model.addAttribute("message", "Sorry, there was a problem with your order");
-
+                model.addAttribute("message", "Sorry, a problem occured.");
+                model.addAttribute("update", false);
+                model.addAttribute("failure", true);
+                model.addAttribute("loggedinuser", getPrincipal());
             }
 
-            return "ordersuccess";
+            return "view_order_success";
             /**
              * If Order Id is NOT null, then an existing order is updated
              * by the administrator.
@@ -161,10 +167,14 @@ public class OrderController {
             
             if(orderService.updateOrder(order)) {
                 model.addAttribute("message", "The order was updated successfully");
-                return "ordersuccess";
+                model.addAttribute("update", true);
+                model.addAttribute("loggedinuser", getPrincipal());
+                return "view_order_success";
             } else {
                 model.addAttribute("message", "Sorry, the order failed to update.");
-                return "ordersuccess";
+                model.addAttribute("update", true);
+                model.addAttribute("loggedinuser", getPrincipal());
+                return "view_order_success";
             }
         }
     }
