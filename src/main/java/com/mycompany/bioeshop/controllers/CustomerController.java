@@ -51,6 +51,7 @@ public class CustomerController {
         model.addAttribute("customer", customerService.getCustomerById(Integer.parseInt(id)));
         model.addAttribute("action","/BioEShop/user/profile/save");
         model.addAttribute("cancel","/user/profile");
+        model.addAttribute("loggedinuser", getPrincipal());
         return "updateprofile";
     }
 
@@ -75,7 +76,7 @@ public class CustomerController {
         } else {
             model.addAttribute("success", "Your info was not updated.");
         }
-
+        model.addAttribute("loggedinuser", getPrincipal());
         return "customer_profile";
     }
 
@@ -85,6 +86,7 @@ public class CustomerController {
             int id = customerService.getCustomerBySsoId(username).getCustomerId();
             List<Order$> orders = odao.getOrdersForCustomerById(id);
             model.addAttribute("orders",orders);
+            model.addAttribute("loggedinuser", getPrincipal());
         return "myorders";
     }
 

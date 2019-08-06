@@ -76,7 +76,7 @@
     </form>-->
     <div class="container main">
         <div class="row chatbox">
-            <div class="container">
+            <div class="container" id="box">
                 <div ng-repeat="message in messages">
                     <div ng-if='message.me === 1'>
                         <div class='mymessagebox container'>
@@ -149,7 +149,8 @@
              
              window.addEventListener("load",handleLoad);
              function handleLoad(){
-                    chatbox.scrollTop = 100000;
+                 let box = document.getElementById("box");
+                 box.scrollTop = 100000;
              }
 
 //             window.addEventListener("load",handleWindowLoad);

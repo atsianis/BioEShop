@@ -1,23 +1,35 @@
-<%-- 
-    Document   : myprofile
-    Created on : Jul 24, 2019, 11:10:03 PM
-    Author     : giorgos
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<%@include file="z1JSP_setup.jsp" %>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link href="<c:url value='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' />" rel="stylesheet"></link>
-    </head>
+        <%@include file="z2HTML_Head.jsp" %>
+        <!-- Our CSS -->
+        <link href="<c:url value='/static/css/app.css' />" type="text/css" rel="stylesheet"></link>
+        <link href="<c:url value='/static/css/contact.css' />" type="text/css" rel="stylesheet"></link>
+        <link href="<c:url value='/static/css/style.css' />" type="text/css" rel="stylesheet"></link>
+        <style>
+                body {
+          background-color: lightgoldenrodyellow;
+        }
+
+        nav {
+          background-color: lightgoldenrodyellow;
+        }
+
+        .color {
+          background-color: lightgreen;
+        }
+
+        h1 {
+          background-color: black;
+        }
+
+        .gr {
+          background-color: greenyellow;
+        }
+      </style>
     <body>
         <%@include file="authheader.jsp" %>
-        <%@include file="menu.jsp" %>
+        <%@include file="z5HTML_NavBar_Menu.jsp" %>
         <h1>Hello World!</h1>
         <div class="generic-container">
             <div class="panel panel-default">
