@@ -5,6 +5,7 @@
         <!-- Our CSS -->
         <link href="<c:url value='/static/css/contact.css' />" type="text/css" rel="stylesheet"></link>
         <link href="<c:url value='/static/css/style.css' />" type="text/css" rel="stylesheet"></link>
+        <link href="<c:url value='/static/css/animationabout.css' />" type="text/css" rel="stylesheet"></link>
         <style>
             h1 {
                 background-color: black;
@@ -26,10 +27,10 @@
                 background-color: greenyellow;
             }
 
-            .container {
+            .containerrr {
                 position: relative;
                 text-align: center;
-                color: white;
+                
 
             }
 
@@ -78,7 +79,7 @@
         <%@include file="z5HTML_NavBar_Menu.jsp" %>
         <main>
             <h1 style="text-align:center;text-shadow:0 0 3px black; color:lightgoldenrodyellow;">About</h1>
-            <div class="container ">
+            <div class="containerrr container ">
                 <div class="row">
                     <div class=" container tarea">
                         <div class="tarea btn" style="color:white">

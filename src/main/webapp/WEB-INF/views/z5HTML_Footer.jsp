@@ -11,10 +11,10 @@
         <div class="col">
             <h2 class="text-center">Visit us</h2>
             <div class="text-center">
-                <a style="display: inline-block; padding: 10px;" class="icon" href="index.html">Home</a>
-                <a style="display: inline-block; padding: 10px;" class="icon" href="about.html">About</a>
-                <a style="display: inline-block; padding: 10px;" class="icon" href="gridall.html">Products</a>
-                <a style="display: inline-block; padding: 10px;" class="icon" href="contact.html">Contact</a>
+                <a style="display: inline-block; padding: 10px;" class="icon" href="/BioEShop/">Home</a>
+                <a style="display: inline-block; padding: 10px;" class="icon" href="/BioEShop/about">About</a>
+                <a style="display: inline-block; padding: 10px;" class="icon" href="/BioEShop/categories/">Products</a>
+                <a style="display: inline-block; padding: 10px;" class="icon" href="/BioEShop/contact">Contact</a>
             </div>
         </div>
         <div class="col">
