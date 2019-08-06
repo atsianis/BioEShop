@@ -26,6 +26,7 @@ public class ChatController {
     public String chatPage(ModelMap model){
         model.addAttribute("name",getPrincipal());
         model.addAttribute("message", new Message());
+        model.addAttribute("loggedinuser",getPrincipal());
         return "chat";
     }
     

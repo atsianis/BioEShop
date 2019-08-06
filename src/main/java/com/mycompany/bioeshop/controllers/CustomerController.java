@@ -46,9 +46,9 @@ public class CustomerController {
         return "customer_profile";
     }
 
-    @RequestMapping(value = {"/profile/update/{id}"}, method = RequestMethod.GET)
-    public String updateProfile(ModelMap model, @PathVariable String id) {
-        model.addAttribute("customer", customerService.getCustomerById(Integer.parseInt(id)));
+    @RequestMapping(value = {"/profile/update"}, method = RequestMethod.GET)
+    public String updateProfile(ModelMap model) {
+        model.addAttribute("customer", customerService.getCustomerBySsoId(getPrincipal()));
         model.addAttribute("action","/BioEShop/user/profile/save");
         model.addAttribute("cancel","/user/profile");
         model.addAttribute("loggedinuser", getPrincipal());

@@ -22,11 +22,11 @@
         }
         .mymessagebox{
             display:flex;
-            justify-content:flex-end;
+            justify-content:flex-start;
         }
         .messagebox{
             display:flex;
-            justify-content: flex-start;
+            justify-content: flex-end;
         }
         .mymessage{
             display:flex;
@@ -65,11 +65,11 @@
     </form>-->
 <div class="container-fluid mainchat">
         <div class="row chatbox">
-            <div class="container" id="box">
+            <div class="container" id="box" style="transform: rotate(180deg)">
                 <div ng-repeat="message in messages">
                     <div ng-if='message.me === 1'>
                         <div class='mymessagebox container'>
-                            <div class="row card text-white bg-dark mb-3 mymessage">
+                            <div class="row card text-white bg-dark mb-3 mymessage" style="transform: rotate(180deg)">
                                 <div class="card-header"><strong>You:</strong></div>
                                 <div class="card-body">
                                     <p class="card-text">{{message.content}}</p>
@@ -80,7 +80,7 @@
                             
                     <div ng-if='message.me === 0'>
                         <div class='messagebox container'>
-                            <div class="row card bg-light mb-3 message">
+                            <div class="row card bg-light mb-3 message" style="transform: rotate(180deg)">
                                 <div class="card-header"><strong>{{message.name}}</strong> says:</div>
                                 <div class="card-body">
                                     <p class="card-text">{{message.content}}</p>
