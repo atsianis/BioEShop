@@ -89,19 +89,16 @@ public class AdminController {
 
         if (result.hasErrors()) {
             //model.addAttribute("message", "There was an error trying to save. Please try again");
-            model.addAttribute("loggedinuser", getPrincipal());
             return "redirect:/products/";
         }
         
         if ((p.getProductId() == 0) && (pdao.addProduct(p))) {
                // model.addAttribute("message", "Entry done");
         } else if (pdao.updateProduct(p)) {
-            model.addAttribute("loggedinuser", getPrincipal());
             return "redirect:/products/" + p.getProductId();
         }
 
         //model.addAttribute("message", "There was a problem");
-        model.addAttribute("loggedinuser", getPrincipal());
         return "redirect:/products/";
     }
 
@@ -113,7 +110,6 @@ public class AdminController {
             model.addAttribute("message", "Something went wrong. Could not delete");
         }
         //model.addAttribute("products", pdao.getAllProducts());
-        model.addAttribute("loggedinuser", getPrincipal());
         return "redirect:/products/";
     }
 
@@ -152,6 +148,7 @@ public class AdminController {
             if (!customerService.isEmailUnique(customer.getCustomerId(), customer.getEmail())) {
                 model.addAttribute("emailnotUnique", "Email " + customer.getEmail()
                         + " already exists. Please fill in a different email.");
+                model.addAttribute("loggedinuser", getPrincipal());
                 return "updateprofile";
             }
         }
@@ -163,6 +160,7 @@ public class AdminController {
         }
         List<Customer> customers = cdao.getAllRegisteredCustomers();
         model.addAttribute("customers", customers);
+        model.addAttribute("loggedinuser", getPrincipal());
         return "customers";
     }
 
@@ -176,6 +174,7 @@ public class AdminController {
         }
         List<Customer> customers = cdao.getAllRegisteredCustomers();
         model.addAttribute("customers", customers);
+        model.addAttribute("loggedinuser", getPrincipal());
         return "customers";
 
     }

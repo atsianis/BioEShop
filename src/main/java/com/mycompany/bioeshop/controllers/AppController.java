@@ -80,6 +80,13 @@ public class AppController {
         return "view_contact";
     }
 
+    @RequestMapping(value = {"/about"}, method = RequestMethod.GET)
+    public String goAbout(ModelMap model) {
+        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("pagetitle", "About");
+        return "view_about";
+    }
+
     /**
      * This method will provide the medium to add a new user.
      */
@@ -93,6 +100,7 @@ public class AppController {
         model.addAttribute("user", user);
         model.addAttribute("edit", false);
         model.addAttribute("action", "newuser");
+        model.addAttribute("loggedinuser", getPrincipal());
         return "registration";
     }
 
@@ -105,6 +113,7 @@ public class AppController {
             ModelMap model) {
 
         if (result.hasErrors()) {
+            model.addAttribute("loggedinuser", getPrincipal());
             return "registration";
         }
 
@@ -123,6 +132,7 @@ public class AppController {
 
         if (notUnique) {
             model.addAttribute("action", "newuser");
+            model.addAttribute("loggedinuser", getPrincipal());
             return "registration";
         }
 

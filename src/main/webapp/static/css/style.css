@@ -185,11 +185,7 @@ table{
 .card-body{text-align: center;}
 .card-footer{text-align:center;}
 
-footer {
-    height: 150px;
-    width: 100%;
-    margin-top: 40px;
-}
+
 .ran {
     flex-grow: unset;
     background-color: rgb(219, 219, 130);
