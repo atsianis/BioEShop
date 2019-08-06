@@ -63,7 +63,7 @@
             <input type="text" id="name" ng-model="nickname" placeholder="Choose a nickname">
             <button id="namebutton">Start Chatting</button>
     </form>-->
-<div class="container-fluid main">
+<div class="container-fluid mainchat">
         <div class="row chatbox">
             <div class="container" id="box">
                 <div ng-repeat="message in messages">

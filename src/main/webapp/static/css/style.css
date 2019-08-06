@@ -52,7 +52,7 @@ body {
     min-height:200px;;
 }
 
-.main{
+.mainchat{
             display:flex;
             flex-direction: column;
             justify-content: center;
