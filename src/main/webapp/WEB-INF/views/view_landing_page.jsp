@@ -28,7 +28,7 @@
     <body>
         <%@include file="z5HTML_NavBar_Menu_FLUID.jsp" %>
         <main>
-            <div class="row gr" style="margin-right: -15px!important; margin-left: -15px!important;">
+            <div class="row gr">
 
                 <section class="hero">
 
