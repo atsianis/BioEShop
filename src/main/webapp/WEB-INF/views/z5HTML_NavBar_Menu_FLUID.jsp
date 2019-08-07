@@ -52,7 +52,6 @@
                             <a class="dropdown-item" href="/BioEShop/admin/customers">Customers</a>
                             <a class="dropdown-item" href="/BioEShop/admin/orders/pending">Pending Orders</a>
                             <a class="dropdown-item" href="/BioEShop/admin/orders/done">Completed orders</a>
-                            <a class="dropdown-item" href="#">Messages</a>
                         </div>
                     </li>
                 </sec:authorize>
@@ -86,10 +85,12 @@
                 <div class="dropdown-menu">
                     <sec:authorize access="hasRole('ADMIN') or hasRole('USER')">
                         <a class="dropdown-item" href="/BioEShop/logout">Logout</a>
+                        <a class="dropdown-item" href="/BioEShop/chat">Chat</a>
                     </sec:authorize>
                     <sec:authorize access="!hasRole('ADMIN') and !hasRole('USER')">
                         <a class="dropdown-item" href="/BioEShop/register">Resigster Now</a>
                         <a class="dropdown-item" href="/BioEShop/login">Login</a>
+                        <a class="dropdown-item" href="/BioEShop/chat">Chat</a>
                     </sec:authorize>
                 </div>
             </div>
