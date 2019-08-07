@@ -18,7 +18,7 @@
                 margin-top:20px;
                 height:500px;
                 width:600px;
-                overflow:scroll;
+                overflow-y:scroll;
             }
             .mymessagebox{
                 display:flex;
