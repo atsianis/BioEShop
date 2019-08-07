@@ -22,7 +22,6 @@
                 align-items: stretch;
             }
             form{
-                border: 1px solid black;
                 padding:10px;
                 margin: 0 10px;
                 border-radius:10px;
@@ -33,7 +32,8 @@
     <body>
         <%@include file="z5HTML_NavBar_Menu.jsp" %>
         <div class="container myinfo">
-            <div class="title">Edit Profile</div>
+            <div style="padding: 15px 0;">
+            <h2 class="title">Edit Profile</h2>
             <div class="row">
                 <div class='col-md-3'>
                     <div class="card">
@@ -47,15 +47,17 @@
                         <form:input type="hidden" path="customerId" id="id"/>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="fname">First Name</label>
-                                <form:input type="text" path="fname" id="fname" class="form-control input-sm" />
+                                <label class="text-success font-weight-bold" for="fname">First Name</label>
+                                <form:input type="text" path="fname" id="fname" class="form-control"
+                                            required="true" placeholder="Maria" minlength="3"/>
                                 <div class="has-error">
                                     <form:errors path="fname" class="help-inline"/>
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="lname">Last Name</label>
-                                <form:input type="text" path="lname" id="lname" class="form-control input-sm" />
+                                <label class="text-success font-weight-bold" for="lname">Last Name</label>
+                                <form:input type="text" path="lname" id="lname" class="form-control"
+                                            required="true" placeholder="Papadopoulou" minlength="3"/>
                                 <div class="has-error">
                                     <form:errors path="lname" class="help-inline"/>
                                 </div>
@@ -63,9 +65,10 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="email">Email</label>
+                                <label class="text-success font-weight-bold" for="email">Email</label>
                                 <input hidden="true" type="text" name="oldemail" value="${customer.email}"/>
-                                <form:input type="text" path="email" id="email" class="form-control input-sm" />
+                                <form:input type="email" path="email" id="email" class="form-control"
+                                            required="true" placeholder="maria.pap@example.com" minlength="3"/>
                                 <div class="has-error">
                                     <form:errors path="email" class="help-inline"/>
                                     <span class="help-inline">${emailnotUnique}</span>
@@ -74,15 +77,17 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="address">Address</label>
-                                <form:input type="text" path="address" id="address" class="form-control input-sm" />
+                                <label class="text-success font-weight-bold" for="address">Address</label>
+                                <form:input type="text" path="address" id="address" class="form-control" 
+                                            required="true" placeholder="Somewhere in the universe str, 17854, City, Country, Wolrd" minlength="10"/>
                                 <div class="has-error">
                                     <form:errors path="address" class="help-inline"/>
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="number">Phone Number</label>
-                                <form:input type="text" path="phoneNumber" id="number" class="form-control input-sm" />
+                                <label class="text-success font-weight-bold" for="number">Phone Number</label>
+                                <form:input type="number" path="phoneNumber" id="number" class="form-control"
+                                            required="true" min="6950000000" max="6999999999" placeholder="6979696969"/>
                                 <div class="has-error">
                                     <form:errors path="phoneNumber" class="help-inline"/>
                                 </div>
@@ -92,21 +97,14 @@
                         
                         <div class="form-group">
                             <div class="form-actions floatRight">
-                                <form:button type="submit" value="save" class="btn btn-primary btn-sm">Save</form:button> or <a href="<c:url value='${cancel}' />">Cancel</a>
+                                <form:button type="submit" value="save" class="btn btn-success">Save</form:button>
                             </div>
                         </div>
                     </form:form>
                 </div>
-
-                
-
-                <!--                        <div class="row">
-                                            <div class="form-actions floatRight">
-                                                <input type="submit" value="save" class="btn btn-primary btn-sm"/> or <a href="<c:url value='${cancel}' />">Cancel</a>
-                                            </div>
-                                        </div>-->
-
             </div>
         </div>
+        </div>
+        <%@include file="z5HTML_Footer.jsp" %>
     </body>
 </html>

@@ -64,9 +64,18 @@
             <button type="button" class="btn">
                 <span class="glyphicon glyphicon-cog"></span>
                 <span class="caret"></span>
-                <a href="/BioEShop/user/profile">
-                    <i class="fas fa-user icon"></i>
-                </a>
+                <sec:authorize access="hasRole('ADMIN')">
+                    <a href="/BioEShop/admin/profile">
+                        <i class="fas fa-user icon"></i>
+                    </a>
+                </sec:authorize>
+                <sec:authorize access="!hasRole('ADMIN')">
+                    <a href="/BioEShop/user/profile">
+                        <i class="fas fa-user icon"></i>
+                    </a>
+                </sec:authorize>
+
+
             </button>
 
 

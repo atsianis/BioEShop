@@ -36,14 +36,67 @@ public class AdminController {
 
     @Autowired
     CustomerService customerService;
-    
+
     @Autowired
     OrderService orderService;
+
+    @RequestMapping(value = {"/profile"}, method = RequestMethod.GET)
+    public String getProfile(ModelMap model) {
+        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("customer", customerService.getCustomerBySsoId(getPrincipal()));
+        model.addAttribute("pagetitle", "My profile");
+        model.addAttribute("adminForAdmin", true);
+        return "customer_profile";
+    }
+
+    @RequestMapping(value = {"/profile/update"}, method = RequestMethod.GET)
+    public String updateProfile(ModelMap model) {
+        model.addAttribute("customer", customerService.getCustomerBySsoId(getPrincipal()));
+        model.addAttribute("action", "/BioEShop/user/profile/save");
+        model.addAttribute("cancel", "../BioEShop/admin/profile");
+        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("pagetitle", "Edit profile");
+        model.addAttribute("adminForAdmin", true);
+        return "updateprofile";
+    }
+
+    @RequestMapping(value = {"/profile/save"}, method = RequestMethod.POST)
+    public String saveProfile(@Valid Customer customer, BindingResult result,
+            ModelMap model, @RequestParam("oldemail") String oldemail) {
+
+        if (result.hasErrors()) {
+            model.addAttribute("loggedinuser", getPrincipal());
+            model.addAttribute("pagetitle", "Edit profile");
+            model.addAttribute("adminForAdmin", true);
+            return "updateprofile";
+        }
+
+        if (!oldemail.equals(customer.getEmail())) {
+            if (!customerService.isEmailUnique(customer.getCustomerId(), customer.getEmail())) {
+                model.addAttribute("emailnotUnique", "Email " + customer.getEmail()
+                        + " already exists. Please fill in a different email.");
+                model.addAttribute("loggedinuser", getPrincipal());
+                model.addAttribute("pagetitle", "Edit profile");
+                model.addAttribute("adminForAdmin", true);
+                return "updateprofile";
+            }
+        }
+
+        if (customerService.updateCustomer(customer)) {
+            model.addAttribute("success", "Your info was updated successfully.");
+        } else {
+            model.addAttribute("success", "Your info was not updated.");
+        }
+        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("pagetitle", "My profile");
+        model.addAttribute("adminForAdmin", true);
+        return "customer_profile";
+    }
 
     @RequestMapping(value = {"/products/edit/{id}"}, method = RequestMethod.GET)
     public String editProduct(ModelMap model, @PathVariable String id) {
         Product p = pdao.getProductById(Integer.parseInt(id));
-        switch(p.getCategory()){
+        switch (p.getCategory()) {
             case "Cup":
                 model.addAttribute("cupSelected", true);
                 model.addAttribute("strawSelected", false);
@@ -66,6 +119,7 @@ public class AdminController {
         model.addAttribute("act", "Edit");
         model.addAttribute("button", "Update product");
         model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("pagetitle", "Edit product");
         return "view_create_edit_product";
 
     }
@@ -79,6 +133,7 @@ public class AdminController {
         model.addAttribute("act", "Add a new ");
         model.addAttribute("button", "Add product");
         model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("pagetitle", "Add new product");
         return "view_create_edit_product";
 
     }
@@ -91,9 +146,9 @@ public class AdminController {
             //model.addAttribute("message", "There was an error trying to save. Please try again");
             return "redirect:/products/";
         }
-        
+
         if ((p.getProductId() == 0) && (pdao.addProduct(p))) {
-               // model.addAttribute("message", "Entry done");
+            // model.addAttribute("message", "Entry done");
         } else if (pdao.updateProduct(p)) {
             return "redirect:/products/" + p.getProductId();
         }
@@ -120,6 +175,7 @@ public class AdminController {
         List<Customer> customers = cdao.getAllCustomers();
         model.addAttribute("customers", customers);
         model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("pagetitle", "Customers list");
         return "customers";
 
     }
@@ -131,6 +187,7 @@ public class AdminController {
         model.addAttribute("action", "/BioEShop/admin/customers/save");
         model.addAttribute("cancel", "BioEShop/admin/customers");
         model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("pagetitle", "Edit Customer's Info");
         return "updateprofile";
 
     }
@@ -141,6 +198,7 @@ public class AdminController {
 
         if (result.hasErrors()) {
             model.addAttribute("loggedinuser", getPrincipal());
+            model.addAttribute("pagetitle", "Edit Customer's Info");
             return "updateprofile";
         }
 
@@ -149,6 +207,7 @@ public class AdminController {
                 model.addAttribute("emailnotUnique", "Email " + customer.getEmail()
                         + " already exists. Please fill in a different email.");
                 model.addAttribute("loggedinuser", getPrincipal());
+                model.addAttribute("pagetitle", "Edit Customer's Info");
                 return "updateprofile";
             }
         }
@@ -161,6 +220,7 @@ public class AdminController {
         List<Customer> customers = cdao.getAllRegisteredCustomers();
         model.addAttribute("customers", customers);
         model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("pagetitle", "Customers list");
         return "customers";
     }
 
@@ -175,36 +235,39 @@ public class AdminController {
         List<Customer> customers = cdao.getAllRegisteredCustomers();
         model.addAttribute("customers", customers);
         model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("pagetitle", "Customers list");
         return "customers";
 
     }
 
     @RequestMapping(value = {"/orders/", "/orders/{something}"}, method = RequestMethod.GET)
     public String pendingOrders(ModelMap model) {
-            model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("pagetitle", "Orders list");
         return "view_orders";
     }
-    
+
     @RequestMapping(value = {"/order/edit/{id}"}, method = RequestMethod.GET)
     public String editOrder(ModelMap model, @PathVariable int id) {
-            model.addAttribute("loggedinuser", getPrincipal());
-            model.addAttribute("order", orderService.getOrderById(id));
-            System.out.println("//////////////////////");
-            System.out.println(orderService.getOrderById(id));
-            model.addAttribute("action", "order/save");
+        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("order", orderService.getOrderById(id));
+        System.out.println("//////////////////////");
+        System.out.println(orderService.getOrderById(id));
+        model.addAttribute("action", "order/save");
+        model.addAttribute("pagetitle", "Edit Order");
         return "view_edit_order";
     }
-    
+
     @RequestMapping(value = {"/order/delete/{id}"}, method = RequestMethod.GET)
     public String deleteOrder(ModelMap model, @PathVariable int id) {
-            if(orderService.deleteOrderById(id)) {
-                return "redirect:/admin/orders/pending";
-            }
-            
-            model.addAttribute("loggedinuser", getPrincipal());
+        if (orderService.deleteOrderById(id)) {
+            return "redirect:/admin/orders/pending";
+        }
+
+        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("pagetitle", "Orders list");
         return "view_orders";
     }
-    
 
     private String getPrincipal() {
         String userName = null;

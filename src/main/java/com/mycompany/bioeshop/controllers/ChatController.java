@@ -27,6 +27,7 @@ public class ChatController {
         model.addAttribute("name",getPrincipal());
         model.addAttribute("message", new Message());
         model.addAttribute("loggedinuser",getPrincipal());
+        model.addAttribute("pagetitle", "Chat");
         return "chat";
     }
     
