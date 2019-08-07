@@ -202,6 +202,7 @@
             </form:form>
         </div>
         <script>
+            <%@include file="z4scriptsBeforeBody.jsp" %>
             let CupArray = [
                 {
                     material1: "Bamboo",

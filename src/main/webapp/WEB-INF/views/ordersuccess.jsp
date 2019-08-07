@@ -17,6 +17,7 @@
             </span>
             
         </div>
+            <%@include file="z4scriptsBeforeBody.jsp" %>
     </body>
 
 </html>

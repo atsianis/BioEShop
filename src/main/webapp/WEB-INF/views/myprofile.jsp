@@ -7,26 +7,26 @@
         <link href="<c:url value='/static/css/contact.css' />" type="text/css" rel="stylesheet"></link>
         <link href="<c:url value='/static/css/style.css' />" type="text/css" rel="stylesheet"></link>
         <style>
-                body {
-          background-color: lightgoldenrodyellow;
-        }
+            body {
+                background-color: lightgoldenrodyellow;
+            }
 
-        nav {
-          background-color: lightgoldenrodyellow;
-        }
+            nav {
+                background-color: lightgoldenrodyellow;
+            }
 
-        .color {
-          background-color: lightgreen;
-        }
+            .color {
+                background-color: lightgreen;
+            }
 
-        h1 {
-          background-color: black;
-        }
+            h1 {
+                background-color: black;
+            }
 
-        .gr {
-          background-color: greenyellow;
-        }
-      </style>
+            .gr {
+                background-color: greenyellow;
+            }
+        </style>
     <body>
         <%@include file="authheader.jsp" %>
         <%@include file="z5HTML_NavBar_Menu.jsp" %>
@@ -65,5 +65,6 @@
                 </sec:authorize>
             </div>
         </div>
+        <%@include file="z4scriptsBeforeBody.jsp" %>
     </body>
 </html>

@@ -54,5 +54,6 @@
 		 	</div>
 	 	</sec:authorize>
    	</div>
+                <%@include file="z4scriptsBeforeBody.jsp" %>
 </body>
 </html>

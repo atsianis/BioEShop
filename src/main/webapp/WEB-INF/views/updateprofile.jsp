@@ -87,7 +87,8 @@
                             <div class="form-group col-md-6">
                                 <label class="text-success font-weight-bold" for="number">Phone Number</label>
                                 <form:input type="number" path="phoneNumber" id="number" class="form-control"
-                                            required="true" min="6950000000" max="6999999999" placeholder="6979696969"/>
+                                            required="true" min="6940000000" max="6999999999" placeholder="6979696969"
+                                            value="${customer.phoneNumber}"/>
                                 <div class="has-error">
                                     <form:errors path="phoneNumber" class="help-inline"/>
                                 </div>
@@ -106,5 +107,6 @@
         </div>
         </div>
         <%@include file="z5HTML_Footer.jsp" %>
+        <%@include file="z4scriptsBeforeBody.jsp" %>
     </body>
 </html>

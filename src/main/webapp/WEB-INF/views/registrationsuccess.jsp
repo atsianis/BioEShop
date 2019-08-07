@@ -20,6 +20,7 @@
                 response.setHeader("Refresh", String.valueOf(request.getAttribute("path")));
             %>
         </div>
+        <%@include file="z4scriptsBeforeBody.jsp" %>
     </body>
 
 </html>
