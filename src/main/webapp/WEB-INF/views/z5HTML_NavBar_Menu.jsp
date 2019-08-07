@@ -3,7 +3,7 @@
 <header>
     <nav class="container navbar navbar-expand-lg navbar-light" style="background-color: lightgoldenrodyellow;">
         <!-- Logo -->
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="/BioEShop/">
             <img src="${pageContext.request.contextPath}/static/img/peslogo.jpg" alt="Pand-Eco logo"
                  style=" position:relative; bottom: 7px; width:100px;height:60px; border-radius: 50%;">
         </a>
