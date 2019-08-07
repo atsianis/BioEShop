@@ -60,24 +60,24 @@
                         </thead>
                         <tbody>
                             <c:forEach var="c" items="${customers}">
-                            <tr>
-                                <td>${c.fname}</td>
-                                <td>${c.lname}</td>
-                                <td>${c.email}</td>
-                                <td>${c.address}</td>
-                                <td>${c.phoneNumber}</td>
-                                <td><a href="/BioEShop/admin/customers/update/${c.customerId}" class="update btn btn-warning btn-sm"></a>
-                                    <c:if test="${c.customerId==1}">
-                                        </td><td><a href="/BioEShop/admin/customers/delete/${c.customerId}" class="delete btn btn-danger btn-sm disabled"></a></td>
-                                    </c:if>
-                                    <c:if test="${c.customerId!=1}">
-                                        </td><td><a href="/BioEShop/admin/customers/delete/${c.customerId}" class="delete btn btn-danger btn-sm"></a></td>
-                                    </c:if>
-                            </tr>
+                                <tr>
+                                    <td>${c.fname}</td>
+                                    <td>${c.lname}</td>
+                                    <td>${c.email}</td>
+                                    <td>${c.address}</td>
+                                    <td>${c.phoneNumber}</td>
+                                    <td><a href="/BioEShop/admin/customers/update/${c.customerId}" class="update btn btn-warning btn-sm"></a>
+                                        <c:if test="${c.customerId==1}">
+                                        </td><td><a id="deletebtn" href="/BioEShop/admin/customers/delete/${c.customerId}" class="delete btn btn-danger btn-sm disabled"></a></td>
+                                        </c:if>
+                                        <c:if test="${c.customerId!=1}">
+                                    </td><td><button href="/BioEShop/admin/customers/delete/${c.customerId}" class="delete btn btn-danger btn-sm"></button></td>
+                                </c:if>
+                        </tr>
                     </c:forEach>
-                        </tbody>
-                </div>
-            </div>
-            <%@include file="z4scriptsBeforeBody.jsp" %>
-            </body>
-            </html>
+                </tbody>
+        </div>
+    </div>
+    <%@include file="z4scriptsBeforeBody.jsp" %>
+</body>
+</html>

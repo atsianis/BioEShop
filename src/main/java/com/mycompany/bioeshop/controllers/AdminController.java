@@ -217,7 +217,7 @@ public class AdminController {
         } else {
             model.addAttribute("success", "Info was not updated.");
         }
-        List<Customer> customers = cdao.getAllRegisteredCustomers();
+        List<Customer> customers = cdao.getAllCustomers();
         model.addAttribute("customers", customers);
         model.addAttribute("loggedinuser", getPrincipal());
         model.addAttribute("pagetitle", "Customers list");
@@ -232,7 +232,7 @@ public class AdminController {
         } else {
             model.addAttribute("message", "Could not delete customer");
         }
-        List<Customer> customers = cdao.getAllRegisteredCustomers();
+        List<Customer> customers = cdao.getAllCustomers();
         model.addAttribute("customers", customers);
         model.addAttribute("loggedinuser", getPrincipal());
         model.addAttribute("pagetitle", "Customers list");

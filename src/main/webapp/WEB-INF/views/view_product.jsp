@@ -137,7 +137,8 @@
                                     <a href="/BioEShop/admin/products/edit/{{product.productId}}"
                                        class="btn btn-outline-warning orderBtn">Edit</a>
                                     <a href="/BioEShop/admin/products/delete/{{product.productId}}"
-                                       class="btn btn-outline-danger orderBtn">Delete</a>
+                                       class="btn btn-outline-danger orderBtn"
+                                       ng-click="alert($event, product.productId)">Delete</a>
                                 </sec:authorize>
                                 <br>
                                 <a href="/BioEShop/order/buy/{{product.productId}}"

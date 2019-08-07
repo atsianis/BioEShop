@@ -20,6 +20,14 @@ const EcoShopApp = angular.module("App", []);
 EcoShopApp.controller("MainCtrl", ['$scope', '$http', MainCtrl]);
 
 function MainCtrl($scope, $http) {
+    $scope.alert = function (event, id) {
+        event.preventDefault();
+        let choise = confirm("Are you sure?");
+        if (choise === true) {
+            window.location.href = 'http://localhost:8084/BioEShop/admin/products/delete/' + id;
+            
+        }
+    }
 
     let all = document.querySelector("#all");
     let cup = document.querySelector("#cups");
