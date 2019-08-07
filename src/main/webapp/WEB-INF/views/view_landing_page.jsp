@@ -5,7 +5,7 @@
 --%>
 
 <%@include file="z1JSP_setup.jsp" %>
-<!DOCTYPE html>
+
 <html>
     <head>
         <%@include file="z2HTML_Head.jsp" %>
