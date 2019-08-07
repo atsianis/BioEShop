@@ -117,7 +117,7 @@ public class AdminController {
     public String allCustomers(ModelMap model) {
         Product p = new Product();
 //        Hibernate.initialize(p.getOrderdetailsList());
-        List<Customer> customers = cdao.getAllRegisteredCustomers();
+        List<Customer> customers = cdao.getAllCustomers();
         model.addAttribute("customers", customers);
         model.addAttribute("loggedinuser", getPrincipal());
         return "customers";

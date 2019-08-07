@@ -6,6 +6,7 @@
 package com.mycompany.bioeshop.dao;
 
 import com.mycompany.bioeshop.entities.Customer;
+import com.mycompany.bioeshop.entities.Product;
 import com.mycompany.bioeshop.entities.User;
 import java.util.List;
 import org.hibernate.Criteria;
@@ -66,6 +67,12 @@ public class CustomerDaoImpl extends AbstractDao<Integer, Customer> implements C
         String sqlQuery = "select c from Customer c inner join c.userList u where u.ssoId ='" + ssoId + "'";
         Customer c =(Customer)getSession().createQuery(sqlQuery).uniqueResult();
         return c;
+    }
+    
+    public List<Customer> getAllCustomers(){
+        Criteria criteria = createEntityCriteria();
+        List<Customer> customers = (List<Customer>) criteria.list();
+        return customers;
     }
     
     @Override
