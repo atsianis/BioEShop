@@ -43,6 +43,8 @@ public class CustomerController {
     public String getProfile(ModelMap model) {
         model.addAttribute("loggedinuser", getPrincipal());
         model.addAttribute("customer", customerService.getCustomerBySsoId(getPrincipal()));
+        model.addAttribute("pagetitle", "My profile");
+        model.addAttribute("adminForAdmin", false);
         return "customer_profile";
     }
 
@@ -50,8 +52,9 @@ public class CustomerController {
     public String updateProfile(ModelMap model) {
         model.addAttribute("customer", customerService.getCustomerBySsoId(getPrincipal()));
         model.addAttribute("action","/BioEShop/user/profile/save");
-        model.addAttribute("cancel","/user/profile");
+        model.addAttribute("cancel","../BioEShop/user/profile");
         model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("pagetitle", "Edit profile");
         return "updateprofile";
     }
 
@@ -61,6 +64,7 @@ public class CustomerController {
 
         if (result.hasErrors()) {
             model.addAttribute("loggedinuser", getPrincipal());
+            model.addAttribute("pagetitle", "Edit profile");
             return "updateprofile";
         }
 
@@ -69,6 +73,7 @@ public class CustomerController {
                 model.addAttribute("emailnotUnique", "Email " + customer.getEmail()
                         + " already exists. Please fill in a different email.");
                 model.addAttribute("loggedinuser", getPrincipal());
+                model.addAttribute("pagetitle", "Edit profile");
                 return "updateprofile";
             }
         }
@@ -79,6 +84,7 @@ public class CustomerController {
             model.addAttribute("success", "Your info was not updated.");
         }
         model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("pagetitle", "My profile");
         return "customer_profile";
     }
 
@@ -89,6 +95,7 @@ public class CustomerController {
             List<Order$> orders = odao.getOrdersForCustomerById(id);
             model.addAttribute("orders",orders);
             model.addAttribute("loggedinuser", getPrincipal());
+            model.addAttribute("pagetitle", "My orders");
         return "myorders";
     }
 
