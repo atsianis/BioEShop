@@ -147,15 +147,7 @@ public class AppController {
         return "registrationsuccess";
     }
 
-    @RequestMapping(value = {"/products"}, method = RequestMethod.GET)
-    public String allProducts(ModelMap model) {
-        model.addAttribute("loggedinuser", getPrincipal());
-        model.addAttribute("products", pdao.getAllProducts());
-        return "products";
 
-    }
-//
-//
 //	/**
 //	 * This method will provide the medium to update an existing user.
 //	 */

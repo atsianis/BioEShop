@@ -7,7 +7,6 @@ package com.mycompany.bioeshop.controllers;
 
 import com.mycompany.bioeshop.dao.OrderDao;
 import com.mycompany.bioeshop.entities.Customer;
-import com.mycompany.bioeshop.entities.User;
 import com.mycompany.bioeshop.entities.Order$;
 import com.mycompany.bioeshop.service.CustomerService;
 import java.util.List;
@@ -18,7 +17,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;

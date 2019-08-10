@@ -47,7 +47,12 @@
 
         <main>
             <h1 style="text-align:center;text-shadow:0 0 3px black; color:lightgoldenrodyellow;">
-                ${act} Product
+                <c:if test="${edit == true}">
+                    Edit Product
+                </c:if>
+                <c:if test="${edit == false}">
+                    Add a new Product
+                </c:if>
             </h1>
 
             <div class="container">
@@ -126,7 +131,14 @@
                             </div>
                         </div>
                         <!-- Submit -->
-                        <button type="submit" class="btn btn-success mx-auto d-block">${button}</button>
+                        <button type="submit" class="btn btn-success mx-auto d-block">
+                            <c:if test="${edit == true}">
+                                Update product
+                            </c:if>
+                            <c:if test="${edit == false}">
+                                Add product
+                            </c:if>
+                        </button>
 
                         <input hidden="true" type="text" id="colorInit" value="${p.color}">
                         <input hidden="true" type="text" id="sizeInit" value="${p.size}">

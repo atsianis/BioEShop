@@ -8,7 +8,6 @@ import com.mycompany.bioeshop.service.CustomerService;
 import com.mycompany.bioeshop.service.OrderService;
 import java.util.List;
 import javax.validation.Valid;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -95,43 +94,27 @@ public class AdminController {
 
     @RequestMapping(value = {"/products/edit/{id}"}, method = RequestMethod.GET)
     public String editProduct(ModelMap model, @PathVariable String id) {
-        Product p = pdao.getProductById(Integer.parseInt(id));
-        switch (p.getCategory()) {
-            case "Cup":
-                model.addAttribute("cupSelected", true);
-                model.addAttribute("strawSelected", false);
-                model.addAttribute("toothbrushSelected", false);
-                break;
-            case "Straw":
-                model.addAttribute("cupSelected", false);
-                model.addAttribute("strawSelected", true);
-                model.addAttribute("toothbrushSelected", false);
-                break;
-            case "Toothbrush":
-                model.addAttribute("cupSelected", false);
-                model.addAttribute("strawSelected", false);
-                model.addAttribute("toothbrushSelected", true);
-                break;
+        try {
+            Product p = pdao.getProductById(Integer.parseInt(id));
+            String category = p.getCategory();
+            model.addAttribute("p", p);
+            model.addAttribute("cupSelected", category.equals("Cup"));
+            model.addAttribute("strawSelected", category.equals("Straw"));
+            model.addAttribute("toothbrushSelected", category.equals("Toothbrush"));
+            model.addAttribute("edit", true);
+            model.addAttribute("loggedinuser", getPrincipal());
+            model.addAttribute("pagetitle", "Edit product");
+        } catch (NumberFormatException e) {
+            return "redirect:../../../products/";
         }
-//        Hibernate.initialize(p.getOrderdetailsList());
-        model.addAttribute("edit", true);
-        model.addAttribute("p", p);
-        model.addAttribute("act", "Edit");
-        model.addAttribute("button", "Update product");
-        model.addAttribute("loggedinuser", getPrincipal());
-        model.addAttribute("pagetitle", "Edit product");
         return "view_create_edit_product";
-
     }
 
     @RequestMapping(value = {"/products/create"}, method = RequestMethod.GET)
     public String newProduct(ModelMap model) {
-        Product p = new Product();
 //        Hibernate.initialize(p.getOrderdetailsList());
+        model.addAttribute("p", new Product());
         model.addAttribute("edit", false);
-        model.addAttribute("p", p);
-        model.addAttribute("act", "Add a new ");
-        model.addAttribute("button", "Add product");
         model.addAttribute("loggedinuser", getPrincipal());
         model.addAttribute("pagetitle", "Add new product");
         return "view_create_edit_product";

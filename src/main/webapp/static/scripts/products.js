@@ -49,9 +49,10 @@ function MainCtrl($scope, $http) {
      */
     function handleWindowLoad() {
         let pathArray = window.location.pathname.split('/');
+        console.log(pathArray);
         let lastElementOfPath = pathArray[pathArray.length - 1];
         let pathFragment = "";
-        if (lastElementOfPath === "") {
+        if (lastElementOfPath === "" || lastElementOfPath === "products") {
             pathFragment = "all";
             $scope.categoryMessage = "Shoping eco products makes Pandas happy!";
         } else {

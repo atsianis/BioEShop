@@ -6,14 +6,11 @@
 package com.mycompany.bioeshop.controllers;
 
 import com.mycompany.bioeshop.entities.Order$;
-import com.mycompany.bioeshop.entities.OrderDetails;
-import com.mycompany.bioeshop.entities.Product;
 import com.mycompany.bioeshop.service.OrderService;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
