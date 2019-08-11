@@ -40,7 +40,7 @@ The registered customer gains extra capabilities.
  The Chat module executes at runtime.
 
 ## Authors
-- [Mantzari Alexandra](https://github.com/) (Front-end)
+- [Mantzari Alexandra](https://github.com/alexandraCoding) (Front-end)
 - [Tsianis Thanos](https://github.com/atsianis) (Back-end)
 - [Valamatsas Giorgos](https://github.com/GiorgosVal) (Back-end)
 
