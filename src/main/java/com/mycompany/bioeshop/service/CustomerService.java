@@ -21,4 +21,8 @@ public interface CustomerService {
     public Customer getCustomerBySsoId(String ssoId);
     
     public Customer updateCustomer(Customer newCustomer, Customer oldCustomer);
+    
+    public List<Customer> getAllCustomers();
+    
+    public boolean deleteCustomerById(int id);
 }

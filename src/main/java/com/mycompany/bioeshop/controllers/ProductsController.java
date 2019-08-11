@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -28,7 +29,8 @@ public class ProductsController {
     ProductsService productsService;    
       
     @RequestMapping(value = {"", "/", "/{something}"}, method = RequestMethod.GET)
-    public String getProductsOfCategory(ModelMap model ) {
+    public String getProductsOfCategory(ModelMap model, @ModelAttribute("message") String message) {
+        model.addAttribute("message", message);
         model.addAttribute("pagetitle", "Products");
         model.addAttribute("loggedinuser", getPrincipal());        
         return "view_product";

@@ -78,4 +78,14 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return null;
     }
+
+    @Override
+    public List<Customer> getAllCustomers() {
+        return cdao.getAllCustomers();
+    }
+
+    @Override
+    public boolean deleteCustomerById(int id) {
+        return cdao.deleteCustomerById(id);
+    }
 }

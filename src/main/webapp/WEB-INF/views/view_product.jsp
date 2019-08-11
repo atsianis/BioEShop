@@ -70,6 +70,7 @@
         <!-- CONTENT -->
         <main>
             <h1 style="text-align:center;text-shadow:0 0 3px black; color:lightgoldenrodyellow;">{{categoryMessage}}</h1>
+            <h3 class="text-center">${message}</h3>
             <div class="container">
                 <div class="row">
 

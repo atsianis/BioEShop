@@ -1,11 +1,10 @@
 package com.mycompany.bioeshop.controllers;
 
-import com.mycompany.bioeshop.dao.CustomerDao;
-import com.mycompany.bioeshop.dao.ProductDao;
 import com.mycompany.bioeshop.entities.Customer;
 import com.mycompany.bioeshop.entities.Product;
 import com.mycompany.bioeshop.service.CustomerService;
 import com.mycompany.bioeshop.service.OrderService;
+import com.mycompany.bioeshop.service.ProductsService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -28,10 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AdminController {
 
     @Autowired
-    ProductDao pdao;
-
-    @Autowired
-    CustomerDao cdao;
+    ProductsService productService;
 
     @Autowired
     CustomerService customerService;
@@ -63,10 +60,11 @@ public class AdminController {
     public String saveProfile(@Valid Customer customer, BindingResult result,
             ModelMap model, @RequestParam("oldemail") String oldemail) {
 
+        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("adminForAdmin", true);
+
         if (result.hasErrors()) {
-            model.addAttribute("loggedinuser", getPrincipal());
             model.addAttribute("pagetitle", "Edit profile");
-            model.addAttribute("adminForAdmin", true);
             return "updateprofile";
         }
 
@@ -74,9 +72,7 @@ public class AdminController {
             if (!customerService.isEmailUnique(customer.getCustomerId(), customer.getEmail())) {
                 model.addAttribute("emailnotUnique", "Email " + customer.getEmail()
                         + " already exists. Please fill in a different email.");
-                model.addAttribute("loggedinuser", getPrincipal());
                 model.addAttribute("pagetitle", "Edit profile");
-                model.addAttribute("adminForAdmin", true);
                 return "updateprofile";
             }
         }
@@ -86,16 +82,15 @@ public class AdminController {
         } else {
             model.addAttribute("success", "Your info was not updated.");
         }
-        model.addAttribute("loggedinuser", getPrincipal());
+
         model.addAttribute("pagetitle", "My profile");
-        model.addAttribute("adminForAdmin", true);
         return "customer_profile";
     }
 
     @RequestMapping(value = {"/products/edit/{id}"}, method = RequestMethod.GET)
     public String editProduct(ModelMap model, @PathVariable String id) {
         try {
-            Product p = pdao.getProductById(Integer.parseInt(id));
+            Product p = productService.getProductById(Integer.parseInt(id));
             String category = p.getCategory();
             model.addAttribute("p", p);
             model.addAttribute("cupSelected", category.equals("Cup"));
@@ -127,27 +122,32 @@ public class AdminController {
 
         if (result.hasErrors()) {
             //model.addAttribute("message", "There was an error trying to save. Please try again");
-            return "redirect:/products/";
+            return "redirect:../../products/";
         }
 
-        if ((p.getProductId() == 0) && (pdao.addProduct(p))) {
+        if ((p.getProductId() == 0) && (productService.addProduct(p))) {
             // model.addAttribute("message", "Entry done");
-        } else if (pdao.updateProduct(p)) {
-            return "redirect:/products/" + p.getProductId();
+        } else if (productService.updateProduct(p)) {
+            return "redirect:../../products/" + p.getProductId();
         }
 
         //model.addAttribute("message", "There was a problem");
-        return "redirect:/products/";
+        return "redirect:../../products/";
     }
 
     @RequestMapping(value = {"/products/delete/{id}"}, method = RequestMethod.GET)
-    public String deleteProduct(ModelMap model, @PathVariable int id) {
-        if (pdao.deleteProductById(id)) {
-            model.addAttribute("message", "Product deleted successfully");
-        } else {
-            model.addAttribute("message", "Something went wrong. Could not delete");
+    public String deleteProduct(ModelMap model, @PathVariable String id, final RedirectAttributes redirectAttributes) {
+
+        try {
+            if (productService.deleteProductById(Integer.parseInt(id))) {
+                redirectAttributes.addFlashAttribute("message", "Product deleted successfully");
+            } else {
+                redirectAttributes.addFlashAttribute("message", "Something went wrong. Could not delete");
+            }
+        } catch (NumberFormatException e) {
+            redirectAttributes.addFlashAttribute("message", "Bad number format given.");
         }
-        //model.addAttribute("products", pdao.getAllProducts());
+
         return "redirect:/products/";
     }
 
@@ -155,7 +155,7 @@ public class AdminController {
     public String allCustomers(ModelMap model) {
         Product p = new Product();
 //        Hibernate.initialize(p.getOrderdetailsList());
-        List<Customer> customers = cdao.getAllCustomers();
+        List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("customers", customers);
         model.addAttribute("loggedinuser", getPrincipal());
         model.addAttribute("pagetitle", "Customers list");
@@ -165,7 +165,7 @@ public class AdminController {
 
     @RequestMapping(value = {"/customers/update/{id}"}, method = RequestMethod.GET)
     public String editCustomer(ModelMap model, @PathVariable int id) {
-        Customer c = cdao.getCustomerById(id);
+        Customer c = customerService.getCustomerById(id);
         model.addAttribute("customer", c);
         model.addAttribute("action", "/BioEShop/admin/customers/save");
         model.addAttribute("cancel", "BioEShop/admin/customers");
@@ -200,7 +200,7 @@ public class AdminController {
         } else {
             model.addAttribute("success", "Info was not updated.");
         }
-        List<Customer> customers = cdao.getAllCustomers();
+        List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("customers", customers);
         model.addAttribute("loggedinuser", getPrincipal());
         model.addAttribute("pagetitle", "Customers list");
@@ -209,13 +209,13 @@ public class AdminController {
 
     @RequestMapping(value = {"/customers/delete/{id}"}, method = RequestMethod.GET)
     public String deleteCustomer(ModelMap model, @PathVariable int id) {
-        boolean deleted = cdao.deleteCustomerById(id);
+        boolean deleted = customerService.deleteCustomerById(id);
         if (deleted) {
             model.addAttribute("message", "Customer deleted successfully");
         } else {
             model.addAttribute("message", "Could not delete customer");
         }
-        List<Customer> customers = cdao.getAllCustomers();
+        List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("customers", customers);
         model.addAttribute("loggedinuser", getPrincipal());
         model.addAttribute("pagetitle", "Customers list");
