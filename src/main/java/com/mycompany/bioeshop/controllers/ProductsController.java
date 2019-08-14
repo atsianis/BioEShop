@@ -5,6 +5,7 @@
  */
 package com.mycompany.bioeshop.controllers;
 
+import com.mycompany.bioeshop.service.AppService;
 import com.mycompany.bioeshop.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +25,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @RequestMapping("/products")
 @SessionAttributes("roles")
 public class ProductsController {
+    
+    @Autowired
+    AppService appService;
 
     @Autowired
     ProductsService productsService;    
@@ -32,23 +36,9 @@ public class ProductsController {
     public String getProductsOfCategory(ModelMap model, @ModelAttribute("message") String message) {
         model.addAttribute("message", message);
         model.addAttribute("pagetitle", "Products");
-        model.addAttribute("loggedinuser", getPrincipal());        
+        model.addAttribute("loggedinuser", appService.getPrincipal());        
         return "view_product";
     }
     
-    /**
-     * This method returns the principal[user-name] of logged-in user.
-     */
-    private String getPrincipal() {
-        String userName = null;
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (principal instanceof UserDetails) {
-            userName = ((UserDetails) principal).getUsername();
-        } else {
-            userName = principal.toString();
-        }
-        return userName;
-    }
 
 }

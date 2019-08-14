@@ -13,7 +13,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,6 +24,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.mycompany.bioeshop.entities.User;
 import com.mycompany.bioeshop.entities.UserProfile;
+import com.mycompany.bioeshop.service.AppService;
 import com.mycompany.bioeshop.service.CustomerService;
 import com.mycompany.bioeshop.service.UserProfileService;
 import com.mycompany.bioeshop.service.UserService;
@@ -34,6 +34,9 @@ import java.util.ArrayList;
 @RequestMapping("/")
 @SessionAttributes("roles")
 public class AppController {
+    
+    @Autowired
+    AppService appService;
 
     @Autowired
     UserService userService;
@@ -61,28 +64,28 @@ public class AppController {
      */
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
     public String goHome(ModelMap model) {
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("loggedinuser", appService.getPrincipal());
         model.addAttribute("pagetitle", "Pand-Eco");
         return "view_landing_page";
     }
 
     @RequestMapping(value = {"/categories/"}, method = RequestMethod.GET)
     public String goCategories(ModelMap model) {
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("loggedinuser", appService.getPrincipal());
         model.addAttribute("pagetitle", "Pand-Eco");
         return "view_categories";
     }
 
     @RequestMapping(value = {"/contact"}, method = RequestMethod.GET)
     public String goContact(ModelMap model) {
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("loggedinuser", appService.getPrincipal());
         model.addAttribute("pagetitle", "Contact");
         return "view_contact";
     }
 
     @RequestMapping(value = {"/about"}, method = RequestMethod.GET)
     public String goAbout(ModelMap model) {
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("loggedinuser", appService.getPrincipal());
         model.addAttribute("pagetitle", "About");
         return "view_about";
     }
@@ -100,7 +103,7 @@ public class AppController {
         model.addAttribute("user", user);
         model.addAttribute("edit", false);
         model.addAttribute("action", "newuser");
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("loggedinuser", appService.getPrincipal());
         return "registration";
     }
 
@@ -113,7 +116,7 @@ public class AppController {
             ModelMap model) {
 
         if (result.hasErrors()) {
-            model.addAttribute("loggedinuser", getPrincipal());
+            model.addAttribute("loggedinuser", appService.getPrincipal());
             return "registration";
         }
 
@@ -132,7 +135,7 @@ public class AppController {
 
         if (notUnique) {
             model.addAttribute("action", "newuser");
-            model.addAttribute("loggedinuser", getPrincipal());
+            model.addAttribute("loggedinuser", appService.getPrincipal());
             return "registration";
         }
 
@@ -212,7 +215,7 @@ public class AppController {
      */
     @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
     public String accessDeniedPage(ModelMap model) {
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("loggedinuser", appService.getPrincipal());
         return "accessDenied";
     }
 
@@ -243,21 +246,6 @@ public class AppController {
             SecurityContextHolder.getContext().setAuthentication(null);
         }
         return "redirect:/login?logout";
-    }
-
-    /**
-     * This method returns the principal[user-name] of logged-in user.
-     */
-    private String getPrincipal() {
-        String userName = null;
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (principal instanceof UserDetails) {
-            userName = ((UserDetails) principal).getUsername();
-        } else {
-            userName = principal.toString();
-        }
-        return userName;
     }
 
     /**

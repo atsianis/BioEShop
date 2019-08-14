@@ -6,6 +6,7 @@ import com.mycompany.bioeshop.entities.Customer;
 import com.mycompany.bioeshop.entities.Order$;
 import com.mycompany.bioeshop.entities.OrderDetails;
 import com.mycompany.bioeshop.entities.Product;
+import com.mycompany.bioeshop.service.AppService;
 import com.mycompany.bioeshop.service.CustomerService;
 import com.mycompany.bioeshop.service.OrderService;
 import com.mycompany.bioeshop.service.ProductsService;
@@ -27,6 +28,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/order")
 public class OrderController {
+    
+    @Autowired
+    AppService appService;
 
     @Autowired
     CustomerService customerService;
@@ -47,7 +51,7 @@ public class OrderController {
     public String newOrder(ModelMap model, @PathVariable int id) {
         Customer c;
         boolean isRegistered;
-        String username = getPrincipal();
+        String username = appService.getPrincipal();
         if (username == "anonymousUser") {
             c = new Customer();
             isRegistered = false;
@@ -77,7 +81,7 @@ public class OrderController {
         model.addAttribute("order", o);
         model.addAttribute("action", "order/save");
         model.addAttribute("registered", isRegistered);
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("loggedinuser", appService.getPrincipal());
         return "view_buynow";
     }
 
@@ -89,7 +93,7 @@ public class OrderController {
 
         if (result.hasErrors()) {
             model.addAttribute("message", "problem");
-            model.addAttribute("loggedinuser", getPrincipal());
+            model.addAttribute("loggedinuser", appService.getPrincipal());
             return "home";
         }
         
@@ -144,12 +148,12 @@ public class OrderController {
                 model.addAttribute("customerName", order.getCustomer().getFname());
                 model.addAttribute("orderNumber", order.getOrderId());
                 model.addAttribute("update", false);
-                model.addAttribute("loggedinuser", getPrincipal());
+                model.addAttribute("loggedinuser", appService.getPrincipal());
             } else {
                 model.addAttribute("message", "Sorry, a problem occured.");
                 model.addAttribute("update", false);
                 model.addAttribute("failure", true);
-                model.addAttribute("loggedinuser", getPrincipal());
+                model.addAttribute("loggedinuser", appService.getPrincipal());
             }
 
             return "view_order_success";
@@ -168,12 +172,12 @@ public class OrderController {
             if(orderService.updateOrder(order)) {
                 model.addAttribute("message", "The order was updated successfully");
                 model.addAttribute("update", true);
-                model.addAttribute("loggedinuser", getPrincipal());
+                model.addAttribute("loggedinuser", appService.getPrincipal());
                 return "view_order_success";
             } else {
                 model.addAttribute("message", "Sorry, the order failed to update.");
                 model.addAttribute("update", true);
-                model.addAttribute("loggedinuser", getPrincipal());
+                model.addAttribute("loggedinuser", appService.getPrincipal());
                 return "view_order_success";
             }
         }
@@ -183,15 +187,5 @@ public class OrderController {
 //        return new Order$();
 //    }
 
-    private String getPrincipal() {
-        String userName = null;
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (principal instanceof UserDetails) {
-            userName = ((UserDetails) principal).getUsername();
-        } else {
-            userName = principal.toString();
-        }
-        return userName;
-    }
+    
 }

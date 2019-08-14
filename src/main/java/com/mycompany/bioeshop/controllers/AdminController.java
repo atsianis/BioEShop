@@ -2,14 +2,13 @@ package com.mycompany.bioeshop.controllers;
 
 import com.mycompany.bioeshop.entities.Customer;
 import com.mycompany.bioeshop.entities.Product;
+import com.mycompany.bioeshop.service.AppService;
 import com.mycompany.bioeshop.service.CustomerService;
 import com.mycompany.bioeshop.service.OrderService;
 import com.mycompany.bioeshop.service.ProductsService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -28,6 +27,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class AdminController {
 
     @Autowired
+    AppService appService;
+
+    @Autowired
     ProductsService productService;
 
     @Autowired
@@ -38,8 +40,8 @@ public class AdminController {
 
     @RequestMapping(value = {"/profile"}, method = RequestMethod.GET)
     public String getProfile(ModelMap model) {
-        model.addAttribute("loggedinuser", getPrincipal());
-        model.addAttribute("customer", customerService.getCustomerBySsoId(getPrincipal()));
+        model.addAttribute("loggedinuser", appService.getPrincipal());
+        model.addAttribute("customer", customerService.getCustomerBySsoId(appService.getPrincipal()));
         model.addAttribute("pagetitle", "My profile");
         model.addAttribute("adminForAdmin", true);
         return "customer_profile";
@@ -47,10 +49,10 @@ public class AdminController {
 
     @RequestMapping(value = {"/profile/update"}, method = RequestMethod.GET)
     public String updateProfile(ModelMap model) {
-        model.addAttribute("customer", customerService.getCustomerBySsoId(getPrincipal()));
+        model.addAttribute("customer", customerService.getCustomerBySsoId(appService.getPrincipal()));
         model.addAttribute("action", "/BioEShop/user/profile/save");
         model.addAttribute("cancel", "../BioEShop/admin/profile");
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("loggedinuser", appService.getPrincipal());
         model.addAttribute("pagetitle", "Edit profile");
         model.addAttribute("adminForAdmin", true);
         return "updateprofile";
@@ -60,7 +62,7 @@ public class AdminController {
     public String saveProfile(@Valid Customer customer, BindingResult result,
             ModelMap model, @RequestParam("oldemail") String oldemail) {
 
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("loggedinuser", appService.getPrincipal());
         model.addAttribute("adminForAdmin", true);
 
         if (result.hasErrors()) {
@@ -97,7 +99,7 @@ public class AdminController {
             model.addAttribute("strawSelected", category.equals("Straw"));
             model.addAttribute("toothbrushSelected", category.equals("Toothbrush"));
             model.addAttribute("edit", true);
-            model.addAttribute("loggedinuser", getPrincipal());
+            model.addAttribute("loggedinuser", appService.getPrincipal());
             model.addAttribute("pagetitle", "Edit product");
         } catch (NumberFormatException e) {
             return "redirect:../../../products/";
@@ -110,7 +112,7 @@ public class AdminController {
 //        Hibernate.initialize(p.getOrderdetailsList());
         model.addAttribute("p", new Product());
         model.addAttribute("edit", false);
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("loggedinuser", appService.getPrincipal());
         model.addAttribute("pagetitle", "Add new product");
         return "view_create_edit_product";
 
@@ -157,7 +159,7 @@ public class AdminController {
 //        Hibernate.initialize(p.getOrderdetailsList());
         List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("customers", customers);
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("loggedinuser", appService.getPrincipal());
         model.addAttribute("pagetitle", "Customers list");
         return "customers";
 
@@ -169,7 +171,7 @@ public class AdminController {
         model.addAttribute("customer", c);
         model.addAttribute("action", "/BioEShop/admin/customers/save");
         model.addAttribute("cancel", "BioEShop/admin/customers");
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("loggedinuser", appService.getPrincipal());
         model.addAttribute("pagetitle", "Edit Customer's Info");
         return "updateprofile";
 
@@ -180,7 +182,7 @@ public class AdminController {
             ModelMap model, @RequestParam("oldemail") String oldemail) {
 
         if (result.hasErrors()) {
-            model.addAttribute("loggedinuser", getPrincipal());
+            model.addAttribute("loggedinuser", appService.getPrincipal());
             model.addAttribute("pagetitle", "Edit Customer's Info");
             return "updateprofile";
         }
@@ -189,7 +191,7 @@ public class AdminController {
             if (!customerService.isEmailUnique(customer.getCustomerId(), customer.getEmail())) {
                 model.addAttribute("emailnotUnique", "Email " + customer.getEmail()
                         + " already exists. Please fill in a different email.");
-                model.addAttribute("loggedinuser", getPrincipal());
+                model.addAttribute("loggedinuser", appService.getPrincipal());
                 model.addAttribute("pagetitle", "Edit Customer's Info");
                 return "updateprofile";
             }
@@ -202,7 +204,7 @@ public class AdminController {
         }
         List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("customers", customers);
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("loggedinuser", appService.getPrincipal());
         model.addAttribute("pagetitle", "Customers list");
         return "customers";
     }
@@ -217,7 +219,7 @@ public class AdminController {
         }
         List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("customers", customers);
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("loggedinuser", appService.getPrincipal());
         model.addAttribute("pagetitle", "Customers list");
         return "customers";
 
@@ -225,14 +227,14 @@ public class AdminController {
 
     @RequestMapping(value = {"/orders/", "/orders/{something}"}, method = RequestMethod.GET)
     public String pendingOrders(ModelMap model) {
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("loggedinuser", appService.getPrincipal());
         model.addAttribute("pagetitle", "Orders list");
         return "view_orders";
     }
 
     @RequestMapping(value = {"/order/edit/{id}"}, method = RequestMethod.GET)
     public String editOrder(ModelMap model, @PathVariable int id) {
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("loggedinuser", appService.getPrincipal());
         model.addAttribute("order", orderService.getOrderById(id));
         System.out.println("//////////////////////");
         System.out.println(orderService.getOrderById(id));
@@ -247,21 +249,8 @@ public class AdminController {
             return "redirect:/admin/orders/pending";
         }
 
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("loggedinuser", appService.getPrincipal());
         model.addAttribute("pagetitle", "Orders list");
         return "view_orders";
     }
-
-    private String getPrincipal() {
-        String userName = null;
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (principal instanceof UserDetails) {
-            userName = ((UserDetails) principal).getUsername();
-        } else {
-            userName = principal.toString();
-        }
-        return userName;
-    }
-
 }

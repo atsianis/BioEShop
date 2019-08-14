@@ -6,6 +6,8 @@
 package com.mycompany.bioeshop.controllers;
 
 import com.mycompany.bioeshop.entities.Message;
+import com.mycompany.bioeshop.service.AppService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -22,11 +24,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/chat")
 public class ChatController {
     
+    @Autowired
+    AppService appService;
+    
     @RequestMapping(value="",method=RequestMethod.GET)
     public String chatPage(ModelMap model){
-        model.addAttribute("name",getPrincipal());
+        model.addAttribute("name",appService.getPrincipal());
         model.addAttribute("message", new Message());
-        model.addAttribute("loggedinuser",getPrincipal());
+        model.addAttribute("loggedinuser",appService.getPrincipal());
         model.addAttribute("pagetitle", "Chat");
         return "chat";
     }
@@ -35,18 +40,6 @@ public class ChatController {
     public String addMessage(ModelMap model,@ModelAttribute Message message){
         Message.addMessage(message);
         return "redirect:/chat";
-    }
-    
-    private String getPrincipal() {
-        String userName = null;
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (principal instanceof UserDetails) {
-            userName = ((UserDetails) principal).getUsername();
-        } else {
-            userName = principal.toString();
-        }
-        return userName;
     }
     
 }
